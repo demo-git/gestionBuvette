@@ -1,3 +1,0 @@
-buvette_homepage:
-    path:     /
-    defaults: { _controller: BuvetteBundle:Main:index }

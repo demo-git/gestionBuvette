@@ -1,7 +1,9 @@
 cuisine:
-    resource: "@CuisineBundle/Resources/config/routing.yml"
-    prefix:   /
+    resource: "@CuisineBundle/Controller/"
+    type:     annotation
+    prefix:   /cuisine
 
 app:
     resource: "@BuvetteBundle/Controller/"
     type:     annotation
+    prefix:   /buvette

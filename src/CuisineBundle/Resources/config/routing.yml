@@ -1,3 +1,0 @@
-cuisine_homepage:
-    path:     /
-    defaults: { _controller: CuisineBundle:Main:index }
