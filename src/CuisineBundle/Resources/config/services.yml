@@ -1,0 +1,4 @@
+services:
+#    cuisine.example:
+#        class: CuisineBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
