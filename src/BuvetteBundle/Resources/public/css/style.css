@@ -1,0 +1,26 @@
+.fond-gris {
+    background-image: url('/bundles/buvette/images/fond_gris.png');
+}
+
+.fond-gris h1 {
+    text-align: center;
+    color: #3380ff;
+}
+
+.nav-color {
+    background-image: none;
+    background-color: #808080;
+}
+
+#lien-buvette, #lien-cuisine, #lien-tarif {
+    color: white;
+    font-size: 18px;
+}
+
+#lien-buvette:hover, #lien-cuisine:hover, #lien-tarif:hover {
+    color: black;
+}
+
+.img-logo {
+    width: 200px;
+}

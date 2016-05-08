@@ -3,7 +3,6 @@ cuisine:
     type:     annotation
     prefix:   /cuisine
 
-app:
+buvette:
     resource: "@BuvetteBundle/Controller/"
     type:     annotation
-    prefix:   /buvette

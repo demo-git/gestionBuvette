@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block menu %}
+    <nav class="navbar navbar-default nav-color">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button style="background-color:#ddd;" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img class="img-logo" src="{{ asset('bundles/buvette/images/epsilan_logo.png') }}" alt="logo epsilan" />
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a id="lien-buvette" href="{{ path('buvette_accueil') }}">Buvette</a></li>
+                    <li><a id="lien-cuisine" href="{{ path('cuisine_accueil') }}">Cuisine</a></li>
+                    <li><a id="lien-tarif" href="{{ path('buvette_tarif') }}">Tarif</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}

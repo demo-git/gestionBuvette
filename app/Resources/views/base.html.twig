@@ -6,10 +6,12 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('bundles/buvette/css/bootstrap.min.css') }}" />
             <link rel="stylesheet" href="{{ asset('bundles/buvette/css/bootstrap-theme.min.css') }}" />
+            <link rel="stylesheet" href="{{ asset('bundles/buvette/css/style.css') }}" />
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body>
+    <body class="fond-gris">
+        {% block menu %}{% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}
             <script src="{{ asset('bundles/buvette/js/jquery-2.2.3.min.js') }}"></script>
