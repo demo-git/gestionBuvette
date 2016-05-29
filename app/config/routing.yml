@@ -1,3 +1,7 @@
+user:
+    resource: "@UserBundle/Controller"
+    type:     annotation
+
 cuisine:
     resource: "@CuisineBundle/Controller/"
     type:     annotation

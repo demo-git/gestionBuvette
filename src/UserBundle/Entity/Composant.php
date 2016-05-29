@@ -1,6 +1,6 @@
 <?php
 
-namespace CuisineBundle\Entity;
+namespace UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Composant
  *
  * @ORM\Table(name="composant")
- * @ORM\Entity(repositoryClass="CuisineBundle\Repository\ComposantRepository")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\ComposantRepository")
  */
 class Composant
 {
@@ -24,18 +24,18 @@ class Composant
     /**
      * @var int
      *
-     * @ORM\Column(name="quantite", type="integer")
+     * @ORM\Column(name="quantite", type="integer", nullable=true)
      */
     private $quantite;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produit", inversedBy="composants")
+     * @ORM\ManyToOne(targetEntity="Produit")
      * @ORM\JoinColumn(name="produit_composant_id", referencedColumnName="id")
      */
     private $produitComposant;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produit")
+     * @ORM\ManyToOne(targetEntity="Produit", inversedBy="composants")
      * @ORM\JoinColumn(name="produit_compose_id", referencedColumnName="id")
      */
     private $produitCompose;

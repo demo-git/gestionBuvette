@@ -1,0 +1,60 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Cuisine{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1>Cuisine</h1>
+        </div>
+        <div class="row">
+            {% for flashMessage in app.session.flashbag.get('error') %}
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row btn-margin">
+            <a href="{{ path('admin_modifierproduit') }}"><button class="btn btn-primary">Ajouter un produit</button></a>
+        </div>
+        <div class="row">
+            <div class="content col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="col-md-4">Nom</th>
+                            <th class="col-md-2">Quantité</th>
+                            <th class="col-md-2">Prix</th>
+                            <th class="col-md-4">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for produit in produits %}
+                            <tr>
+                                <td class="col-md-4">{{ produit.nom }}</td>
+                                <td class="col-md-2">{{ produit.quantiteActuelle }}</td>
+                                {% if produit.prixVente is not null %}
+                                    <td class="col-md-2">{{ produit.prixVente }} €</td>
+                                {% else %}
+                                    <td class="col-md-2">non vendu</td>
+                                {% endif %}
+                                <td class="col-md-4">
+                                    <a href="{{ path('admin_addfacture', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Nouvelle facture</button></a>
+                                    <a href="{{ path('admin_modifierproduit', {'id' : produit.id}) }}"><button class="btn btn-success">Modifier</button></a>
+                                    <a href="{{ path('admin_deleteproduit', {'id' : produit.id}) }}"><button class="btn btn-danger btn-table">X</button></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

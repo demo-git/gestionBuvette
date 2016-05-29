@@ -2,15 +2,16 @@
 
 namespace CuisineBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Produit_panier
+ * Facture
  *
- * @ORM\Table(name="produit_panier")
- * @ORM\Entity(repositoryClass="CuisineBundle\Repository\Produit_panierRepository")
+ * @ORM\Table(name="facture")
+ * @ORM\Entity(repositoryClass="CuisineBundle\Repository\FactureRepository")
  */
-class Produit_panier
+class Facture
 {
     /**
      * @var int
@@ -22,6 +23,13 @@ class Produit_panier
     private $id;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="prix", type="float")
+     */
+    private $prix;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="quantite", type="integer")
@@ -29,13 +37,15 @@ class Produit_panier
     private $quantite;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Panier", inversedBy="produitCommandes")
-     * @ORM\JoinColumn(name="panier_id", referencedColumnName="id")
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="createAt", type="datetime")
      */
-    private $panier;
+    protected $createAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produit")
+     * @ORM\ManyToOne(targetEntity="Produit", inversedBy="factures")
      * @ORM\JoinColumn(name="produit_id", referencedColumnName="id")
      */
     private $produit;
@@ -52,11 +62,35 @@ class Produit_panier
     }
 
     /**
+     * Set prix
+     *
+     * @param float $prix
+     *
+     * @return Facture
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return float
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+    /**
      * Set quantite
      *
      * @param integer $quantite
      *
-     * @return Produit_panier
+     * @return Facture
      */
     public function setQuantite($quantite)
     {
@@ -76,35 +110,11 @@ class Produit_panier
     }
 
     /**
-     * Set panier
-     *
-     * @param \CuisineBundle\Entity\Panier $panier
-     *
-     * @return Produit_panier
-     */
-    public function setPanier(\CuisineBundle\Entity\Panier $panier = null)
-    {
-        $this->panier = $panier;
-
-        return $this;
-    }
-
-    /**
-     * Get panier
-     *
-     * @return \CuisineBundle\Entity\Panier
-     */
-    public function getPanier()
-    {
-        return $this->panier;
-    }
-
-    /**
      * Set produit
      *
      * @param \CuisineBundle\Entity\Produit $produit
      *
-     * @return Produit_panier
+     * @return Facture
      */
     public function setProduit(\CuisineBundle\Entity\Produit $produit = null)
     {

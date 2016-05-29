@@ -5,6 +5,9 @@
 .fond-gris h1 {
     text-align: center;
     color: #3380ff;
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 50px;
 }
 
 .nav-color {
@@ -12,9 +15,14 @@
     background-color: #808080;
 }
 
-#lien-buvette, #lien-cuisine, #lien-tarif {
+#lien-buvette > a, #lien-cuisine > a, #lien-tarif > a {
     color: white;
-    font-size: 18px;
+    font-size: 20px;
+}
+
+#lien-buvette > a:hover, #lien-cuisine > a:hover, #lien-tarif > a:hover {
+    color: white;
+    font-size: 24px;
 }
 
 #lien-buvette:hover, #lien-cuisine:hover, #lien-tarif:hover {
@@ -23,4 +31,56 @@
 
 .img-logo {
     width: 200px;
+}
+
+.content {
+    padding: 10px 10px 10px 10px;
+    background-image: none;
+    background-color: white;
+    box-shadow: 0px 0px 10px #B1B1B1;
+}
+
+.col-center {
+    text-align: center;
+}
+
+.content h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.input-margin input, .input-margin select {
+    margin-bottom: 20px;
+}
+
+.btn-margin {
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.composant {
+    margin-top: 20px;
+}
+
+.delete {
+    float: right;
+    margin-top: 7px;
+}
+
+.btn-table {
+    float: right;
+}
+
+.btn-table-left {
+    margin-right: 10px;
+}
+
+.block-alert h2 {
+    text-align: center;
+    color: #3380ff;
+    font-size: 25px;
+}
+
+.border-alerte {
+    margin-bottom: 10px;
 }

@@ -1,0 +1,159 @@
+<?php
+
+namespace UserBundle\Entity;
+
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Facture
+ *
+ * @ORM\Table(name="facture")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\FactureRepository")
+ */
+class Facture
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="prix", type="float")
+     */
+    private $prix;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="quantite", type="integer")
+     */
+    private $quantite;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="createAt", type="datetime")
+     */
+    protected $createAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Produit", inversedBy="factures")
+     * @ORM\JoinColumn(name="produit_id", referencedColumnName="id")
+     */
+    private $produit;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set prix
+     *
+     * @param float $prix
+     *
+     * @return Facture
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return float
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+    /**
+     * Set quantite
+     *
+     * @param integer $quantite
+     *
+     * @return Facture
+     */
+    public function setQuantite($quantite)
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    /**
+     * Get quantite
+     *
+     * @return int
+     */
+    public function getQuantite()
+    {
+        return $this->quantite;
+    }
+
+    /**
+     * Set produit
+     *
+     * @param \CuisineBundle\Entity\Produit $produit
+     *
+     * @return Facture
+     */
+    public function setProduit(\CuisineBundle\Entity\Produit $produit = null)
+    {
+        $this->produit = $produit;
+
+        return $this;
+    }
+
+    /**
+     * Get produit
+     *
+     * @return \CuisineBundle\Entity\Produit
+     */
+    public function getProduit()
+    {
+        return $this->produit;
+    }
+
+    /**
+     * Set createAt
+     *
+     * @param \DateTime $createAt
+     *
+     * @return Facture
+     */
+    public function setCreateAt($createAt)
+    {
+        $this->createAt = $createAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createAt
+     *
+     * @return \DateTime
+     */
+    public function getCreateAt()
+    {
+        return $this->createAt;
+    }
+}

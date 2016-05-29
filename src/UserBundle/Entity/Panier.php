@@ -1,14 +1,15 @@
 <?php
 
-namespace CuisineBundle\Entity;
+namespace UserBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Panier
  *
  * @ORM\Table(name="panier")
- * @ORM\Entity(repositoryClass="CuisineBundle\Repository\PanierRepository")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\PanierRepository")
  */
 class Panier
 {
@@ -20,6 +21,14 @@ class Panier
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="createAt", type="datetime")
+     */
+    protected $createAt;
 
     /**
      * @ORM\OneToMany(targetEntity="Produit_panier", mappedBy="panier", cascade={"persist"})
@@ -73,5 +82,29 @@ class Panier
     public function getProduitCommandes()
     {
         return $this->produitCommandes;
+    }
+
+    /**
+     * Set createAt
+     *
+     * @param \DateTime $createAt
+     *
+     * @return Panier
+     */
+    public function setCreateAt($createAt)
+    {
+        $this->createAt = $createAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createAt
+     *
+     * @return \DateTime
+     */
+    public function getCreateAt()
+    {
+        return $this->createAt;
     }
 }

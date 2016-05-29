@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class MainController extends Controller
 {
     /**
-     * @Route("/", name="buvette_accueil")
+     * @Route("/", name="buvette_commande")
      */
     public function indexAction()
     {

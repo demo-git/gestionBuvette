@@ -1,6 +1,6 @@
 <?php
 
-namespace CuisineBundle\Repository;
+namespace UserBundle\Repository;
 
 /**
  * ComposantRepository

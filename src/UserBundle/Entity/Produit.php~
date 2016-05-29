@@ -12,6 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Produit
 {
+    const TYPE_DRINK = 0;
+    const TYPE_SNACK = 2;
+    const TYPE_FOOD = 1;
+
     /**
      * @var int
      *
@@ -45,32 +49,45 @@ class Produit
     /**
      * @var int
      *
-     * @ORM\Column(name="quantite", type="integer")
+     * @ORM\Column(name="quantiteActuelle", type="integer", options={"default" = 0})
      */
-    private $quantite;
+    private $quantiteActuelle;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="prix", type="float")
+     * @ORM\Column(name="prixVente", type="float", nullable=true)
      */
-    private $prix;
+    private $prixVente;
 
     /**
-     * @var int
+     * @var bool
      *
-     * @ORM\Column(name="categorie", type="integer")
+     * @ORM\Column(name="vendable", type="boolean")
      */
-    private $categorie;
+    private $vendable;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="actif", type="boolean", options={"default" = true})
+     */
+    private $actif;
 
     /**
      * @ORM\OneToMany(targetEntity="Composant", mappedBy="produitComposant", cascade={"persist"})
      */
     private $composants;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Facture", mappedBy="produit", cascade={"persist"})
+     */
+    private $factures;
+
     public function __construct()
     {
         $this->composants = new ArrayCollection();
+        $this->factures = new ArrayCollection();
     }
 
     /**
@@ -204,27 +221,27 @@ class Produit
     }
 
     /**
-     * Set categorie
+     * Set vendable
      *
-     * @param integer $categorie
+     * @param integer $vendable
      *
      * @return Produit
      */
-    public function setCategorie($categorie)
+    public function setVendable($vendable)
     {
-        $this->categorie = $categorie;
+        $this->vendable = $vendable;
 
         return $this;
     }
 
     /**
-     * Get categorie
+     * Get vendable
      *
      * @return int
      */
-    public function getCategorie()
+    public function getVendable()
     {
-        return $this->categorie;
+        return $this->vendable;
     }
 
     /**

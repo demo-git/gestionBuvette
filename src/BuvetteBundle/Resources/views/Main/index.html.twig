@@ -2,9 +2,14 @@
 
 {% block title %}Buvette{% endblock %}
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <h1>Buvette</h1>
+    <div class="col-md-3">
+        {% include '@User/Alerte/alerte_commande.html.twig' %}
+    </div>
+    <div class="col-md-9">
+        <div class="container">
+            <div class="row">
+                <h1>Buvette</h1>
+            </div>
         </div>
     </div>
 {% endblock %}
