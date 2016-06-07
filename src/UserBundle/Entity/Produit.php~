@@ -1,14 +1,15 @@
 <?php
 
-namespace CuisineBundle\Entity;
+namespace UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Produit
  *
  * @ORM\Table(name="produit")
- * @ORM\Entity(repositoryClass="CuisineBundle\Repository\ProduitRepository")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\ProduitRepository")
  */
 class Produit
 {
@@ -42,7 +43,7 @@ class Produit
     /**
      * @var string
      *
-     * @ORM\Column(name="pathImage", type="string", length=255)
+     * @ORM\Column(name="pathImage", type="string", length=255, nullable=true)
      */
     private $pathImage;
 
@@ -51,7 +52,7 @@ class Produit
      *
      * @ORM\Column(name="quantiteActuelle", type="integer", options={"default" = 0})
      */
-    private $quantiteActuelle;
+    private $quantiteActuelle = 0;
 
     /**
      * @var float
@@ -63,19 +64,12 @@ class Produit
     /**
      * @var bool
      *
-     * @ORM\Column(name="vendable", type="boolean")
-     */
-    private $vendable;
-
-    /**
-     * @var bool
-     *
      * @ORM\Column(name="actif", type="boolean", options={"default" = true})
      */
-    private $actif;
+    private $actif = true;
 
     /**
-     * @ORM\OneToMany(targetEntity="Composant", mappedBy="produitComposant", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Composant", mappedBy="produitCompose", cascade={"persist", "remove"})
      */
     private $composants;
 
@@ -173,78 +167,6 @@ class Produit
     }
 
     /**
-     * Set quantite
-     *
-     * @param integer $quantite
-     *
-     * @return Produit
-     */
-    public function setQuantite($quantite)
-    {
-        $this->quantite = $quantite;
-
-        return $this;
-    }
-
-    /**
-     * Get quantite
-     *
-     * @return int
-     */
-    public function getQuantite()
-    {
-        return $this->quantite;
-    }
-
-    /**
-     * Set prix
-     *
-     * @param float $prix
-     *
-     * @return Produit
-     */
-    public function setPrix($prix)
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
-
-    /**
-     * Get prix
-     *
-     * @return float
-     */
-    public function getPrix()
-    {
-        return $this->prix;
-    }
-
-    /**
-     * Set vendable
-     *
-     * @param integer $vendable
-     *
-     * @return Produit
-     */
-    public function setVendable($vendable)
-    {
-        $this->vendable = $vendable;
-
-        return $this;
-    }
-
-    /**
-     * Get vendable
-     *
-     * @return int
-     */
-    public function getVendable()
-    {
-        return $this->vendable;
-    }
-
-    /**
      * Add composant
      *
      * @param \CuisineBundle\Entity\Composant $composant
@@ -276,5 +198,114 @@ class Produit
     public function getComposants()
     {
         return $this->composants;
+    }
+
+    /**
+     * Set quantiteActuelle
+     *
+     * @param integer $quantiteActuelle
+     *
+     * @return Produit
+     */
+    public function setQuantiteActuelle($quantiteActuelle)
+    {
+        $this->quantiteActuelle = $quantiteActuelle;
+
+        return $this;
+    }
+
+    /**
+     * Get quantiteActuelle
+     *
+     * @return integer
+     */
+    public function getQuantiteActuelle()
+    {
+        return $this->quantiteActuelle;
+    }
+
+    /**
+     * Set prixVente
+     *
+     * @param float $prixVente
+     *
+     * @return Produit
+     */
+    public function setPrixVente($prixVente)
+    {
+        if($prixVente <= 0){
+            $prixVente = null;
+        }
+        $this->prixVente = $prixVente;
+
+        return $this;
+    }
+
+    /**
+     * Get prixVente
+     *
+     * @return float
+     */
+    public function getPrixVente()
+    {
+        return $this->prixVente;
+    }
+
+    /**
+     * Set actif
+     *
+     * @param boolean $actif
+     *
+     * @return Produit
+     */
+    public function setActif($actif)
+    {
+        $this->actif = $actif;
+
+        return $this;
+    }
+
+    /**
+     * Get actif
+     *
+     * @return boolean
+     */
+    public function getActif()
+    {
+        return $this->actif;
+    }
+
+    /**
+     * Add facture
+     *
+     * @param \CuisineBundle\Entity\Facture $facture
+     *
+     * @return Produit
+     */
+    public function addFacture(\CuisineBundle\Entity\Facture $facture)
+    {
+        $this->factures[] = $facture;
+
+        return $this;
+    }
+
+    /**
+     * Remove facture
+     *
+     * @param \CuisineBundle\Entity\Facture $facture
+     */
+    public function removeFacture(\CuisineBundle\Entity\Facture $facture)
+    {
+        $this->factures->removeElement($facture);
+    }
+
+    /**
+     * Get factures
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFactures()
+    {
+        return $this->factures;
     }
 }

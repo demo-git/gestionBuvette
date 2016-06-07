@@ -5,10 +5,10 @@ namespace BuvetteBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class MainController extends Controller
+class BuvetteController extends Controller
 {
     /**
-     * @Route("/", name="buvette_commande")
+     * @Route("/buvette", name="buvette_commande")
      */
     public function indexAction()
     {
@@ -16,7 +16,7 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/tarif", name="buvette_tarif")
+     * @Route("/", name="buvette_tarif")
      */
     public function tarifAction()
     {

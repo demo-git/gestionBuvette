@@ -1,6 +1,6 @@
 <?php
 
-namespace CuisineBundle\Entity;
+namespace UserBundle\Entity;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Panier
  *
  * @ORM\Table(name="panier")
- * @ORM\Entity(repositoryClass="CuisineBundle\Repository\PanierRepository")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\PanierRepository")
  */
 class Panier
 {
@@ -82,5 +82,29 @@ class Panier
     public function getProduitCommandes()
     {
         return $this->produitCommandes;
+    }
+
+    /**
+     * Set createAt
+     *
+     * @param \DateTime $createAt
+     *
+     * @return Panier
+     */
+    public function setCreateAt($createAt)
+    {
+        $this->createAt = $createAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createAt
+     *
+     * @return \DateTime
+     */
+    public function getCreateAt()
+    {
+        return $this->createAt;
     }
 }

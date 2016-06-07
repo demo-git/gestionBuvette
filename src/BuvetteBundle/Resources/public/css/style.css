@@ -1,3 +1,47 @@
+@media (max-width:767px) {
+    .vignette > div {
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        display: block;
+        cursor: pointer;
+        height: 75px;
+        border: solid 1px #3380ff;
+    }
+}
+
+@media (min-width:768px) and (max-width:991px) {
+    .vignette > div {
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        display: block;
+        cursor: pointer;
+        height: 125px;
+        border: solid 1px #3380ff;
+    }
+}
+
+@media (min-width:992px) and (max-width:1199px) {
+    .vignette > div {
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        display: block;
+        cursor: pointer;
+        height: 150px;
+        border: solid 1px #3380ff;
+    }
+}
+
+@media (min-width:1200px) {
+    .vignette > div {
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        display: block;
+        cursor: pointer;
+        height: 175px;
+        border: solid 1px #3380ff;
+    }
+}
+
 .fond-gris {
     background-image: url('/bundles/buvette/images/fond_gris.png');
 }
@@ -7,7 +51,7 @@
     color: #3380ff;
     font-size: 40px;
     font-weight: bold;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .nav-color {
@@ -15,18 +59,18 @@
     background-color: #808080;
 }
 
-#lien-buvette > a, #lien-cuisine > a, #lien-tarif > a {
+#lien-buvette > a, #lien-cuisine > a, #lien-tarif > a, #lien-gestionproduit > a, #lien-logout > a, #lien-login > a, #heure, #lien-gestioncaisse > a, #lien-setting > a {
     color: white;
     font-size: 20px;
 }
 
-#lien-buvette > a:hover, #lien-cuisine > a:hover, #lien-tarif > a:hover {
+#lien-buvette > a:hover, #lien-cuisine > a:hover, #lien-tarif > a:hover, #lien-gestionproduit > a:hover, #lien-logout > a:hover, #lien-login > a:hover, #lien-gestioncaisse > a:hover, #lien-setting > a:hover {
     color: white;
     font-size: 24px;
 }
 
-#lien-buvette:hover, #lien-cuisine:hover, #lien-tarif:hover {
-    color: black;
+#lien-login, #lien-logout {
+    float: right;
 }
 
 .img-logo {
@@ -38,6 +82,7 @@
     background-image: none;
     background-color: white;
     box-shadow: 0px 0px 10px #B1B1B1;
+    margin-bottom: 20px;
 }
 
 .col-center {
@@ -83,4 +128,57 @@
 
 .border-alerte {
     margin-bottom: 10px;
+    border: solid 1px;
+    text-align: center;
+}
+
+.success {
+    background-color: #5fea5f;
+    border-color: #2cb32c;
+    color: rgb(0, 102, 0);
+}
+
+.warning {
+    background-color: #ffc660;
+    border-color: #ffa400;
+    color: #7D5000;
+}
+
+.danger {
+    background-color: #ff7c7c;
+    border-color: #ff1b1b;
+    color: rgb(171, 3, 0);
+}
+
+.border-alerte button {
+    margin-bottom: 5px;
+}
+
+.vignette {
+    text-decoration: none;
+    background-color: grey;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 2px 2px 4px #000
+}
+
+.vignette:hover {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.padding-top-7 {
+    padding: 7px 0px 0px 0px;
+}
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
 }

@@ -53,11 +53,11 @@ class Panier
     /**
      * Add produitCommande
      *
-     * @param \CuisineBundle\Entity\Produit_panier $produitCommande
+     * @param \UserBundle\Entity\Produit_panier $produitCommande
      *
      * @return Panier
      */
-    public function addProduitCommande(\CuisineBundle\Entity\Produit_panier $produitCommande)
+    public function addProduitCommande(\UserBundle\Entity\Produit_panier $produitCommande)
     {
         $this->produitCommandes[] = $produitCommande;
 
@@ -67,9 +67,9 @@ class Panier
     /**
      * Remove produitCommande
      *
-     * @param \CuisineBundle\Entity\Produit_panier $produitCommande
+     * @param \UserBundle\Entity\Produit_panier $produitCommande
      */
-    public function removeProduitCommande(\CuisineBundle\Entity\Produit_panier $produitCommande)
+    public function removeProduitCommande(\UserBundle\Entity\Produit_panier $produitCommande)
     {
         $this->produitCommandes->removeElement($produitCommande);
     }

@@ -78,11 +78,11 @@ class Composant
     /**
      * Set produitComposant
      *
-     * @param \CuisineBundle\Entity\Produit $produitComposant
+     * @param \UserBundle\Entity\Produit $produitComposant
      *
      * @return Composant
      */
-    public function setProduitComposant(\CuisineBundle\Entity\Produit $produitComposant = null)
+    public function setProduitComposant(\UserBundle\Entity\Produit $produitComposant = null)
     {
         $this->produitComposant = $produitComposant;
 
@@ -92,7 +92,7 @@ class Composant
     /**
      * Get produitComposant
      *
-     * @return \CuisineBundle\Entity\Produit
+     * @return \UserBundle\Entity\Produit
      */
     public function getProduitComposant()
     {
@@ -102,11 +102,11 @@ class Composant
     /**
      * Set produitCompose
      *
-     * @param \CuisineBundle\Entity\Produit $produitCompose
+     * @param \UserBundle\Entity\Produit $produitCompose
      *
      * @return Composant
      */
-    public function setProduitCompose(\CuisineBundle\Entity\Produit $produitCompose = null)
+    public function setProduitCompose(\UserBundle\Entity\Produit $produitCompose = null)
     {
         $this->produitCompose = $produitCompose;
 
@@ -116,7 +116,7 @@ class Composant
     /**
      * Get produitCompose
      *
-     * @return \CuisineBundle\Entity\Produit
+     * @return \UserBundle\Entity\Produit
      */
     public function getProduitCompose()
     {

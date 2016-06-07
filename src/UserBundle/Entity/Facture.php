@@ -112,11 +112,11 @@ class Facture
     /**
      * Set produit
      *
-     * @param \CuisineBundle\Entity\Produit $produit
+     * @param \UserBundle\Entity\Produit $produit
      *
      * @return Facture
      */
-    public function setProduit(\CuisineBundle\Entity\Produit $produit = null)
+    public function setProduit(\UserBundle\Entity\Produit $produit = null)
     {
         $this->produit = $produit;
 
@@ -126,7 +126,7 @@ class Facture
     /**
      * Get produit
      *
-     * @return \CuisineBundle\Entity\Produit
+     * @return \UserBundle\Entity\Produit
      */
     public function getProduit()
     {

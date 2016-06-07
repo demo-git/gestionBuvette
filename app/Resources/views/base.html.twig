@@ -6,16 +6,58 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('bundles/buvette/css/bootstrap.min.css') }}" />
             <link rel="stylesheet" href="{{ asset('bundles/buvette/css/bootstrap-theme.min.css') }}" />
+            <link rel="stylesheet" href="{{ asset('bundles/buvette/css/bootstrap-select.min.css') }}" />
             <link rel="stylesheet" href="{{ asset('bundles/buvette/css/style.css') }}" />
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('bundles/buvette/images/epsilan.ico') }}" />
     </head>
     <body class="fond-gris">
-        {% block menu %}{% endblock %}
+        <nav class="navbar navbar-default nav-color">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button style="background-color:#ddd;" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="{% if is_granted('ROLE_BUVETTE') %}{{ path('buvette_commande') }}{% elseif is_granted('ROLE_CUISINE') %}{{ path('cuisine_commande') }}{% else %}{{ path('buvette_tarif') }}{% endif %}">
+                        <img class="img-logo" src="{{ asset('bundles/buvette/images/epsilan_logo.png') }}" alt="logo epsilan" />
+                    </a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <ul class="nav navbar-nav">
+                            <li id="lien-buvette"><a href="{{ path('buvette_commande') }}">Buvette</a></li>
+                            <li id="lien-cuisine"><a href="{{ path('cuisine_commande') }}">Cuisine</a></li>
+                            <li id="lien-gestionproduit"><a href="{{ path('admin_gestionproduit') }}">Gestion produit</a></li>
+                            <li id="lien-gestioncaisse"><a href="{{ path('admin_gestioncaisse') }}">Gestion caisse</a></li>
+                            <li id="lien-setting"><a href="{{ path('admin_setting') }}">Settings</a></li>
+                            <li id="lien-tarif"><a href="{{ path('buvette_tarif') }}">Tarif</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav" style="float:right;">
+                            <li id="lien-logout"><a href="{{ path('logout') }}">Déconnexion</a></li>
+                        </ul>
+                    {% else %}
+                        <ul class="nav navbar-nav" style="float:right;width:52%;">
+                            <li><a href="" id="heure">heure</a></li>
+                            {% if is_granted('ROLE_USER') %}
+                                <li id="lien-logout"><a href="{{ path('logout') }}">Déconnexion</a></li>
+                            {% else %}
+                                <li id="lien-login"><a href="{{ path('login') }}">Connexion</a></li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
         {% block body %}{% endblock %}
         {% block javascripts %}
             <script src="{{ asset('bundles/buvette/js/jquery-2.2.3.min.js') }}"></script>
             <script src="{{ asset('bundles/buvette/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('bundles/buvette/js/bootstrap-select.min.js') }}"></script>
+            <script src="{{ asset('bundles/buvette/js/horloge.js') }}"></script>
         {% endblock %}
     </body>
 </html>

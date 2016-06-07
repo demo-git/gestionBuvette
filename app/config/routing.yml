@@ -5,8 +5,13 @@ user:
 cuisine:
     resource: "@CuisineBundle/Controller/"
     type:     annotation
-    prefix:   /cuisine
 
 buvette:
     resource: "@BuvetteBundle/Controller/"
     type:     annotation
+
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout

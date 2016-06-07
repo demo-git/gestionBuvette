@@ -19,7 +19,7 @@ class FactureController extends Controller
     /**
      * @Route("/admin/facture/{id}", name="admin_addfacture", requirements={"id" = "\d+"}, defaults={"id" = -1})
      */
-    public function ajouterAction(Request $request, $id)
+    public function ajoutAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
         $produit = $em->getRepository('UserBundle:Produit')->find($id);

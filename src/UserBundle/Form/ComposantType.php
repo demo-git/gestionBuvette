@@ -15,7 +15,7 @@ class ComposantType extends AbstractType
     {
         $builder
             ->add('produitComposant', EntityType::class, array(
-                'class' => 'CuisineBundle:Produit',
+                'class' => 'UserBundle:Produit',
                 'choice_label' => 'nom',
                 'label' => 'Produit :',
                 'query_builder' => function (EntityRepository $er) {
@@ -33,7 +33,7 @@ class ComposantType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'CuisineBundle\Entity\Composant',
+            'data_class' => 'UserBundle\Entity\Composant',
         ));
     }
 

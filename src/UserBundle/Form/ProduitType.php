@@ -2,7 +2,7 @@
 
 namespace UserBundle\Form;
 
-use CuisineBundle\Entity\Produit;
+use UserBundle\Entity\Produit;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -19,11 +19,10 @@ class ProduitType extends AbstractType
     {
         $builder
             ->add('type', ChoiceType::class,array(
-                'label' => 'Type :',
                 'choices'  => array('Boisson' => Produit::TYPE_DRINK, 'Nourriture' => Produit::TYPE_FOOD, 'Snack' => Produit::TYPE_SNACK),
                 'expanded' => false,
                 'multiple' => false,
-                'attr' => array('class' => 'form-control')
+                'attr' => array('class' => 'selectpicker', 'title' => 'Type de produit')
             ))
             ->add('nom', TextType::class, array(
                 'label' => 'Nom :',
@@ -54,7 +53,7 @@ class ProduitType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'CuisineBundle\Entity\Produit',
+            'data_class' => 'UserBundle\Entity\Produit',
         ));
     }
 

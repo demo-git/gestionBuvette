@@ -169,11 +169,11 @@ class Produit
     /**
      * Add composant
      *
-     * @param \CuisineBundle\Entity\Composant $composant
+     * @param \UserBundle\Entity\Composant $composant
      *
      * @return Produit
      */
-    public function addComposant(\CuisineBundle\Entity\Composant $composant)
+    public function addComposant(\UserBundle\Entity\Composant $composant)
     {
         $this->composants[] = $composant;
 
@@ -183,9 +183,9 @@ class Produit
     /**
      * Remove composant
      *
-     * @param \CuisineBundle\Entity\Composant $composant
+     * @param \UserBundle\Entity\Composant $composant
      */
-    public function removeComposant(\CuisineBundle\Entity\Composant $composant)
+    public function removeComposant(\UserBundle\Entity\Composant $composant)
     {
         $this->composants->removeElement($composant);
     }
@@ -278,11 +278,11 @@ class Produit
     /**
      * Add facture
      *
-     * @param \CuisineBundle\Entity\Facture $facture
+     * @param \UserBundle\Entity\Facture $facture
      *
      * @return Produit
      */
-    public function addFacture(\CuisineBundle\Entity\Facture $facture)
+    public function addFacture(\UserBundle\Entity\Facture $facture)
     {
         $this->factures[] = $facture;
 
@@ -292,9 +292,9 @@ class Produit
     /**
      * Remove facture
      *
-     * @param \CuisineBundle\Entity\Facture $facture
+     * @param \UserBundle\Entity\Facture $facture
      */
-    public function removeFacture(\CuisineBundle\Entity\Facture $facture)
+    public function removeFacture(\UserBundle\Entity\Facture $facture)
     {
         $this->factures->removeElement($facture);
     }

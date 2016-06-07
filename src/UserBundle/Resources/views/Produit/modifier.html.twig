@@ -1,4 +1,4 @@
-{% extends "layout.html.twig" %}
+{% extends "base.html.twig" %}
 {% block stylesheets %}
     {{ parent() }}
     <link href="{{ asset('bundles/user/css/fileinput.min.css') }}" media="all" rel="stylesheet" type="text/css" />
@@ -16,8 +16,8 @@
                         <h2>Informations générales</h2>
                     </div>
                     <div class="col-md-6 input-margin">
-                        <div class="col-md-12">{{ form_label(form.type) }} {{ form_widget(form.type) }}</div>
-                        <div class="col-md-12">{{ form_label(form.nom) }} {{ form_widget(form.nom) }}</div>
+                        <div class="col-md-12">{{ form_widget(form.type) }}</div>
+                        <div class="col-md-12 margin-top-20">{{ form_label(form.nom) }} {{ form_widget(form.nom) }}</div>
                         <div class="col-md-12">{{ form_label(form.prixVente) }} {{ form_widget(form.prixVente) }}</div>
                         {{ form_widget(form._token) }}
                     </div>

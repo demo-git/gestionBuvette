@@ -1,6 +1,6 @@
 <?php
 
-namespace CuisineBundle\Entity;
+namespace UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Produit_panier
  *
  * @ORM\Table(name="produit_panier")
- * @ORM\Entity(repositoryClass="CuisineBundle\Repository\Produit_panierRepository")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\Produit_panierRepository")
  */
 class Produit_panier
 {
@@ -27,6 +27,13 @@ class Produit_panier
      * @ORM\Column(name="quantite", type="integer")
      */
     private $quantite;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="prix", type="float")
+     */
+    private $prix;
 
     /**
      * @ORM\ManyToOne(targetEntity="Panier", inversedBy="produitCommandes")
@@ -74,5 +81,52 @@ class Produit_panier
     {
         return $this->quantite;
     }
-}
 
+    /**
+     * Set panier
+     *
+     * @param \CuisineBundle\Entity\Panier $panier
+     *
+     * @return Produit_panier
+     */
+    public function setPanier(\CuisineBundle\Entity\Panier $panier = null)
+    {
+        $this->panier = $panier;
+
+        return $this;
+    }
+
+    /**
+     * Get panier
+     *
+     * @return \CuisineBundle\Entity\Panier
+     */
+    public function getPanier()
+    {
+        return $this->panier;
+    }
+
+    /**
+     * Set produit
+     *
+     * @param \CuisineBundle\Entity\Produit $produit
+     *
+     * @return Produit_panier
+     */
+    public function setProduit(\CuisineBundle\Entity\Produit $produit = null)
+    {
+        $this->produit = $produit;
+
+        return $this;
+    }
+
+    /**
+     * Get produit
+     *
+     * @return \CuisineBundle\Entity\Produit
+     */
+    public function getProduit()
+    {
+        return $this->produit;
+    }
+}

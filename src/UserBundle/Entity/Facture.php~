@@ -1,6 +1,6 @@
 <?php
 
-namespace CuisineBundle\Entity;
+namespace UserBundle\Entity;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Facture
  *
  * @ORM\Table(name="facture")
- * @ORM\Entity(repositoryClass="CuisineBundle\Repository\FactureRepository")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\FactureRepository")
  */
 class Facture
 {
@@ -131,5 +131,29 @@ class Facture
     public function getProduit()
     {
         return $this->produit;
+    }
+
+    /**
+     * Set createAt
+     *
+     * @param \DateTime $createAt
+     *
+     * @return Facture
+     */
+    public function setCreateAt($createAt)
+    {
+        $this->createAt = $createAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createAt
+     *
+     * @return \DateTime
+     */
+    public function getCreateAt()
+    {
+        return $this->createAt;
     }
 }

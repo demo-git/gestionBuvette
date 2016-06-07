@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jérémy
- * Date: 24/05/2016
- * Time: 16:18
- */
 
 namespace UserBundle\Form;
 
@@ -41,7 +35,7 @@ class FactureType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'CuisineBundle\Entity\Facture',
+            'data_class' => 'UserBundle\Entity\Facture',
         ));
     }
 
