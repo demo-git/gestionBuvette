@@ -8,6 +8,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use UserBundle\Entity\Composant;
+use UserBundle\Entity\Produit;
 
 class ComposantType extends AbstractType
 {
@@ -15,7 +17,7 @@ class ComposantType extends AbstractType
     {
         $builder
             ->add('produitComposant', EntityType::class, array(
-                'class' => 'UserBundle:Produit',
+                'class' => Produit::class,
                 'choice_label' => 'nom',
                 'label' => 'Produit :',
                 'query_builder' => function (EntityRepository $er) {
@@ -33,7 +35,7 @@ class ComposantType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'UserBundle\Entity\Composant',
+            'data_class' => Composant::class,
         ));
     }
 

@@ -15,7 +15,9 @@ class Produit
 {
     const TYPE_DRINK = 0;
     const TYPE_SNACK = 2;
-    const TYPE_FOOD = 1;
+    const TYPE_SANDWITCH = 1;
+    const TYPE_PIZZA = 3;
+    const TYPE_COMPOSANT = 4;
 
     /**
      * @var int
@@ -41,18 +43,19 @@ class Produit
     private $nom;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="pathImage", type="string", length=255, nullable=true)
-     */
-    private $pathImage;
-
-    /**
      * @var int
      *
      * @ORM\Column(name="quantiteActuelle", type="integer", options={"default" = 0})
      */
     private $quantiteActuelle = 0;
+
+    /**
+     * temps de cuisson en minute
+     * @var int
+     *
+     * @ORM\Column(name="cuisson", type="integer", options={"default" = 0})
+     */
+    private $cuisson = 0;
 
     /**
      * @var float
@@ -77,6 +80,11 @@ class Produit
      * @ORM\OneToMany(targetEntity="Facture", mappedBy="produit", cascade={"persist"})
      */
     private $factures;
+
+    /**
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Image", cascade={"all"}, orphanRemoval=true)
+     */
+    private $image;
 
     public function __construct()
     {
@@ -143,37 +151,13 @@ class Produit
     }
 
     /**
-     * Set pathImage
-     *
-     * @param string $pathImage
-     *
-     * @return Produit
-     */
-    public function setPathImage($pathImage)
-    {
-        $this->pathImage = $pathImage;
-
-        return $this;
-    }
-
-    /**
-     * Get pathImage
-     *
-     * @return string
-     */
-    public function getPathImage()
-    {
-        return $this->pathImage;
-    }
-
-    /**
      * Add composant
      *
-     * @param \CuisineBundle\Entity\Composant $composant
+     * @param \UserBundle\Entity\Composant $composant
      *
      * @return Produit
      */
-    public function addComposant(\CuisineBundle\Entity\Composant $composant)
+    public function addComposant(\UserBundle\Entity\Composant $composant)
     {
         $this->composants[] = $composant;
 
@@ -183,9 +167,9 @@ class Produit
     /**
      * Remove composant
      *
-     * @param \CuisineBundle\Entity\Composant $composant
+     * @param \UserBundle\Entity\Composant $composant
      */
-    public function removeComposant(\CuisineBundle\Entity\Composant $composant)
+    public function removeComposant(\UserBundle\Entity\Composant $composant)
     {
         $this->composants->removeElement($composant);
     }
@@ -278,11 +262,11 @@ class Produit
     /**
      * Add facture
      *
-     * @param \CuisineBundle\Entity\Facture $facture
+     * @param \UserBundle\Entity\Facture $facture
      *
      * @return Produit
      */
-    public function addFacture(\CuisineBundle\Entity\Facture $facture)
+    public function addFacture(\UserBundle\Entity\Facture $facture)
     {
         $this->factures[] = $facture;
 
@@ -292,9 +276,9 @@ class Produit
     /**
      * Remove facture
      *
-     * @param \CuisineBundle\Entity\Facture $facture
+     * @param \UserBundle\Entity\Facture $facture
      */
-    public function removeFacture(\CuisineBundle\Entity\Facture $facture)
+    public function removeFacture(\UserBundle\Entity\Facture $facture)
     {
         $this->factures->removeElement($facture);
     }
@@ -307,5 +291,29 @@ class Produit
     public function getFactures()
     {
         return $this->factures;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \UserBundle\Entity\Image $image
+     *
+     * @return Produit
+     */
+    public function setImage(\UserBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \UserBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

@@ -9,6 +9,7 @@
 namespace UserBundle\Controller;
 
 use UserBundle\Entity\Facture;
+use UserBundle\Entity\Produit;
 use UserBundle\Form\FactureType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -22,7 +23,7 @@ class FactureController extends Controller
     public function ajoutAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $produit = $em->getRepository('UserBundle:Produit')->find($id);
+        $produit = $em->getRepository(Produit::class)->find($id);
 
         if($produit){
             $facture = new Facture();
@@ -33,9 +34,7 @@ class FactureController extends Controller
                 $form->handleRequest($request);
                 if($form->isValid()){
                     $em->persist($facture);
-                    if($facture->getQuantite()){
-                        $produit->setQuantiteActuelle($produit->getQuantiteActuelle() + $facture->getQuantite());
-                    }
+                    $produit->setQuantiteActuelle($produit->getQuantiteActuelle() + $facture->getQuantite());
                     $em->flush();
                     $request->getSession()->getFlashBag()->add('success', 'La facture a bien été créée');
                     return $this->redirect($this->generateUrl('admin_gestionproduit'));

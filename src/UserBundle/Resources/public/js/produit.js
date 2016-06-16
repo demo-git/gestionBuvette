@@ -2,14 +2,13 @@ var NB_COMPOSANT;
 var jsonData = null;
 $(document).ready(function(){
     NB_COMPOSANT = $(".composant").length - 1;
-    $("#produit_modifier_pathImage").fileinput();
 
     $("#add-composant").click(function (){
         NB_COMPOSANT++;
         if(jsonData == null){
             $.ajax({
                 method: "POST",
-                url: "/cuisine/ajax/produit/actif"
+                url: "/admin/ajax/produit/actif"
             })
             .done(function( data ) {
                 jsonData = data.split(';');

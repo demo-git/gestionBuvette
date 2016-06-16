@@ -6,7 +6,6 @@ use UserBundle\Entity\Produit;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -19,7 +18,7 @@ class ProduitType extends AbstractType
     {
         $builder
             ->add('type', ChoiceType::class,array(
-                'choices'  => array('Boisson' => Produit::TYPE_DRINK, 'Nourriture' => Produit::TYPE_FOOD, 'Snack' => Produit::TYPE_SNACK),
+                'choices'  => array('Boisson' => Produit::TYPE_DRINK, 'Sandwitch' => Produit::TYPE_SANDWITCH, 'Snack' => Produit::TYPE_SNACK, 'Pizza' => Produit::TYPE_PIZZA, 'Composant' => Produit::TYPE_COMPOSANT),
                 'expanded' => false,
                 'multiple' => false,
                 'attr' => array('class' => 'selectpicker', 'title' => 'Type de produit')
@@ -34,10 +33,10 @@ class ProduitType extends AbstractType
                 'attr' => array('min' => 0, 'step' => 0.01, 'class' => 'form-control', 'placeholder' => '€'),
                 'required' => false
             ))
-            ->add('pathImage', FileType::class, array(
-                'label' => 'Image :',
-                'required' => false,
-                'attr' => array('class' => 'file','data-preview-file-type' => "image")
+            ->add('cuisson', IntegerType::class, array(
+                'label' => 'Temps de cuisson :',
+                'attr' => array('min' => 0, 'class' => 'form-control', 'placeholder' => 'En minutes'),
+                'required' => false
             ))
             ->add('composants', CollectionType::class, array(
                 'allow_delete' => true,
@@ -53,7 +52,7 @@ class ProduitType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'UserBundle\Entity\Produit',
+            'data_class' => Produit::class,
         ));
     }
 
