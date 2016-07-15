@@ -29,13 +29,6 @@ class Produit_panier
     private $quantite;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="prix", type="float")
-     */
-    private $prix;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Panier", inversedBy="produitCommandes")
      * @ORM\JoinColumn(name="panier_id", referencedColumnName="id")
      */
@@ -47,7 +40,11 @@ class Produit_panier
      */
     private $produit;
 
-
+    /**
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Operation", cascade={"all"}, orphanRemoval=true)
+     */
+    private $operation;
+    
     /**
      * Get id
      *
@@ -131,26 +128,26 @@ class Produit_panier
     }
 
     /**
-     * Set prix
+     * Set operation
      *
-     * @param float $prix
+     * @param \UserBundle\Entity\Operation $operation
      *
      * @return Produit_panier
      */
-    public function setPrix($prix)
+    public function setOperation(\UserBundle\Entity\Operation $operation = null)
     {
-        $this->prix = $prix;
+        $this->operation = $operation;
 
         return $this;
     }
 
     /**
-     * Get prix
+     * Get operation
      *
-     * @return float
+     * @return \UserBundle\Entity\Operation
      */
-    public function getPrix()
+    public function getOperation()
     {
-        return $this->prix;
+        return $this->operation;
     }
 }

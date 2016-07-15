@@ -9,6 +9,7 @@
 namespace UserBundle\Controller;
 
 use UserBundle\Entity\Facture;
+use UserBundle\Entity\Operation;
 use UserBundle\Entity\Produit;
 use UserBundle\Form\FactureType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -33,6 +34,11 @@ class FactureController extends Controller
             if($request->isMethod('POST')){
                 $form->handleRequest($request);
                 if($form->isValid()){
+                    $operation = new Operation();
+                    $operation->setJustification('achat produit');
+                    $operation->setType(Operation::TYPE_FACTURE);
+                    $operation->setMontant($form->get('prix')->getData());
+                    $facture->setOperation($operation);
                     $em->persist($facture);
                     $produit->setQuantiteActuelle($produit->getQuantiteActuelle() + $facture->getQuantite());
                     $em->flush();

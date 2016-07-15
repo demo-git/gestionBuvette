@@ -46,5 +46,4 @@ class SettingType extends AbstractType
     {
         return 'settings';
     }
-
 }

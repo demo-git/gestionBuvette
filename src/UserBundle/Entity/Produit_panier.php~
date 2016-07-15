@@ -29,13 +29,6 @@ class Produit_panier
     private $quantite;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="prix", type="float")
-     */
-    private $prix;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Panier", inversedBy="produitCommandes")
      * @ORM\JoinColumn(name="panier_id", referencedColumnName="id")
      */
@@ -47,7 +40,11 @@ class Produit_panier
      */
     private $produit;
 
-
+    /**
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Operation", cascade={"all"}, orphanRemoval=true)
+     */
+    private $operation;
+    
     /**
      * Get id
      *
@@ -85,11 +82,11 @@ class Produit_panier
     /**
      * Set panier
      *
-     * @param \CuisineBundle\Entity\Panier $panier
+     * @param \UserBundle\Entity\Panier $panier
      *
      * @return Produit_panier
      */
-    public function setPanier(\CuisineBundle\Entity\Panier $panier = null)
+    public function setPanier(\UserBundle\Entity\Panier $panier = null)
     {
         $this->panier = $panier;
 
@@ -99,7 +96,7 @@ class Produit_panier
     /**
      * Get panier
      *
-     * @return \CuisineBundle\Entity\Panier
+     * @return \UserBundle\Entity\Panier
      */
     public function getPanier()
     {
@@ -109,11 +106,11 @@ class Produit_panier
     /**
      * Set produit
      *
-     * @param \CuisineBundle\Entity\Produit $produit
+     * @param \UserBundle\Entity\Produit $produit
      *
      * @return Produit_panier
      */
-    public function setProduit(\CuisineBundle\Entity\Produit $produit = null)
+    public function setProduit(\UserBundle\Entity\Produit $produit = null)
     {
         $this->produit = $produit;
 
@@ -123,10 +120,34 @@ class Produit_panier
     /**
      * Get produit
      *
-     * @return \CuisineBundle\Entity\Produit
+     * @return \UserBundle\Entity\Produit
      */
     public function getProduit()
     {
         return $this->produit;
+    }
+
+    /**
+     * Set prix
+     *
+     * @param float $prix
+     *
+     * @return Produit_panier
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return float
+     */
+    public function getPrix()
+    {
+        return $this->prix;
     }
 }

@@ -23,13 +23,6 @@ class Facture
     private $id;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="prix", type="float")
-     */
-    private $prix;
-
-    /**
      * @var int
      *
      * @ORM\Column(name="quantite", type="integer")
@@ -50,6 +43,11 @@ class Facture
      */
     private $produit;
 
+    /**
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Operation", cascade={"all"}, orphanRemoval=true)
+     */
+    private $operation;
+
 
     /**
      * Get id
@@ -59,30 +57,6 @@ class Facture
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set prix
-     *
-     * @param float $prix
-     *
-     * @return Facture
-     */
-    public function setPrix($prix)
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
-
-    /**
-     * Get prix
-     *
-     * @return float
-     */
-    public function getPrix()
-    {
-        return $this->prix;
     }
 
     /**
@@ -112,11 +86,11 @@ class Facture
     /**
      * Set produit
      *
-     * @param \CuisineBundle\Entity\Produit $produit
+     * @param \UserBundle\Entity\Produit $produit
      *
      * @return Facture
      */
-    public function setProduit(\CuisineBundle\Entity\Produit $produit = null)
+    public function setProduit(\UserBundle\Entity\Produit $produit = null)
     {
         $this->produit = $produit;
 
@@ -126,7 +100,7 @@ class Facture
     /**
      * Get produit
      *
-     * @return \CuisineBundle\Entity\Produit
+     * @return \UserBundle\Entity\Produit
      */
     public function getProduit()
     {

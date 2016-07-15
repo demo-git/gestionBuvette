@@ -4,6 +4,7 @@ namespace UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,10 +20,11 @@ class FactureType extends AbstractType
                 'attr' => array('min' => 1, 'class' => 'form-control'),
                 'required' => true
             ))
-            ->add('prix', IntegerType::class, array(
+            ->add('prix', NumberType::class, array(
                 'label' => 'Coût total :',
+                'mapped' => false,
                 'scale' => 2,
-                'attr' => array('min' => 0, 'step' => 0.01, 'class' => 'form-control', 'placeholder' => '€'),
+                'attr' => array('min' => 0, 'class' => 'form-control', 'placeholder' => '€'),
                 'required' => true
             ))
             ->add('Ajouter', SubmitType::class, array(

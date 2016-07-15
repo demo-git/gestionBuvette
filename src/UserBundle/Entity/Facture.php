@@ -23,13 +23,6 @@ class Facture
     private $id;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="prix", type="float")
-     */
-    private $prix;
-
-    /**
      * @var int
      *
      * @ORM\Column(name="quantite", type="integer")
@@ -50,6 +43,11 @@ class Facture
      */
     private $produit;
 
+    /**
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Operation", cascade={"all"}, orphanRemoval=true)
+     */
+    private $operation;
+
 
     /**
      * Get id
@@ -59,30 +57,6 @@ class Facture
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set prix
-     *
-     * @param float $prix
-     *
-     * @return Facture
-     */
-    public function setPrix($prix)
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
-
-    /**
-     * Get prix
-     *
-     * @return float
-     */
-    public function getPrix()
-    {
-        return $this->prix;
     }
 
     /**
@@ -155,5 +129,29 @@ class Facture
     public function getCreateAt()
     {
         return $this->createAt;
+    }
+
+    /**
+     * Set operation
+     *
+     * @param \UserBundle\Entity\Operation $operation
+     *
+     * @return Facture
+     */
+    public function setOperation(\UserBundle\Entity\Operation $operation = null)
+    {
+        $this->operation = $operation;
+
+        return $this;
+    }
+
+    /**
+     * Get operation
+     *
+     * @return \UserBundle\Entity\Operation
+     */
+    public function getOperation()
+    {
+        return $this->operation;
     }
 }

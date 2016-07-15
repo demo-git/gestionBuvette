@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Financier{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="col-xs-12 col-sm-8 col-md-9">
+            <div class="row margin-top-10">
+                <h1>Financier</h1>
+            </div>
+            <div class="row">
+                {% for flashMessage in app.session.flashbag.get('error') %}
+                    <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    <div class="alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3">
+            {% include '@User/Alerte/alerte_stock.html.twig' %}
+            {%  include '@User/Alerte/alerte_commande.html.twig' %}
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/user/js/produit_index.js') }}"></script>
+{% endblock %}

@@ -2,6 +2,7 @@
 
 namespace UserBundle\Form;
 
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use UserBundle\Entity\Produit;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -27,10 +28,10 @@ class ProduitType extends AbstractType
                 'label' => 'Nom :',
                 'attr' => array('class' => 'form-control')
             ))
-            ->add('prixVente', IntegerType::class, array(
+            ->add('prixVente', NumberType::class, array(
                 'label' => 'Prix de vente :',
                 'scale' => 2,
-                'attr' => array('min' => 0, 'step' => 0.01, 'class' => 'form-control', 'placeholder' => '€'),
+                'attr' => array('min' => 0, 'class' => 'form-control', 'placeholder' => '€'),
                 'required' => false
             ))
             ->add('cuisson', IntegerType::class, array(

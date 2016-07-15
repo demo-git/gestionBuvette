@@ -14,8 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Produit
 {
     const TYPE_DRINK = 0;
-    const TYPE_SNACK = 2;
     const TYPE_SANDWITCH = 1;
+    const TYPE_SNACK = 2;
     const TYPE_PIZZA = 3;
     const TYPE_COMPOSANT = 4;
 
