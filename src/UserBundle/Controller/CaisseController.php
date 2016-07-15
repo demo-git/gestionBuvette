@@ -32,7 +32,7 @@ class CaisseController extends Controller
         }
 
         $operations = $this->getDoctrine()->getRepository(Operation::class)->findAll();
-        
+
         $ca = 0;
         $total = 0;
         $benef = 0;
