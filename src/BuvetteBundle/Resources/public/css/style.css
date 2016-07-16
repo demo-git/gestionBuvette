@@ -186,3 +186,7 @@
 .not-display {
     display: none;
 }
+
+.margin-left-20 {
+    margin-left: 20px;
+}

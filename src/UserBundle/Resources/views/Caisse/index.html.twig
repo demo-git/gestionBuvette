@@ -22,6 +22,68 @@
                 {% endfor %}
             </div>
             <div class="row">
+                <div class="content col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="row">
+                                {{ form_start(form) }}
+                                <div class="col-xs-12 col-center">
+                                    {{ form_widget(form.type) }}
+                                </div>
+                                <div class="col-xs-12 margin-top-10">
+                                    {{ form_label(form.montant) }}
+                                    {{ form_widget(form.montant) }}
+                                </div>
+                                <div class="col-xs-12 margin-top-10">
+                                    {{ form_label(form.justification) }}
+                                    {{ form_widget(form.justification) }}
+                                </div>
+                                {{ form_widget(form._token) }}
+                                <div class="col-xs-12 col-center">{{ form_widget(form.Enregistrer) }}</div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-8">
+                            <div class="row">
+                                <ul class="list-inline">
+                                    <li class="margin-left-20">CA : {{ ca }}</li>
+                                    <li class="margin-left-20">Benefice : {{ benef }}</li>
+                                    <li class="margin-left-20">Total : {{ total }}</li>
+                                </ul>
+                            </div>
+                            <div class="row">
+                                <table id="table-boisson" class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th class="col-xs-3 col-sm-2">Type</th>
+                                        <th class="col-xs-3 col-sm-2">Montant</th>
+                                        <th class="col-xs-6 col-sm-8">Justification</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for operation in operations %}
+                                        <tr>
+                                            <td class="col-xs-3 col-sm-2">
+                                                {% if operation.type == operation.TYPE_RETRAIT %}
+                                                    Retrait
+                                                {% elseif operation.type == operation.TYPE_AJOUT %}
+                                                    Ajout
+                                                {% elseif operation.type == operation.TYPE_FACTURE %}
+                                                    Facture
+                                                {% else %}
+                                                    Vente
+                                                {% endif %}
+                                            </td>
+                                            <td class="col-xs-3 col-sm-2">{{ operation.montant }}</td>
+                                            <td class="col-xs-6 col-sm-8">{{ operation.justification }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-xs-12 col-sm-4 col-md-3">

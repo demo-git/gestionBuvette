@@ -56,6 +56,6 @@ class CaisseController extends Controller
             }
         }
 
-        return $this->render('UserBundle:Caisse:index.html.twig', array('form' => $form, 'operations' => $operations, 'benef' => $benef, 'ca' => $ca, 'total' => $total));
+        return $this->render('UserBundle:Caisse:index.html.twig', array('form' => $form->createView(), 'operations' => $operations, 'benef' => $benef, 'ca' => $ca, 'total' => $total));
     }
 }

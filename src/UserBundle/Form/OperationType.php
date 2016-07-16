@@ -26,7 +26,7 @@ class OperationType extends AbstractType
                 'choices'  => array('Retrait d\'argent' => Operation::TYPE_RETRAIT, 'Dépôt d\'argent' => Operation::TYPE_AJOUT),
                 'expanded' => false,
                 'multiple' => false,
-                'attr' => array('class' => 'selectpicker', 'title' => 'Type de mouvement financier'),
+                'attr' => array('class' => 'selectpicker', 'title' => 'Type de mouvement'),
                 'required' => true
             ))
             ->add('justification', TextareaType::class, array(
