@@ -10,7 +10,6 @@
 /build/
 /vendor/
 /bin/
-/web/*
 /composer.phar
 /.idea
 /var/*
