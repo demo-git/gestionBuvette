@@ -52,7 +52,7 @@ class Operation
     /**
      * @var bool
      *
-     * @ORM\Column(name="type", type="boolean")
+     * @ORM\Column(name="type", type="integer")
      */
     private $type;
 

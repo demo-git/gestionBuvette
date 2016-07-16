@@ -64,11 +64,11 @@
                                     {% for operation in operations %}
                                         <tr>
                                             <td class="col-xs-3 col-sm-2">
-                                                {% if operation.type == operation.TYPE_RETRAIT %}
+                                                {% if operation.type == 0 %}
                                                     Retrait
-                                                {% elseif operation.type == operation.TYPE_AJOUT %}
+                                                {% elseif operation.type == 1 %}
                                                     Ajout
-                                                {% elseif operation.type == operation.TYPE_FACTURE %}
+                                                {% elseif operation.type == 2 %}
                                                     Facture
                                                 {% else %}
                                                     Vente
