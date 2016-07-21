@@ -15,12 +15,12 @@ class SettingType extends AbstractType
     {
         $builder
             ->add('warningWait', IntegerType::class, array(
-                'label' => 'Temps à partir duquel se déclenche les "warnings" :',
+                'label' => 'Temps d\'attente à partir duquel se déclenche les "warnings" :',
                 'attr' => array('min' => 0, 'class' => 'form-control', 'placeholder' => 'En minutes'),
                 'required' => true
             ))
             ->add('dangerWait', IntegerType::class, array(
-                'label' => 'Temps à partir duquel se déclenche les "dangers" :',
+                'label' => 'Temps d\'attente à partir duquel se déclenche les "dangers" :',
                 'attr' => array('min' => 0, 'class' => 'form-control', 'placeholder' => 'En minutes'),
                 'required' => true
             ))
