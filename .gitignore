@@ -11,5 +11,6 @@
 /vendor/
 /web/*
 /composer.phar
+/composer.lock
 /.idea
 /var/*
