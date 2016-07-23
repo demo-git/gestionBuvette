@@ -9,7 +9,8 @@
 /app/phpunit.xml
 /build/
 /vendor/
-/bin/
+/web/*
 /composer.phar
+/composer.lock
 /.idea
 /var/*
