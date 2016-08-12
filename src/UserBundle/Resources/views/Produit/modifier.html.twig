@@ -32,11 +32,11 @@
                                     </div>
                                     <div class="col-md-12">
                                         <label for="produit_modifier_composants_{{ nbComposant }}_produitComposant" class="required">Produit :</label>
-                                        <select id="produit_modifier_composants_{{ nbComposant }}_produitComposant" name="produit_modifier[composants][{{ nbComposant }}][produitComposant]" class="form-control"></select>
+                                        {{ form_widget(composant.produitComposant) }}
                                     </div>
                                     <div class="col-md-12">
                                         <label for="produit_modifier_composants_{{ nbComposant }}_quantite" class="required">Quantité :</label>
-                                        <input id="produit_modifier_composants_{{ nbComposant }}_quantite" name="produit_modifier[composants][{{ nbComposant }}][quantite]" required="required" min="1" type="number" class="form-control">
+                                        {{ form_widget(composant.quantite) }}
                                     </div>
                                 </div>
                                 {% set nbComposant = nbComposant + 1 %}

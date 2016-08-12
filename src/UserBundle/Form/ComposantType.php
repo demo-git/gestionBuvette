@@ -20,6 +20,7 @@ class ComposantType extends AbstractType
                 'class' => Produit::class,
                 'choice_label' => 'nom',
                 'label' => 'Produit :',
+                'attr' => array('class' => 'selectpicker'),
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('c')->where('c.actif = true');
                 }
