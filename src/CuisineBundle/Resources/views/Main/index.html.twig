@@ -9,7 +9,11 @@
             </div>
             <div class="row">
                 <div class="content col-xs-12">
-                    <div id="listing-commande-time">
+                    <ul class="nav nav-tabs margin-bottom-20">
+                        <li id="tab-pizza" role="presentation" class="content-tab active"><a href="#">Commande Pizza</a></li>
+                        <li id="tab-produits" role="presentation" class="content-tab"><a href="#">Gestion produits</a></li>
+                    </ul>
+                    <div id="table-pizza" class="content-table">
                         <div id="1-num-id-commande" class="col-xs-12 border-alerte danger">
                             <div class="margin-top-10 col-xs-6 col-sm-3"><span class="timer-commande">40</span>m depuis commande</div>
                             <div class="margin-top-10 col-xs-6 col-sm-6"><p>pizza 4 formage / Ref 12515</p></div>
@@ -41,6 +45,26 @@
                             <div class="col-xs-12 col-sm-3"><button class="margin-top-10 col-xs-8 col-xs-offset-2 btn btn-warning">En préparation</button></div>
                         </div>
                     </div>
+                    <table id="table-produits" class="table table-striped content-table not-display">
+                        <thead>
+                        <tr>
+                            <th class="col-xs-4">Nom</th>
+                            <th class="col-xs-2">Quantité</th>
+                            <th class="col-xs-6">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for produit in produits %}
+                            <tr>
+                                <td class="col-md-3">{{ produit.nom }}</td>
+                                <td class="col-md-2">{{ produit.quantiteActuelle }}</td>
+                                <td class="col-md-5">
+                                    <a href="{{ path('cuisine_addquantity', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajout stock</button></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -48,4 +72,8 @@
             {% include '@User/Alerte/alerte_stock.html.twig' %}
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/user/js/table_content.js') }}"></script>
 {% endblock %}

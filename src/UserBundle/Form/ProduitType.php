@@ -24,6 +24,12 @@ class ProduitType extends AbstractType
                 'multiple' => false,
                 'attr' => array('class' => 'selectpicker', 'title' => 'Type de produit')
             ))
+            ->add('isBillable', ChoiceType::class,array(
+                'choices'  => array('Facturable' => true, 'Non facturable' => false),
+                'expanded' => false,
+                'multiple' => false,
+                'attr' => array('class' => 'selectpicker', 'title' => 'Type d\'ajout')
+            ))
             ->add('nom', TextType::class, array(
                 'label' => 'Nom :',
                 'attr' => array('class' => 'form-control')

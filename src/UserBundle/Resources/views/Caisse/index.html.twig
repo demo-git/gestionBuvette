@@ -52,16 +52,25 @@
                                 </ul>
                             </div>
                             <div class="row">
-                                <table id="table-boisson" class="table table-striped">
+                                <div class="col-xs-12">
+                                    {{ form_start(formSearch) }}
+                                        {{ form_widget(formSearch.typeSearch) }}
+                                        {{ form_widget(formSearch.Filtrer) }}
+                                    {{ form_end(formSearch) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <table class="table">
                                     <thead>
                                     <tr>
                                         <th class="col-xs-3 col-sm-2">Type</th>
                                         <th class="col-xs-3 col-sm-2">Montant</th>
-                                        <th class="col-xs-6 col-sm-8">Justification</th>
+                                        <th class="col-xs-4 col-sm-6">Justification</th>
+                                        <th class="col-xs-2 col-sm-2">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for operation in operations %}
+                                    {% for operation in pagination %}
                                         <tr>
                                             <td class="col-xs-3 col-sm-2">
                                                 {% if operation.type == 0 %}
@@ -75,10 +84,14 @@
                                                 {% endif %}
                                             </td>
                                             <td class="col-xs-3 col-sm-2">{{ operation.montant }}</td>
-                                            <td class="col-xs-6 col-sm-8">{{ operation.justification }}</td>
+                                            <td class="col-xs-4 col-sm-6">{{ operation.justification }}</td>
+                                            <td class="col-xs-2 col-sm-2"><a href="{{ path('admin_modifieroperation', {'id' : operation.id}) }}"><button class="btn btn-primary">Modifier</button></a></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
+                                    <div class="navigation">
+                                        {{ knp_pagination_render(pagination) }}
+                                    </div>
                                 </table>
                             </div>
                         </div>
@@ -91,8 +104,4 @@
             {%  include '@User/Alerte/alerte_commande.html.twig' %}
         </div>
     </div>
-{% endblock %}
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('bundles/user/js/produit_index.js') }}"></script>
 {% endblock %}

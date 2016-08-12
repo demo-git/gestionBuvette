@@ -23,7 +23,7 @@ class OperationType extends AbstractType
                 'required' => true
             ))
             ->add('type', ChoiceType::class,array(
-                'choices'  => array('Retrait d\'argent' => Operation::TYPE_RETRAIT, 'Dépôt d\'argent' => Operation::TYPE_AJOUT),
+                'choices'  => array('Retrait d\'argent' => Operation::TYPE_RETRAIT, 'Dépôt d\'argent' => Operation::TYPE_AJOUT, 'Facture' => Operation::TYPE_FACTURE, 'Vente' => Operation::TYPE_VENTE),
                 'expanded' => false,
                 'multiple' => false,
                 'attr' => array('class' => 'selectpicker'),

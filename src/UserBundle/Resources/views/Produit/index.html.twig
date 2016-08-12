@@ -27,13 +27,13 @@
             <div class="row">
                 <div class="content col-md-12">
                     <ul class="nav nav-tabs">
-                        <li id="tab-boisson" role="presentation" class="active"><a href="#">Boisson</a></li>
-                        <li id="tab-sandwitch" role="presentation"><a href="#">Sandwitch</a></li>
-                        <li id="tab-pizza" role="presentation"><a href="#">Pizza</a></li>
-                        <li id="tab-snack" role="presentation"><a href="#">Snack</a></li>
-                        <li id="tab-composant" role="presentation"><a href="#">Composant</a></li>
+                        <li id="tab-boisson" role="presentation" class="content-tab active"><a href="#">Boisson</a></li>
+                        <li id="tab-sandwitch" role="presentation" class="content-tab"><a href="#">Sandwitch</a></li>
+                        <li id="tab-pizza" role="presentation" class="content-tab"><a href="#">Pizza</a></li>
+                        <li id="tab-snack" role="presentation" class="content-tab"><a href="#">Snack</a></li>
+                        <li id="tab-composant" role="presentation" class="content-tab"><a href="#">Composant</a></li>
                     </ul>
-                    <table id="table-boisson" class="table table-striped">
+                    <table id="table-boisson" class="table table-striped content-table">
                         <thead>
                             <tr>
                                 <th class="col-md-3">Nom</th>
@@ -53,7 +53,11 @@
                                         <td class="col-md-2">non vendu</td>
                                     {% endif %}
                                     <td class="col-md-5">
-                                        <a href="{{ path('admin_addfacture', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Nouvelle facture</button></a>
+                                        {% if produit.isBillable == true %}
+                                            <a href="{{ path('admin_addfacture', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Nouvelle facture</button></a>
+                                        {% else %}
+                                            <a href="{{ path('cuisine_addquantity', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajout stock</button></a>
+                                        {% endif %}
                                         <a href="{{ path('admin_addimage', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajouter image</button></a>
                                         <a href="{{ path('admin_modifierproduit', {'id' : produit.id}) }}"><button class="btn btn-success btn-table-left">Modifier</button></a>
                                         <a href="{{ path('admin_deleteproduit', {'id' : produit.id}) }}"><button class="btn btn-danger btn-table">X</button></a>
@@ -62,7 +66,7 @@
                             {% endfor %}
                         </tbody>
                     </table>
-                    <table id="table-sandwitch" class="not-display table table-striped">
+                    <table id="table-sandwitch" class="not-display table table-striped content-table">
                         <thead>
                         <tr>
                             <th class="col-md-3">Nom</th>
@@ -82,7 +86,11 @@
                                     <td class="col-md-2">non vendu</td>
                                 {% endif %}
                                 <td class="col-md-5">
-                                    <a href="{{ path('admin_addfacture', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Nouvelle facture</button></a>
+                                    {% if produit.isBillable == true %}
+                                        <a href="{{ path('admin_addfacture', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Nouvelle facture</button></a>
+                                    {% else %}
+                                        <a href="{{ path('cuisine_addquantity', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajout stock</button></a>
+                                    {% endif %}
                                     <a href="{{ path('admin_addimage', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajouter image</button></a>
                                     <a href="{{ path('admin_modifierproduit', {'id' : produit.id}) }}"><button class="btn btn-success btn-table-left">Modifier</button></a>
                                     <a href="{{ path('admin_deleteproduit', {'id' : produit.id}) }}"><button class="btn btn-danger btn-table">X</button></a>
@@ -91,7 +99,7 @@
                         {% endfor %}
                         </tbody>
                     </table>
-                    <table id="table-pizza" class="not-display table table-striped">
+                    <table id="table-pizza" class="not-display table table-striped content-table">
                         <thead>
                         <tr>
                             <th class="col-md-3">Nom</th>
@@ -111,7 +119,11 @@
                                     <td class="col-md-2">non vendu</td>
                                 {% endif %}
                                 <td class="col-md-5">
-                                    <a href="{{ path('admin_addfacture', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Nouvelle facture</button></a>
+                                    {% if produit.isBillable == true %}
+                                        <a href="{{ path('admin_addfacture', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Nouvelle facture</button></a>
+                                    {% else %}
+                                        <a href="{{ path('cuisine_addquantity', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajout stock</button></a>
+                                    {% endif %}
                                     <a href="{{ path('admin_addimage', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajouter image</button></a>
                                     <a href="{{ path('admin_modifierproduit', {'id' : produit.id}) }}"><button class="btn btn-success btn-table-left">Modifier</button></a>
                                     <a href="{{ path('admin_deleteproduit', {'id' : produit.id}) }}"><button class="btn btn-danger btn-table">X</button></a>
@@ -120,7 +132,7 @@
                         {% endfor %}
                         </tbody>
                     </table>
-                    <table id="table-snack" class="not-display table table-striped">
+                    <table id="table-snack" class="not-display table table-striped content-table">
                         <thead>
                         <tr>
                             <th class="col-md-3">Nom</th>
@@ -140,7 +152,11 @@
                                     <td class="col-md-2">non vendu</td>
                                 {% endif %}
                                 <td class="col-md-5">
-                                    <a href="{{ path('admin_addfacture', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Nouvelle facture</button></a>
+                                    {% if produit.isBillable == true %}
+                                        <a href="{{ path('admin_addfacture', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Nouvelle facture</button></a>
+                                    {% else %}
+                                        <a href="{{ path('cuisine_addquantity', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajout stock</button></a>
+                                    {% endif %}
                                     <a href="{{ path('admin_addimage', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajouter image</button></a>
                                     <a href="{{ path('admin_modifierproduit', {'id' : produit.id}) }}"><button class="btn btn-success btn-table-left">Modifier</button></a>
                                     <a href="{{ path('admin_deleteproduit', {'id' : produit.id}) }}"><button class="btn btn-danger btn-table">X</button></a>
@@ -149,7 +165,7 @@
                         {% endfor %}
                         </tbody>
                     </table>
-                    <table id="table-composant" class="not-display table table-striped">
+                    <table id="table-composant" class="not-display table table-striped content-table">
                         <thead>
                         <tr>
                             <th class="col-md-3">Nom</th>
@@ -169,7 +185,11 @@
                                     <td class="col-md-2">non vendu</td>
                                 {% endif %}
                                 <td class="col-md-5">
-                                    <a href="{{ path('admin_addfacture', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Nouvelle facture</button></a>
+                                    {% if produit.isBillable == true %}
+                                        <a href="{{ path('admin_addfacture', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Nouvelle facture</button></a>
+                                    {% else %}
+                                        <a href="{{ path('cuisine_addquantity', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajout stock</button></a>
+                                    {% endif %}
                                     <a href="{{ path('admin_addimage', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajouter image</button></a>
                                     <a href="{{ path('admin_modifierproduit', {'id' : produit.id}) }}"><button class="btn btn-success btn-table-left">Modifier</button></a>
                                     <a href="{{ path('admin_deleteproduit', {'id' : produit.id}) }}"><button class="btn btn-danger btn-table">X</button></a>
@@ -189,5 +209,5 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('bundles/user/js/produit_index.js') }}"></script>
+    <script src="{{ asset('bundles/user/js/table_content.js') }}"></script>
 {% endblock %}

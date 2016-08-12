@@ -14,8 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Produit
 {
     const TYPE_DRINK = 0;
-    const TYPE_SNACK = 2;
     const TYPE_SANDWITCH = 1;
+    const TYPE_SNACK = 2;
     const TYPE_PIZZA = 3;
     const TYPE_COMPOSANT = 4;
 
@@ -34,6 +34,13 @@ class Produit
      * @ORM\Column(name="type", type="integer")
      */
     private $type;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="isBillable", type="boolean")
+     */
+    private $isBillable;
 
     /**
      * @var string
@@ -315,5 +322,29 @@ class Produit
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Set cuisson
+     *
+     * @param integer $cuisson
+     *
+     * @return Produit
+     */
+    public function setCuisson($cuisson)
+    {
+        $this->cuisson = $cuisson;
+
+        return $this;
+    }
+
+    /**
+     * Get cuisson
+     *
+     * @return integer
+     */
+    public function getCuisson()
+    {
+        return $this->cuisson;
     }
 }

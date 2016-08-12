@@ -183,6 +183,10 @@
     margin-top: 20px;
 }
 
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
 .not-display {
     display: none;
 }

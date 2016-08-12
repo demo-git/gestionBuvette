@@ -13,7 +13,8 @@
                         <h2>Informations générales</h2>
                     </div>
                     <div class="col-md-12 input-margin">
-                        <div class="col-md-12">{{ form_widget(form.type) }}</div>
+                        <div class="col-md-6">{{ form_widget(form.type) }}</div>
+                        <div class="col-md-6">{{ form_widget(form.isBillable) }}</div>
                         <div class="col-md-6 margin-top-20">{{ form_label(form.nom) }} {{ form_widget(form.nom) }}</div>
                         <div class="col-md-6 margin-top-20">{{ form_label(form.cuisson) }} {{ form_widget(form.cuisson) }}</div>
                         <div class="col-md-6 margin-top-20">{{ form_label(form.prixVente) }} {{ form_widget(form.prixVente) }}</div>

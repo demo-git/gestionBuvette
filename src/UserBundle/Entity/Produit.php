@@ -36,6 +36,13 @@ class Produit
     private $type;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="isBillable", type="boolean")
+     */
+    private $isBillable;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
@@ -339,5 +346,29 @@ class Produit
     public function getCuisson()
     {
         return $this->cuisson;
+    }
+
+    /**
+     * Set isBillable
+     *
+     * @param boolean $isBillable
+     *
+     * @return Produit
+     */
+    public function setIsBillable($isBillable)
+    {
+        $this->isBillable = $isBillable;
+
+        return $this;
+    }
+
+    /**
+     * Get isBillable
+     *
+     * @return boolean
+     */
+    public function getIsBillable()
+    {
+        return $this->isBillable;
     }
 }

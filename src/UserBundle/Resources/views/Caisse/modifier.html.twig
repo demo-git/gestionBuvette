@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Modifier opération{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1>Modifier opération</h1>
+        </div>
+        <div class="row">
+            <div class="content col-md-12">
+                {{ form_start(form) }}
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_widget(form.type) }}
+                        </div>
+                        <div class="col-xs-4 margin-top-20">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    {{ form_label(form.montant) }}
+                                </div>
+                                <div class="col-xs-12">
+                                    {{ form_widget(form.montant) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 margin-top-20">
+                            {{ form_label(form.justification) }}
+                        </div>
+                        <div class="col-xs-12">
+                            {{ form_widget(form.justification) }}
+                        </div>
+                        <div class="col-center col-xs-12 margin-top-20">
+                            {{ form_widget(form._token) }}
+                            {{ form_widget(form.Enregistrer) }}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
