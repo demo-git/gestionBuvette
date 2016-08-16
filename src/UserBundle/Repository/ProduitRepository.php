@@ -1,6 +1,7 @@
 <?php
 
 namespace UserBundle\Repository;
+use UserBundle\Entity\Produit;
 
 /**
  * ProduitRepository
@@ -10,4 +11,17 @@ namespace UserBundle\Repository;
  */
 class ProduitRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getBuvetteListe($type = null) {
+        $qb = $this->createQueryBuilder('p')
+            ->where('p.actif = 1')
+            ->andWhere('p.prixVente IS NOT NULL');
+        if ($type !== null) {
+            $qb->andWhere('p.type = :type')
+                ->setParameter('type', $type);
+        } else {
+            $qb->andWhere('p.type != ' . Produit::TYPE_COMPOSANT);
+        }
+        return $qb->getQuery()
+            ->getResult();
+    }
 }

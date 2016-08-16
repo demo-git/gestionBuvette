@@ -9,17 +9,47 @@
             </div>
             <div class="row">
                 <div class="content col-xs-12">
-                    <div class="col-xs-12 col-sm-6 col-md-8">
-                        <a class="vignette" href=""><div style="background-image: url('{{ asset('uploads/cb72b480ffcf7c3c841ca7e46697d3dc.jpeg') }}');" class="col-xs-6 col-sm-6 col-md-3">Pizza 4 fromages</div></a>
-                        <a class="vignette" href=""><div style="background-image: url('{{ asset('uploads/cb72b480ffcf7c3c841ca7e46697d3dc.jpeg') }}');" class="col-xs-6 col-sm-6 col-md-3">Pizza 4 fromages</div></a>
-                        <a class="vignette" href=""><div style="background-image: url('{{ asset('uploads/cb72b480ffcf7c3c841ca7e46697d3dc.jpeg') }}');" class="col-xs-6 col-sm-6 col-md-3">Pizza 4 fromages</div></a>
-                        <a class="vignette" href=""><div style="background-image: url('{{ asset('uploads/cb72b480ffcf7c3c841ca7e46697d3dc.jpeg') }}');" class="col-xs-6 col-sm-6 col-md-3">Pizza 4 fromages</div></a>
-                        <a class="vignette" href=""><div style="background-image: url('{{ asset('uploads/cb72b480ffcf7c3c841ca7e46697d3dc.jpeg') }}');" class="col-xs-6 col-sm-6 col-md-3">Pizza 4 fromages</div></a>
-                        <a class="vignette" href=""><div style="background-image: url('{{ asset('uploads/cb72b480ffcf7c3c841ca7e46697d3dc.jpeg') }}');" class="col-xs-6 col-sm-6 col-md-3">Pizza 4 fromages</div></a>
-                        <a class="vignette" href=""><div style="background-image: url('{{ asset('uploads/cb72b480ffcf7c3c841ca7e46697d3dc.jpeg') }}');" class="col-xs-6 col-sm-6 col-md-3">Pizza 4 fromages</div></a>
-                        <a class="vignette" href=""><div style="background-image: url('{{ asset('uploads/cb72b480ffcf7c3c841ca7e46697d3dc.jpeg') }}');" class="col-xs-6 col-sm-6 col-md-3">Pizza 4 fromages</div></a>
-                        <a class="vignette" href=""><div style="background-image: url('{{ asset('uploads/cb72b480ffcf7c3c841ca7e46697d3dc.jpeg') }}');" class="col-xs-6 col-sm-6 col-md-3">Pizza 4 fromages</div></a>
-                        <a class="vignette" href=""><div style="background-image: url('{{ asset('uploads/cb72b480ffcf7c3c841ca7e46697d3dc.jpeg') }}');" class="col-xs-6 col-sm-6 col-md-3">Pizza 4 fromages</div></a>
+                    <ul class="nav nav-tabs margin-bottom-20">
+                        <li id="tab-boisson" role="presentation" class="content-tab active"><a href="#">Boisson</a></li>
+                        <li id="tab-pizza" role="presentation" class="content-tab"><a href="#">Pizza</a></li>
+                        <li id="tab-sandwitch" role="presentation" class="content-tab"><a href="#">Sandwitch</a></li>
+                        <li id="tab-snack" role="presentation" class="content-tab"><a href="#">Snack</a></li>
+                    </ul>
+                    <div id="table-boisson" class="content-table col-xs-12 col-sm-6 col-md-8">
+                        {% for produit in produitsD %}
+                            {% if produit.image is not null %}
+                                <div style="background-image: url('{{ asset('uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
+                            {% else %}
+                                <div style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div id="table-pizza" class="not-display content-table col-xs-12 col-sm-6 col-md-8">
+                        {% for produit in produitsP %}
+                            {% if produit.image is not null %}
+                                <div style="background-image: url('{{ asset('uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
+                            {% else %}
+                                <div style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div id="table-sandwitch" class="not-display content-table col-xs-12 col-sm-6 col-md-8">
+                        {% for produit in produitsSA %}
+                            {% if produit.image is not null %}
+                                <div style="background-image: url('{{ asset('uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
+                            {% else %}
+                                <div style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div id="table-snack" class="not-display content-table col-xs-12 col-sm-6 col-md-8">
+                        {% for produit in produitsS %}
+                            {% if produit.image is not null %}
+                                <div style="background-image: url('{{ asset('uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
+                            {% else %}
+                                <div style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-4">
                         <div class="row">
@@ -74,4 +104,8 @@
             {% include '@User/Alerte/alerte_stock.html.twig' %}
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/user/js/table_content.js') }}"></script>
 {% endblock %}

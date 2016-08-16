@@ -4,6 +4,7 @@ namespace BuvetteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use UserBundle\Entity\Produit;
 
 class BuvetteController extends Controller
 {
@@ -12,7 +13,16 @@ class BuvetteController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('BuvetteBundle:Main:index.html.twig');
+        $produitsD = $this->getDoctrine()->getRepository(Produit::class)->getBuvetteListe(Produit::TYPE_DRINK);
+        $produitsS = $this->getDoctrine()->getRepository(Produit::class)->getBuvetteListe(Produit::TYPE_SNACK);
+        $produitsP = $this->getDoctrine()->getRepository(Produit::class)->getBuvetteListe(Produit::TYPE_PIZZA);
+        $produitsSA = $this->getDoctrine()->getRepository(Produit::class)->getBuvetteListe(Produit::TYPE_SANDWITCH);
+        return $this->render('BuvetteBundle:Main:index.html.twig', array(
+            'produitsD' => $produitsD,
+            'produitsS' => $produitsS,
+            'produitsSA' => $produitsSA,
+            'produitsP' => $produitsP
+        ));
     }
 
     /**
@@ -20,6 +30,9 @@ class BuvetteController extends Controller
      */
     public function tarifAction()
     {
-        return $this->render('BuvetteBundle:Main:tarif.html.twig');
+        $produits = $this->getDoctrine()->getRepository(Produit::class)->getBuvetteListe();
+        return $this->render('BuvetteBundle:Main:tarif.html.twig', array(
+            'produits' => $produits
+        ));
     }
 }

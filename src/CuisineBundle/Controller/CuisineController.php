@@ -16,7 +16,7 @@ class CuisineController extends Controller
      * @Route("/cuisine", name="cuisine_commande")
      */
     public function indexAction(Request $request) {
-        $produits = $this->getDoctrine()->getRepository(Produit::class)->findBy(array('isBillable' => 0));
+        $produits = $this->getDoctrine()->getRepository(Produit::class)->findBy(array('isBillable' => 0, 'actif' => 1));
         return $this->render('CuisineBundle:Main:index.html.twig', array(
             'produits' => $produits
         ));

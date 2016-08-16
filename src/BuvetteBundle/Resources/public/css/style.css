@@ -1,5 +1,5 @@
 @media (max-width:767px) {
-    .vignette > div {
+    .vignette {
         background-repeat: no-repeat;
         background-size: 100% 100%;
         display: block;
@@ -10,7 +10,7 @@
 }
 
 @media (min-width:768px) and (max-width:991px) {
-    .vignette > div {
+    .vignette {
         background-repeat: no-repeat;
         background-size: 100% 100%;
         display: block;
@@ -21,7 +21,7 @@
 }
 
 @media (min-width:992px) and (max-width:1199px) {
-    .vignette > div {
+    .vignette {
         background-repeat: no-repeat;
         background-size: 100% 100%;
         display: block;
@@ -32,7 +32,7 @@
 }
 
 @media (min-width:1200px) {
-    .vignette > div {
+    .vignette {
         background-repeat: no-repeat;
         background-size: 100% 100%;
         display: block;
