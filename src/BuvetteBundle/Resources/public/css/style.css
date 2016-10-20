@@ -66,7 +66,7 @@
 
 #lien-buvette > a:hover, #lien-cuisine > a:hover, #lien-tarif > a:hover, #lien-gestionproduit > a:hover, #lien-logout > a:hover, #lien-login > a:hover, #lien-gestioncaisse > a:hover, #lien-setting > a:hover {
     color: white;
-    font-size: 24px;
+    text-decoration: underline;
 }
 
 #lien-login, #lien-logout {
@@ -193,4 +193,10 @@
 
 .margin-left-20 {
     margin-left: 20px;
+}
+
+.bordure-produit-buvette {
+    border: 1px solid grey;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

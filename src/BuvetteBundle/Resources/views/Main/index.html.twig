@@ -18,81 +18,52 @@
                     <div id="table-boisson" class="content-table col-xs-12 col-sm-6 col-md-8">
                         {% for produit in produitsD %}
                             {% if produit.image is not null %}
-                                <div style="background-image: url('{{ asset('uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
+                                <div id="{{ produit.id }}" data-name="{{ produit.nom }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
                             {% else %}
-                                <div style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
+                                <div id="{{ produit.id }}" data-name="{{ produit.nom }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
                             {% endif %}
                         {% endfor %}
                     </div>
                     <div id="table-pizza" class="not-display content-table col-xs-12 col-sm-6 col-md-8">
                         {% for produit in produitsP %}
                             {% if produit.image is not null %}
-                                <div style="background-image: url('{{ asset('uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
+                                <div id="{{ produit.id }}" data-name="{{ produit.nom }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
                             {% else %}
-                                <div style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
+                                <div id="{{ produit.id }}" data-name="{{ produit.nom }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
                             {% endif %}
                         {% endfor %}
                     </div>
                     <div id="table-sandwitch" class="not-display content-table col-xs-12 col-sm-6 col-md-8">
                         {% for produit in produitsSA %}
                             {% if produit.image is not null %}
-                                <div style="background-image: url('{{ asset('uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
+                                <div id="{{ produit.id }}" data-name="{{ produit.nom }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
                             {% else %}
-                                <div style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
+                                <div id="{{ produit.id }}" data-name="{{ produit.nom }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
                             {% endif %}
                         {% endfor %}
                     </div>
                     <div id="table-snack" class="not-display content-table col-xs-12 col-sm-6 col-md-8">
                         {% for produit in produitsS %}
                             {% if produit.image is not null %}
-                                <div style="background-image: url('{{ asset('uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
+                                <div id="{{ produit.id }}" data-name="{{ produit.nom }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
                             {% else %}
-                                <div style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
+                                <div id="{{ produit.id }}" data-name="{{ produit.nom }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
                             {% endif %}
                         {% endfor %}
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-4">
                         <div class="row">
                             <div class="col-xs-12 col-center">
-                                <span id="cout-total">20</span>€
+                                Montant total : <span id="cout-total-command">0</span>€
                             </div>
                         </div>
-                        <div id="listing-commande">
-                            <div data-id="18" class="row margin-top-10">
-                                <div class="col-xs-1 col-xs-offset-1 padding-top-7"><span class="qte-18">4</span></div>
-                                <div class="col-xs-5 col-sm-5"><button class="btn btn-default">+</button><button class="btn btn-default">-</button></div>
-                                <div class="col-xs-5 col-sm-5 padding-top-7">Pizza 4 fromages</div>
-                            </div>
-                            <div data-id="18" class="row margin-top-10">
-                                <div class="col-xs-1 col-xs-offset-1 padding-top-7"><span class="qte-18">4</span></div>
-                                <div class="col-xs-5 col-sm-5"><button class="btn btn-default">+</button><button class="btn btn-default">-</button></div>
-                                <div class="col-xs-5 col-sm-5 padding-top-7">Pizza 4 fromages</div>
-                            </div>
-                            <div data-id="18" class="row margin-top-10">
-                                <div class="col-xs-1 col-xs-offset-1 padding-top-7"><span class="qte-18">4</span></div>
-                                <div class="col-xs-5 col-sm-5"><button class="btn btn-default">+</button><button class="btn btn-default">-</button></div>
-                                <div class="col-xs-5 col-sm-5 padding-top-7">Pizza 4 fromages</div>
-                            </div>
-                            <div data-id="18" class="row margin-top-10">
-                                <div class="col-xs-1 col-xs-offset-1 padding-top-7"><span class="qte-18">4</span></div>
-                                <div class="col-xs-5 col-sm-5"><button class="btn btn-default">+</button><button class="btn btn-default">-</button></div>
-                                <div class="col-xs-5 col-sm-5 padding-top-7">Pizza 4 fromages</div>
-                            </div>
-                            <div data-id="18" class="row margin-top-10">
-                                <div class="col-xs-1 col-xs-offset-1 padding-top-7"><span class="qte-18">4</span></div>
-                                <div class="col-xs-5 col-sm-5"><button class="btn btn-default">+</button><button class="btn btn-default">-</button></div>
-                                <div class="col-xs-5 col-sm-5 padding-top-7">Pizza 4 fromages</div>
-                            </div>
+                        <div id="listing-commande"></div>
+                        <div class="row">
+                            <button id="valider-espece-commande" class="btn btn-success col-xs-5 margin-top-20">Payer en espèce</button>
+                            <button id="valider-cb-commande" class="btn btn-success col-xs-5 col-xs-offset-2 margin-top-20">Payer par CB</button>
                         </div>
                         <div class="row">
-                            <div class="margin-top-20 col-xs-12 col-xs-offset-0 col-sm-8 col-sm-offset-2">
-                                <select class="selectpicker col-xs-12" title="Moyen de payement">
-                                    <option>moyen de payement</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <button id="valider-commande" class="btn btn-success col-xs-5 margin-top-20">Commander</button>
+                            <button id="valider-autre-commande" class="btn btn-success col-xs-5 margin-top-20">Payer autrement</button>
                             <button id="annuler-commande" class="btn btn-danger col-xs-5 col-xs-offset-2 margin-top-20">Annuler</button>
                         </div>
                     </div>
@@ -108,4 +79,5 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/user/js/table_content.js') }}"></script>
+    <script src="{{ asset('bundles/buvette/js/buvette.js') }}"></script>
 {% endblock %}

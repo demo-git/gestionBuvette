@@ -2,6 +2,7 @@
 
 namespace UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -9,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Panier
  *
  * @ORM\Table(name="panier")
- * @ORM\Entity(repositoryClass="UserBundle\Repository\PanierRepository")
+ * @ORM\Entity()
  */
 class Panier
 {
@@ -53,7 +54,7 @@ class Panier
     /**
      * Add produitCommande
      *
-     * @param \UserBundle\Entity\Produit_panier $produitCommande
+     * @param \BuvetteBundle\Entity\Produit_panier $produitCommande
      *
      * @return Panier
      */
@@ -67,7 +68,7 @@ class Panier
     /**
      * Remove produitCommande
      *
-     * @param \UserBundle\Entity\Produit_panier $produitCommande
+     * @param \BuvetteBundle\Entity\Produit_panier $produitCommande
      */
     public function removeProduitCommande(\UserBundle\Entity\Produit_panier $produitCommande)
     {
