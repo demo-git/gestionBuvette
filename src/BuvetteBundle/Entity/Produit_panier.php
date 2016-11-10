@@ -1,6 +1,6 @@
 <?php
 
-namespace UserBundle\Entity;
+namespace BuvetteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -35,7 +35,7 @@ class Produit_panier
     private $panier;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produit")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Produit")
      * @ORM\JoinColumn(name="produit_id", referencedColumnName="id")
      */
     private $produit;
@@ -82,11 +82,11 @@ class Produit_panier
     /**
      * Set panier
      *
-     * @param \UserBundle\Entity\Panier $panier
+     * @param \BuvetteBundle\Entity\Panier $panier
      *
      * @return Produit_panier
      */
-    public function setPanier(\UserBundle\Entity\Panier $panier = null)
+    public function setPanier(\BuvetteBundle\Entity\Panier $panier = null)
     {
         $this->panier = $panier;
 
@@ -96,7 +96,7 @@ class Produit_panier
     /**
      * Get panier
      *
-     * @return \UserBundle\Entity\Panier
+     * @return \BuvetteBundle\Entity\Panier
      */
     public function getPanier()
     {

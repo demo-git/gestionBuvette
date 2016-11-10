@@ -14,10 +14,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Panier
 {
-    const PAYEMENT_CB = 1;
-    const PAYEMENT_LIQUIDE = 2;
-    const PAYEMENT_AUTRE = 3;
-
     /**
      * @var int
      *
@@ -68,7 +64,7 @@ class Panier
      * @param \BuvetteBundle\Entity\Produit_panier $produitCommande
      * @return Panier
      */
-    public function addProduitCommande(\BuvetteBundle\Entity\Produit_panier $produitCommande)
+    public function addProduitCommande(\UserBundle\Entity\Produit_panier $produitCommande)
     {
         $this->produitCommandes[] = $produitCommande;
 
@@ -80,7 +76,7 @@ class Panier
      *
      * @param \BuvetteBundle\Entity\Produit_panier $produitCommande
      */
-    public function removeProduitCommande(\BuvetteBundle\Entity\Produit_panier $produitCommande)
+    public function removeProduitCommande(\UserBundle\Entity\Produit_panier $produitCommande)
     {
         $this->produitCommandes->removeElement($produitCommande);
     }
@@ -117,29 +113,5 @@ class Panier
     public function getCreateAt()
     {
         return $this->createAt;
-    }
-
-    /**
-     * Set typePayement
-     *
-     * @param integer $typePayement
-     *
-     * @return Panier
-     */
-    public function setTypePayement($typePayement)
-    {
-        $this->typePayement = $typePayement;
-
-        return $this;
-    }
-
-    /**
-     * Get typePayement
-     *
-     * @return integer
-     */
-    public function getTypePayement()
-    {
-        return $this->typePayement;
     }
 }
