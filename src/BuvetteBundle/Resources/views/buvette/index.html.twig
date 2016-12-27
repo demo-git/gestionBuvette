@@ -7,6 +7,9 @@
             <div class="row btn-margin">
                 <h1>Buvette</h1>
             </div>
+            {% include '@Buvette/buvette/modal_commande.html.twig' %}
+            {% include '@Buvette/buvette/modal_validation.html.twig' %}
+            <div id="ajax-validation" data-ajax="{{ path('buvette_validation') }}"></div>
             <div class="row">
                 <div class="content col-xs-12">
                     <ul class="nav nav-tabs margin-bottom-20">
@@ -27,9 +30,9 @@
                     <div id="table-pizza" class="not-display content-table col-xs-12 col-sm-6 col-md-8">
                         {% for produit in produitsP %}
                             {% if produit.image is not null %}
-                                <div id="{{ produit.id }}" data-name="{{ produit.nom }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
+                                <div id="{{ produit.id }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
                             {% else %}
-                                <div id="{{ produit.id }}" data-name="{{ produit.nom }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
+                                <div id="{{ produit.id }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">{{ produit.nom }}</div>
                             {% endif %}
                         {% endfor %}
                     </div>
@@ -59,11 +62,7 @@
                         </div>
                         <div id="listing-commande"></div>
                         <div class="row">
-                            <button id="valider-espece-commande" class="btn btn-success col-xs-5 margin-top-20">Payer en espèce</button>
-                            <button id="valider-cb-commande" class="btn btn-success col-xs-5 col-xs-offset-2 margin-top-20">Payer par CB</button>
-                        </div>
-                        <div class="row">
-                            <button id="valider-autre-commande" class="btn btn-success col-xs-5 margin-top-20">Payer autrement</button>
+                            <button class="btn btn-success col-xs-5 margin-top-20" data-toggle="modal" data-target="#modalCommande">Valider</button>
                             <button id="annuler-commande" class="btn btn-danger col-xs-5 col-xs-offset-2 margin-top-20">Annuler</button>
                         </div>
                     </div>

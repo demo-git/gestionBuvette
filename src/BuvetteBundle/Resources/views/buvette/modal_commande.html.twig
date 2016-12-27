@@ -1,0 +1,70 @@
+<div class="modal fade" id="modalCommande" tabindex="-1" role="dialog" aria-labelledby="labelCommande">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h4 class="modal-title col-center" id="labelCommande">Encaissement Commande</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 col-center">
+                        Prix total : <span id="modal-prix"></span>€
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-center">
+                        TODO: afficher estimation temps d'attente
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-6 margin-top-20">
+                        <div class="row">
+                            <div class="col-xs-8 col-xs-offset-2">
+                                <div class="row">
+                                    <button type="button" id="valider-espece-commande" class="btn btn-success col-xs-12">Payer en espèce</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 margin-top-20">
+                        <div class="row">
+                            <div class="col-xs-8 col-xs-offset-2">
+                                <div class="row">
+                                    <button type="button" id="valider-cb-commande" class="btn btn-success col-xs-12">Payer par CB</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-center">
+                    <div class="col-xs-6 margin-top-20">
+                        <div class="row">
+                            <div class="col-xs-8 col-xs-offset-2">
+                                <div class="row">
+                                    <button type="button" id="valider-autre-commande" class="btn btn-success col-xs-12">Payer autrement</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 margin-top-20">
+                        <div class="row">
+                            <div class="col-xs-8 col-xs-offset-2">
+                                <div class="row">
+                                    <button type="button" class="btn btn-danger col-xs-12" data-dismiss="modal">Retour à la commande</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

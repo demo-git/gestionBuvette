@@ -36,6 +36,7 @@ class Produit
     private $type;
 
     /**
+     * différencie les produits dont les stocks se font par facture
      * @var int
      *
      * @ORM\Column(name="isBillable", type="boolean")
@@ -164,7 +165,7 @@ class Produit
      *
      * @return Produit
      */
-    public function addComposant(\UserBundle\Entity\Composant $composant)
+    public function addComposant(Composant $composant)
     {
         $this->composants[] = $composant;
 
@@ -176,7 +177,7 @@ class Produit
      *
      * @param \UserBundle\Entity\Composant $composant
      */
-    public function removeComposant(\UserBundle\Entity\Composant $composant)
+    public function removeComposant(Composant $composant)
     {
         $this->composants->removeElement($composant);
     }
@@ -273,7 +274,7 @@ class Produit
      *
      * @return Produit
      */
-    public function addFacture(\UserBundle\Entity\Facture $facture)
+    public function addFacture(Facture $facture)
     {
         $this->factures[] = $facture;
 
@@ -285,7 +286,7 @@ class Produit
      *
      * @param \UserBundle\Entity\Facture $facture
      */
-    public function removeFacture(\UserBundle\Entity\Facture $facture)
+    public function removeFacture(Facture $facture)
     {
         $this->factures->removeElement($facture);
     }
@@ -307,7 +308,7 @@ class Produit
      *
      * @return Produit
      */
-    public function setImage(\UserBundle\Entity\Image $image = null)
+    public function setImage(Image $image = null)
     {
         $this->image = $image;
 

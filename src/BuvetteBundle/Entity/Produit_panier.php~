@@ -17,7 +17,6 @@ class Produit_panier
     const STATE_PREPA = 2;
     const STATE_PRET = 3;
     const STATE_RETIRER = 4;
-    const STATE_NOWAITING = 0;
 
     /**
      * @var int
@@ -59,14 +58,12 @@ class Produit_panier
      * @param int $quantite
      * @param Panier $panier
      * @param Produit $produit
-     * @param int $state
      */
-    public function __construct($quantite = null, $panier = null, $produit = null, $state = self::STATE_NOWAITING)
+    public function __construct($quantite = null, $panier = null, $produit = null)
     {
         $this->quantite = $quantite;
         $this->setPanier($panier);
         $this->setProduit($produit);
-        $this->state = $state;
     }
     
     /**
@@ -149,29 +146,5 @@ class Produit_panier
     public function getProduit()
     {
         return $this->produit;
-    }
-
-    /**
-     * Set state
-     *
-     * @param integer $state
-     *
-     * @return Produit_panier
-     */
-    public function setState($state)
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
-    /**
-     * Get state
-     *
-     * @return integer
-     */
-    public function getState()
-    {
-        return $this->state;
     }
 }

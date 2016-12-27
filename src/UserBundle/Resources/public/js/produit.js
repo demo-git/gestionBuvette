@@ -8,7 +8,7 @@ $(document).ready(function(){
         if(jsonData == null){
             $.ajax({
                 method: "POST",
-                url: "/admin/ajax/produit/actif"
+                url: $('#ajax-produit-add').attr('data-ajax')
             })
             .done(function( data ) {
                 jsonData = data.split(';');

@@ -5,6 +5,7 @@ namespace BuvetteBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use UserBundle\Entity\Operation;
 
 /**
  * Panier
@@ -47,6 +48,11 @@ class Panier
      */
     private $produitCommandes;
 
+    /**
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Operation", cascade={"all"}, orphanRemoval=true)
+     */
+    private $operation;
+
     public function __construct()
     {
         $this->produitCommandes = new ArrayCollection();
@@ -68,7 +74,7 @@ class Panier
      * @param \BuvetteBundle\Entity\Produit_panier $produitCommande
      * @return Panier
      */
-    public function addProduitCommande(\BuvetteBundle\Entity\Produit_panier $produitCommande)
+    public function addProduitCommande(Produit_panier $produitCommande)
     {
         $this->produitCommandes[] = $produitCommande;
 
@@ -80,7 +86,7 @@ class Panier
      *
      * @param \BuvetteBundle\Entity\Produit_panier $produitCommande
      */
-    public function removeProduitCommande(\BuvetteBundle\Entity\Produit_panier $produitCommande)
+    public function removeProduitCommande(Produit_panier $produitCommande)
     {
         $this->produitCommandes->removeElement($produitCommande);
     }
@@ -141,5 +147,29 @@ class Panier
     public function getTypePayement()
     {
         return $this->typePayement;
+    }
+
+    /**
+     * Set operation
+     *
+     * @param \UserBundle\Entity\Operation $operation
+     *
+     * @return Panier
+     */
+    public function setOperation(Operation $operation = null)
+    {
+        $this->operation = $operation;
+
+        return $this;
+    }
+
+    /**
+     * Get operation
+     *
+     * @return \UserBundle\Entity\Operation
+     */
+    public function getOperation()
+    {
+        return $this->operation;
     }
 }
