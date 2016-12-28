@@ -19,7 +19,7 @@ function refresh() {
                 } else {
                     var html = '<div id="' + liste[i][x][0] + '" style="background-image: url(\'';
                     if (liste[i][x][4] != null) {
-                        html += 'uploads/' + liste[i][x][4];
+                        html += '/uploads/' + liste[i][x][4];
                     } else {
                         html += '/bundles/buvette/images/noimagefound.jpg';
                     }
