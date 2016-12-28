@@ -30,4 +30,15 @@ class ProduitRepository extends EntityRepository
         return $qb->getQuery()
             ->getResult();
     }
+
+    /**
+     * @return array Produit
+     */
+    public function getByAlerte() {
+        return $this->createQueryBuilder('p')
+            ->where('p.actif = 1')
+            ->andWhere('p.warnThreshold >= p.quantiteActuelle')
+            ->getQuery()
+            ->getResult();
+    }
 }

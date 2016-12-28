@@ -45,6 +45,16 @@ class ProduitType extends AbstractType
                 'attr' => array('min' => 0, 'class' => 'form-control', 'placeholder' => 'En minutes'),
                 'required' => false
             ))
+            ->add('warnThreshold', IntegerType::class, array(
+                'label' => 'Seuil d\'alerte warning :',
+                'attr' => array('min' => -1, 'class' => 'form-control'),
+                'required' => true
+            ))
+            ->add('dangerThreshold', IntegerType::class, array(
+                'label' => 'Seuil d\'alerte danger :',
+                'attr' => array('min' => -1, 'class' => 'form-control'),
+                'required' => true
+            ))
             ->add('composants', CollectionType::class, array(
                 'allow_delete' => true,
                 'allow_add' => true,
