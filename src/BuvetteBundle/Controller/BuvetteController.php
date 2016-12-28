@@ -18,10 +18,11 @@ class BuvetteController extends Controller
      */
     public function indexAction()
     {
-        $produitsD = $this->getDoctrine()->getRepository(Produit::class)->getBuvetteListe(Produit::TYPE_DRINK);
-        $produitsS = $this->getDoctrine()->getRepository(Produit::class)->getBuvetteListe(Produit::TYPE_SNACK);
-        $produitsP = $this->getDoctrine()->getRepository(Produit::class)->getBuvetteListe(Produit::TYPE_PIZZA);
-        $produitsSA = $this->getDoctrine()->getRepository(Produit::class)->getBuvetteListe(Produit::TYPE_SANDWITCH);
+        $produitRepo = $this->getDoctrine()->getRepository(Produit::class);
+        $produitsD = $produitRepo->getBuvetteListe(Produit::TYPE_DRINK);
+        $produitsS = $produitRepo->getBuvetteListe(Produit::TYPE_SNACK);
+        $produitsP = $produitRepo->getBuvetteListe(Produit::TYPE_PIZZA);
+        $produitsSA = $produitRepo->getBuvetteListe(Produit::TYPE_SANDWITCH);
         return $this->render('BuvetteBundle:buvette:index.html.twig', array(
             'produitsD' => $produitsD,
             'produitsS' => $produitsS,

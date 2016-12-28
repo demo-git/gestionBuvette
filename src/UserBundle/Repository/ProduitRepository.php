@@ -12,10 +12,15 @@ use UserBundle\Entity\Produit;
  */
 class ProduitRepository extends EntityRepository
 {
+    /**
+     * @param int $type
+     * @return array Produit
+     */
     public function getBuvetteListe($type = null) {
         $qb = $this->createQueryBuilder('p')
             ->where('p.actif = 1')
-            ->andWhere('p.prixVente IS NOT NULL');
+            ->andWhere('p.prixVente IS NOT NULL')
+            ->andWhere('p.quantiteActuelle > 0');
         if ($type !== null) {
             $qb->andWhere('p.type = :type')
                 ->setParameter('type', $type);

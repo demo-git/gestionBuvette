@@ -5,17 +5,30 @@
     <div class="container-fluid">
         <div class="row">
             <h1>Tarif buvette</h1>
+            <div id="ajax-refresh-produits" data-ajax="{{ path('refresh_produits') }}"></div>
             <div class="col-xs-12">
-                <div class="row">
+                <div id="listeProduits" class="row">
                     {% for produit in produits %}
                         {% if produit.image is not null %}
-                            <div style="background-image: url('{{ asset('uploads/' ~ produit.image.path) }}');margin: 0px 10px 0px 10px;" class="col-xs-6 col-sm-4 col-md-3 col-lg-2 vignette">{{ produit.nom }}<br/>{{ produit.prixVente }}€</div>
+                            <div id="{{ produit.id }}" style="background-image: url('{{ asset('uploads/' ~ produit.image.path) }}');margin: 0 10px 0 10px;" class="col-xs-6 col-sm-4 col-md-3 col-lg-2 vignette">
+                                <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
+                                <br/>
+                                <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
+                            </div>
                         {% else %}
-                            <div style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');margin: 0px 10px 0px 10px;" class="col-xs-6 col-sm-4 col-md-3 col-lg-2 vignette">{{ produit.nom }}<br/>{{ produit.prixVente }}€</div>
+                            <div id="{{ produit.id }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');margin: 0 10px 0 10px;" class="col-xs-6 col-sm-4 col-md-3 col-lg-2 vignette">
+                                <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
+                                <br/>
+                                <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
+                            </div>
                         {% endif %}
                     {% endfor %}
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/buvette/js/tarif.js') }}"></script>
 {% endblock %}
