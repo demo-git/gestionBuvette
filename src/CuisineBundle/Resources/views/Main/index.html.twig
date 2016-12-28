@@ -53,11 +53,11 @@
                             <th class="col-xs-6">Actions</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="listeStock">
                         {% for produit in produits %}
-                            <tr>
-                                <td class="col-md-3">{{ produit.nom }}</td>
-                                <td class="col-md-2">{{ produit.quantiteActuelle }}</td>
+                            <tr id="stock-{{ produit.id }}">
+                                <td id="pl-{{ produit.id }}-nom" class="col-md-3">{{ produit.nom }}</td>
+                                <td id="pl-{{ produit.id }}-qte" class="col-md-2">{{ produit.quantiteActuelle }}</td>
                                 <td class="col-md-5">
                                     <a href="{{ path('cuisine_addquantity', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajout stock</button></a>
                                 </td>

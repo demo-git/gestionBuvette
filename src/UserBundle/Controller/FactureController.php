@@ -35,7 +35,7 @@ class FactureController extends Controller
                 $form->handleRequest($request);
                 if($form->isValid()){
                     $operation = new Operation();
-                    $operation->setJustification('achat produit');
+                    $operation->setJustification('achat produit ' . $produit->getNom());
                     $operation->setType(Operation::TYPE_FACTURE);
                     $operation->setMontant($form->get('prix')->getData());
                     $facture->setOperation($operation);
