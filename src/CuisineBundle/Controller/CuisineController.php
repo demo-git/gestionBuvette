@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use UserBundle\Entity\Produit;
 
 class CuisineController extends Controller
@@ -15,9 +16,9 @@ class CuisineController extends Controller
     /**
      * @Route("/cuisine", name="cuisine_commande")
      */
-    public function indexAction(Request $request) {
+    public function indexAction() {
         $produits = $this->getDoctrine()->getRepository(Produit::class)->findBy(array('isBillable' => 0, 'actif' => 1));
-        return $this->render('CuisineBundle:Main:index.html.twig', array(
+        return $this->render('CuisineBundle:cuisine:index.html.twig', array(
             'produits' => $produits
         ));
     }
@@ -41,8 +42,18 @@ class CuisineController extends Controller
             if ($request->isMethod('POST')) {
                 $form->handleRequest($request);
                 if ($form->isValid()) {
-                    $produit->setQuantiteActuelle($produit->getQuantiteActuelle() + $form->get('quantity')->getData());
+                    $qte = $form->get('quantity')->getData();
+                    $produit->setQuantiteActuelle($produit->getQuantiteActuelle() + $qte);
                     $em = $this->getDoctrine()->getManager();
+
+                    foreach ($produit->getComposants() as $composant) {
+                        if ($composant->getQuantite()) {
+                            $prdComposant = $composant->getProduitComposant();
+                            $prdComposant->setQuantiteActuelle($prdComposant->getQuantiteActuelle() - ($qte * $composant->getQuantite()));
+                            $em->persist($prdComposant);
+                        }
+                    }
+
                     $em->persist($produit);
                     $em->flush();
                     $request->getSession()->getFlashBag()->add('success', 'La quantité a bien été modifiée');
@@ -56,7 +67,7 @@ class CuisineController extends Controller
                 }
             }
 
-            return $this->render('CuisineBundle:Main:add_quantity.html.twig', array('form' => $form->createView()));
+            return $this->render('CuisineBundle:cuisine:add_quantity.html.twig', array('form' => $form->createView()));
 
         } else {
             $request->getSession()->getFlashBag()->add('error', 'Le produit n\'existe pas');
@@ -68,4 +79,18 @@ class CuisineController extends Controller
             }
         }
     }
+    /**
+     * @Route("/cuisine/refresh/produits", name="cuisine_refresh_produits")
+     * @return Response
+     */
+    public function refreshProduits() {
+        $produits = $this->getDoctrine()->getRepository(Produit::class)->findBy(array('isBillable' => 0, 'actif' => 1));
+        $jsonResponse = array();
+        foreach ($produits as $produit) {
+            $jsonResponse[] = array($produit->getId(), $produit->getNom(), $produit->getQuantiteActuelle());
+        }
+
+        return new Response(json_encode($jsonResponse));
+    }
+
 }

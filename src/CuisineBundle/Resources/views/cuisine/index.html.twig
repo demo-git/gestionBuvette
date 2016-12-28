@@ -7,6 +7,7 @@
             <div class="row btn-margin">
                 <h1>Cuisine</h1>
             </div>
+            <div id="ajax-refresh-produits" data-ajax="{{ path('cuisine_refresh_produits') }}"></div>
             <div class="row">
                 <div class="content col-xs-12">
                     <ul class="nav nav-tabs margin-bottom-20">
@@ -54,15 +55,15 @@
                         </tr>
                         </thead>
                         <tbody id="listeStock">
-                        {% for produit in produits %}
-                            <tr id="stock-{{ produit.id }}">
-                                <td id="pl-{{ produit.id }}-nom" class="col-md-3">{{ produit.nom }}</td>
-                                <td id="pl-{{ produit.id }}-qte" class="col-md-2">{{ produit.quantiteActuelle }}</td>
-                                <td class="col-md-5">
-                                    <a href="{{ path('cuisine_addquantity', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajout stock</button></a>
-                                </td>
-                            </tr>
-                        {% endfor %}
+                            {% for produit in produits %}
+                                <tr id="stock-{{ produit.id }}">
+                                    <td id="pl-{{ produit.id }}-nom" class="col-md-3">{{ produit.nom }}</td>
+                                    <td id="pl-{{ produit.id }}-qte" class="col-md-2">{{ produit.quantiteActuelle }}</td>
+                                    <td class="col-md-5">
+                                        <a href="{{ path('cuisine_addquantity', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajout stock</button></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -76,4 +77,5 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/user/js/table_content.js') }}"></script>
+    <script src="{{ asset('bundles/cuisine/js/cuisine.js') }}"></script>
 {% endblock %}
