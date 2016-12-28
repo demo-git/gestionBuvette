@@ -66,6 +66,22 @@ class Produit
     private $cuisson = 0;
 
     /**
+     * nombre de produit déclenchant une alerte warning
+     * @var int
+     *
+     * @ORM\Column(name="warnThreshold", type="integer", options={"default" = -1})
+     */
+    private $warnThreshold = -1;
+
+    /**
+     * nombre de produit déclenchant une alerte danger
+     * @var int
+     *
+     * @ORM\Column(name="dangerThreshold", type="integer", options={"default" = -1})
+     */
+    private $dangerThreshold = -1;
+
+    /**
      * @var float
      *
      * @ORM\Column(name="prixVente", type="float", nullable=true)
@@ -371,5 +387,53 @@ class Produit
     public function getIsBillable()
     {
         return $this->isBillable;
+    }
+
+    /**
+     * Set warnThreshold
+     *
+     * @param integer $warnThreshold
+     *
+     * @return Produit
+     */
+    public function setWarnThreshold($warnThreshold)
+    {
+        $this->warnThreshold = $warnThreshold;
+
+        return $this;
+    }
+
+    /**
+     * Get warnThreshold
+     *
+     * @return integer
+     */
+    public function getWarnThreshold()
+    {
+        return $this->warnThreshold;
+    }
+
+    /**
+     * Set dangerThreshold
+     *
+     * @param integer $dangerThreshold
+     *
+     * @return Produit
+     */
+    public function setDangerThreshold($dangerThreshold)
+    {
+        $this->dangerThreshold = $dangerThreshold;
+
+        return $this;
+    }
+
+    /**
+     * Get dangerThreshold
+     *
+     * @return integer
+     */
+    public function getDangerThreshold()
+    {
+        return $this->dangerThreshold;
     }
 }
