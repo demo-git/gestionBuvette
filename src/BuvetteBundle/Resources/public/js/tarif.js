@@ -17,11 +17,11 @@ function refresh() {
                     $('#pl-' + liste[i][x][0] + '-nom').html(liste[i][x][1]);
                     $('#pl-' + liste[i][x][0] + '-prix').html(liste[i][x][2]);
                 } else {
-                    var html = '<div id="' + liste[i][x][0] + '" style="background-image: url(';
+                    var html = '<div id="' + liste[i][x][0] + '" style="background-image: url(\'';
                     if (liste[i][x][4] != null) {
-                        html += '\'uploads/' + liste[i][x][4];
+                        html += 'uploads/' + liste[i][x][4];
                     } else {
-                        html += 'bundles/buvette/images/noimagefound.jpg';
+                        html += '/bundles/buvette/images/noimagefound.jpg';
                     }
                     html += '\');margin: 0 10px 0 10px;" class="col-xs-6 col-sm-4 col-md-3 col-lg-2 vignette"><span id="pl-' + liste[i][x][0] + '-nom">' + liste[i][x][1] + '</span><br/><span id="pl-' + liste[i][x][0] + '-prix">' + liste[i][x][2] + '</span>€</div>';
                     listeProduits.append(html);
