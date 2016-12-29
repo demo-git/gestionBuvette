@@ -105,14 +105,19 @@ class CuisineController extends Controller
      * @Route("/cuisine/upgrade/commande", name="cuisine_upgrade_commande")
      * @return Response
      */
-    public function upgradeCommandeAction() {
-        $produits = $this->getDoctrine()->getRepository(Produit::class)->findBy(array('isBillable' => 0, 'actif' => 1));
-        $jsonResponse = array();
-        foreach ($produits as $produit) {
-            $jsonResponse[] = array($produit->getId(), $produit->getNom(), $produit->getQuantiteActuelle());
+    public function upgradeCommandeAction(Request $request) {
+
+        if ($request->isMethod('POST') && $request->get('id')) {
+            $em = $this->getDoctrine()->getManager();
+            $panierProd = $em->getRepository(Produit_panier::class)->find($request->get('id'));
+
+            $panierProd->setState($panierProd->getState() + 1);
+            $em->flush();
+
+            return new Response(json_encode(array($panierProd->getState(), $panierProd->getId())));
         }
 
-        return new Response(json_encode($jsonResponse));
+        return new Response('0');
     }
 
 }

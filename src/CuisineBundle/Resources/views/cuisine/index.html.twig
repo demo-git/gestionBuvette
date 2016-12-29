@@ -8,6 +8,7 @@
                 <h1>Cuisine</h1>
             </div>
             <div id="ajax-refresh-produits" data-ajax="{{ path('cuisine_refresh_produits') }}"></div>
+            <div id="ajax-upgrade-commande" data-ajax="{{ path('cuisine_upgrade_commande') }}"></div>
             <div class="row">
                 <div class="content col-xs-12">
                     <ul class="nav nav-tabs margin-bottom-20">
@@ -28,9 +29,9 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-3">
                                     {% if commande.state == 1 %}
-                                        <button id="btn-commande-{{ commande.id }}" class="margin-top-10 col-xs-8 col-xs-offset-2 btn btn-warning btn-commande-upgrade" value="{{ commande.state }}">En préparation</button>
+                                        <button id="btn-commande-{{ commande.id }}" class="margin-top-10 col-xs-8 col-xs-offset-2 btn btn-warning btn-commande-upgrade">En préparation</button>
                                     {% else %}
-                                        <button id="btn-commande-{{ commande.id }}" class="margin-top-10 col-xs-8 col-xs-offset-2 btn btn-success btn-commande-upgrade" value="{{ commande.state }}">Prêt</button>
+                                        <button id="btn-commande-{{ commande.id }}" class="margin-top-10 col-xs-8 col-xs-offset-2 btn btn-success btn-commande-upgrade">Prêt</button>
                                     {% endif %}
                                 </div>
                             </div>

@@ -1,7 +1,21 @@
 $(document).ready(function () {
     asyncRefresh();
     $('.btn-commande-upgrade').click(function () {
-
+        $.ajax({
+            url: $('#ajax-upgrade-commande').attr('data-ajax'),
+            method: "POST",
+            data: {
+                id: $(this).attr('id').split('-')[2]
+            },
+            async: true
+        }).success(function (json) {
+            json = JSON.parse(json);
+            if (json[0] == 2) {
+                $('#btn-commande-' + json[1]).addClass('btn-success').removeClass('btn-warning').html('Prêt');
+            } else if(json[0] == 3) {
+                $('#commande-' + json[1]).remove();
+            }
+        });
     });
 });
 
