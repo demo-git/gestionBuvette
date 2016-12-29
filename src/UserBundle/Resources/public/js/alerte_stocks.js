@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    asyncRefreshAlerteSctocks();
+    refreshAlerteStocks();
+    setTimeout(asyncRefreshAlerteSctocks(), 30000);
 });
 
 function refreshAlerteStocks() {
@@ -24,6 +25,5 @@ function refreshAlerteStocks() {
 }
 
 function asyncRefreshAlerteSctocks() {
-    refreshAlerteStocks();
-    setInterval(refreshAlerteStocks, 65300);
+    setInterval(refreshAlerteStocks, 60000);
 }
