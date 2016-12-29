@@ -77,8 +77,9 @@ function validerCommande(payement) {
         }
     }).success(function (retour) {
         $('#modalCommande').modal('hide');
-        if (parseInt(retour) === 1) {
-            openModalValidation(1);
+        retour = parseInt(retour);
+        if (retour !== 0) {
+            openModalValidation(retour);
             clearCommande();
         } else {
             openModalValidation(0);
@@ -94,16 +95,16 @@ function clearCommande() {
     $('#cout-total-command').html('0');
 }
 
-function openModalValidation(ok) {
+function openModalValidation(retour) {
     var res = $('#modal_validation_body');
-    if (ok == 1) {
+    if (retour != 0) {
         if (!res.hasClass('alert-success')) {
             res.addClass('alert-success');
         }
         if (res.hasClass('alert-danger')) {
             res.removeClass('alert-danger');
         }
-        $('#modal_resultat_validation').html('La commande a bien été enregistrée !');
+        $('#modal_resultat_validation').html('La commande a bien été enregistrée !<br/>Numéro de commande : ' + retour);
     } else {
         if (!res.hasClass('alert-danger')) {
             res.addClass('alert-danger');

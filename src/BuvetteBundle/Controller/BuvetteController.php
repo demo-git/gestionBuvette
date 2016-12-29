@@ -65,7 +65,7 @@ class BuvetteController extends Controller
             $em->persist($panier);
             $em->flush();
 
-            return new Response('1');
+            return new Response($panier->getId());
         }
 
         return new Response('0');
