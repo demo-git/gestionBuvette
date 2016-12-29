@@ -1,5 +1,6 @@
 $(document).ready(function () {
     asyncRefresh();
+    setTimeout(asyncRefreshCommande, 15000);
     $('.btn-commande-upgrade').click(function () {
         $.ajax({
             url: $('#ajax-upgrade-commande').attr('data-ajax'),
@@ -51,4 +52,55 @@ function refresh() {
 
 function asyncRefresh() {
     setInterval(refresh, 60000);
+}
+
+function refreshCommande() {
+    $.ajax({
+        url: $('#ajax-refresh-commande').attr('data-ajax'),
+        method: "GET",
+        async: true
+    }).success(function (json) {
+        var liste = JSON.parse(json);
+        var listeCommandes = $('#table-pizza');
+        var listeIds = [];
+        for (var i = 0; i < liste[1].length; i++) {
+            if (document.getElementById('commande-' + liste[1][i][0])) {
+                var row = $('commande-' + liste[1][i][0]);
+                if (liste[1][i][4] > liste[0][1]) {
+                    if (!row.hasClass('danger')) {
+                        row.addClass('danger').removeClass('warning');
+                    }
+                } else if (liste[1][i][4] > liste[0][0]) {
+                    if (!row.hasClass('warning')) {
+                        row.addClass('warning').removeClass('success');
+                    }
+                }
+                $('#time-' + liste[1][i][0]).html(liste[1][i][4]);
+            } else {
+                var html = '<div id="commande-' + liste[1][i][0] + '" class="col-xs-12 border-alerte ';
+                if (liste[1][i][4] > liste[0][1]) {
+                    html += 'danger';
+                } else if (liste[1][i][4] > liste[0][0]) {
+                    html += 'warning';
+                } else {
+                    html += 'success';
+                }
+                html += ' padding-bottom-15 padding-top-15"><div class="margin-top-20 col-xs-6 col-sm-3"><span id="time-' + liste[1][i][0] + '">' + liste[1][i][4] + '</span>m depuis commande</div><div class="margin-top-20 col-xs-6 col-sm-6"><span id="commande-nom-' + liste[1][i][0] + '">' + liste[1][i][1] + '</span> / Ref : <span id="commande-ref-' + liste[1][i][0] + '">' + liste[1][i][2] + '</span></div><div class="col-xs-12 col-sm-3"><button id="btn-commande-' + liste[1][i][0] + '" class="margin-top-10 col-xs-8 col-xs-offset-2 btn btn-warning btn-commande-upgrade">En préparation</button></div></div>';
+                listeCommandes.append(html);
+            }
+            listeIds.push(liste[1][i][0]);
+        }
+
+        var children = listeCommandes.children();
+        for (var y = 0; y < children.length; y++) {
+            var child = $(children[y]);
+            if(listeIds.indexOf(parseInt(child.attr('id').split('-')[1])) == -1) {
+                children[y].parentNode.removeChild(children[y]);
+            }
+        }
+    });
+}
+
+function asyncRefreshCommande() {
+    setInterval(refreshCommande, 30000);
 }

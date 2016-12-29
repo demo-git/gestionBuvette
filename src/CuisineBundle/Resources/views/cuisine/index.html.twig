@@ -9,6 +9,7 @@
             </div>
             <div id="ajax-refresh-produits" data-ajax="{{ path('cuisine_refresh_produits') }}"></div>
             <div id="ajax-upgrade-commande" data-ajax="{{ path('cuisine_upgrade_commande') }}"></div>
+            <div id="ajax-refresh-commande" data-ajax="{{ path('alerte_commandes', {'type' : 1}) }}"></div>
             <div class="row">
                 <div class="content col-xs-12">
                     <ul class="nav nav-tabs margin-bottom-20">
@@ -24,8 +25,7 @@
                                     <span id="time-{{ commande.id }}">{{ difference }}</span>m depuis commande
                                 </div>
                                 <div class="margin-top-20 col-xs-6 col-sm-6">
-                                    <span id="commande-nom-{{ commande.id }}">{{ commande.produit.nom }}</span> / Ref
-                                    <span id="commande-ref-{{ commande.id }}">{{ commande.panier.id }}</span>
+                                    <span id="commande-nom-{{ commande.id }}">{{ commande.produit.nom }}</span> / Ref : <span id="commande-ref-{{ commande.id }}">{{ commande.panier.id }}</span>
                                 </div>
                                 <div class="col-xs-12 col-sm-3">
                                     {% if commande.state == 1 %}

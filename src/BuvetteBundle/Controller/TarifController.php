@@ -22,7 +22,7 @@ class TarifController extends Controller
     }
 
     /**
-     * @Route("/refresh/produits", name="refresh_produits")
+     * @Route("/reload/produits", name="refresh_produits")
      * @return Response
      */
     public function refreshProduitsAction() {

@@ -35,6 +35,7 @@ security:
     access_control:
         - { path: ^/logout, roles: ROLE_USER }
         - { path: ^/login_check, roles: ROLE_USER }
+        - { path: ^/refresh, roles: ROLE_USER }
         - { path: ^/buvette, roles: ROLE_BUVETTE }
         - { path: ^/cuisine, roles: ROLE_CUISINE }
         - { path: ^/admin, roles: ROLE_ADMIN }
