@@ -159,5 +159,5 @@ function refresh() {
 }
 
 function asyncRefresh() {
-    setInterval(refresh, 60000);
+    setInterval(refresh, 50000);
 }

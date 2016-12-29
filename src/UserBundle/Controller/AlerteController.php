@@ -16,6 +16,16 @@ class AlerteController extends Controller
     public function indexAction()
     {
         $produits = $this->getDoctrine()->getRepository(Produit::class)->getByAlerte();
-        return new Response(0);
+        $json = array();
+        foreach ($produits as $produit) {
+            if ($produit->getQuantiteActuelle() <= $produit->getDangerThreshold()) {
+                $type = 1;
+            } else {
+                $type = 2;
+            }
+            $json[] = array($produit->getId(), $produit->getNom(), $produit->getQuantiteActuelle(), $type);
+        }
+
+        return new Response(json_encode($json));
     }
 }

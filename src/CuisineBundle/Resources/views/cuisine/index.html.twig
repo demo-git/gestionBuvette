@@ -77,5 +77,6 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/user/js/table_content.js') }}"></script>
-    <script src="{{ asset('bundles/cuisine/js/cuisine.js') }}"></script>
+    <script src="{{ asset('bundles/cuisine/js/cuisine.js') }}" defer async></script>
+    <script src="{{ asset('bundles/user/js/alerte_stocks.js') }}" defer async></script>
 {% endblock %}
