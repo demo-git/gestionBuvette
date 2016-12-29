@@ -13,7 +13,7 @@ class AlerteController extends Controller
      * @return Response
      * @Route("/refresh/alerte/stocks", name="alerte_stock")
      */
-    public function indexAction()
+    public function alerteStockAction()
     {
         $produits = $this->getDoctrine()->getRepository(Produit::class)->getByAlerte();
         $json = array();

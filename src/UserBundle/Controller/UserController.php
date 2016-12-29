@@ -51,20 +51,18 @@ class UserController extends Controller
     public function settingAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $settings = $em->getRepository(Setting::class)->findAll();
-        if(empty($settings)){
-            $setting = new Setting();
-        }
-        else{
-            $setting = $settings[0];
+        $settings = $em->getRepository(Setting::class)->find(1);
+
+        if(!$settings){
+            $settings = new Setting();
         }
 
-        $form = $this->createForm(SettingType::class, $setting);
+        $form = $this->createForm(SettingType::class, $settings);
 
         if($request->isMethod('POST')){
             $form->handleRequest($request);
             if($form->isValid()){
-                $em->persist($setting);
+                $em->persist($settings);
                 $em->flush();
                 $request->getSession()->getFlashBag()->add('success', 'Les paramètres ont bien été modifiés');
             }

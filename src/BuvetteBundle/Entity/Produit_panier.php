@@ -9,7 +9,7 @@ use UserBundle\Entity\Produit;
  * Produit_panier
  *
  * @ORM\Table(name="produit_panier")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="BuvetteBundle\Repository\Produit_panierRepository")
  */
 class Produit_panier
 {

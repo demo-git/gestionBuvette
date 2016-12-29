@@ -2,6 +2,7 @@
 
 namespace CuisineBundle\Controller;
 
+use BuvetteBundle\Entity\Produit_panier;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use UserBundle\Entity\Produit;
+use UserBundle\Entity\Setting;
 
 class CuisineController extends Controller
 {
@@ -17,9 +19,14 @@ class CuisineController extends Controller
      * @Route("/cuisine", name="cuisine_commande")
      */
     public function indexAction() {
-        $produits = $this->getDoctrine()->getRepository(Produit::class)->findBy(array('isBillable' => 0, 'actif' => 1));
+        $em = $this->getDoctrine()->getManager();
+        $produits = $em->getRepository(Produit::class)->findBy(array('isBillable' => 0, 'actif' => 1));
+        $produitsPanier = $em->getRepository(Produit_panier::class)->getCommande();
+        $settings = $em->getRepository(Setting::class)->find(1);
         return $this->render('CuisineBundle:cuisine:index.html.twig', array(
-            'produits' => $produits
+            'produits' => $produits,
+            'commandes' => $produitsPanier,
+            'settings' => $settings
         ));
     }
 
@@ -79,11 +86,26 @@ class CuisineController extends Controller
             }
         }
     }
+
     /**
      * @Route("/cuisine/refresh/produits", name="cuisine_refresh_produits")
      * @return Response
      */
-    public function refreshProduits() {
+    public function refreshProduitsAction() {
+        $produits = $this->getDoctrine()->getRepository(Produit::class)->findBy(array('isBillable' => 0, 'actif' => 1));
+        $jsonResponse = array();
+        foreach ($produits as $produit) {
+            $jsonResponse[] = array($produit->getId(), $produit->getNom(), $produit->getQuantiteActuelle());
+        }
+
+        return new Response(json_encode($jsonResponse));
+    }
+
+    /**
+     * @Route("/cuisine/upgrade/commande", name="cuisine_upgrade_commande")
+     * @return Response
+     */
+    public function upgradeCommandeAction() {
         $produits = $this->getDoctrine()->getRepository(Produit::class)->findBy(array('isBillable' => 0, 'actif' => 1));
         $jsonResponse = array();
         foreach ($produits as $produit) {

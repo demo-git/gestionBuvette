@@ -1,5 +1,8 @@
 $(document).ready(function () {
     asyncRefresh();
+    $('.btn-commande-upgrade').click(function () {
+
+    });
 });
 
 function refresh() {

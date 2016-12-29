@@ -25,7 +25,7 @@ class TarifController extends Controller
      * @Route("/refresh/produits", name="refresh_produits")
      * @return Response
      */
-    public function refreshProduits() {
+    public function refreshProduitsAction() {
         $produits = $this->getDoctrine()->getRepository(Produit::class)->getBuvetteListe();
         $jsonResponse = array();
         foreach ($produits as $produit) {
