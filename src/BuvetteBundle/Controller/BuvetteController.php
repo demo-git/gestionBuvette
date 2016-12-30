@@ -56,7 +56,11 @@ class BuvetteController extends Controller
                 if ($prd->getCuisson() == 0) {
                     $panier->addProduitCommande(new Produit_panier($produit[1], $panier, $prd));
                 } else {
-                    $panier->addProduitCommande(new Produit_panier($produit[1], $panier, $prd, Produit_panier::STATE_ATTENTE));
+                    $x = 0;
+                    while ($x < $produit[1]) {
+                        $panier->addProduitCommande(new Produit_panier(1, $panier, $prd, Produit_panier::STATE_ATTENTE));
+                        $x++;
+                    }
                 }
                 $operation->setJustification($operation->getJustification() . $prd->getNom() . '/');
             }

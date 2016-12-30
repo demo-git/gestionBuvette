@@ -1,6 +1,6 @@
 $(document).ready(function () {
     refreshCommande();
-    setTimeout(asyncRefreshCommande, 15000);
+    setTimeout(asyncRefreshCommande, 75000);
     $('#listeCommandes').on('click', '.btn-commande-upgrade', function () {
         $.ajax({
             url: $('#ajax-upgrade-commande').attr('data-ajax'),
@@ -75,5 +75,5 @@ function refreshCommande() {
 }
 
 function asyncRefreshCommande() {
-    setInterval(refreshCommande, 30000);
+    setInterval(refreshCommande, 15000);
 }
