@@ -133,28 +133,5 @@ class Setting
     {
         return $this->hovenCapacity;
     }
-
-    /**
-     * Set updateAt
-     *
-     * @param \DateTime $updateAt
-     *
-     * @return Setting
-     */
-    public function setUpdateAt($updateAt)
-    {
-        $this->updateAt = $updateAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updateAt
-     *
-     * @return \DateTime
-     */
-    public function getUpdateAt()
-    {
-        return $this->updateAt;
-    }
 }
+

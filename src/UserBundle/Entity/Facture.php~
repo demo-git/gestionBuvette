@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Facture
  *
  * @ORM\Table(name="facture")
- * @ORM\Entity(repositoryClass="UserBundle\Repository\FactureRepository")
+ * @ORM\Entity()
  */
 class Facture
 {
@@ -28,14 +28,6 @@ class Facture
      * @ORM\Column(name="quantite", type="integer")
      */
     private $quantite;
-
-    /**
-     * @var \DateTime
-     *
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="createAt", type="datetime")
-     */
-    protected $createAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produit", inversedBy="factures")
@@ -108,26 +100,26 @@ class Facture
     }
 
     /**
-     * Set createAt
+     * Set operation
      *
-     * @param \DateTime $createAt
+     * @param \UserBundle\Entity\Operation $operation
      *
      * @return Facture
      */
-    public function setCreateAt($createAt)
+    public function setOperation(\UserBundle\Entity\Operation $operation = null)
     {
-        $this->createAt = $createAt;
+        $this->operation = $operation;
 
         return $this;
     }
 
     /**
-     * Get createAt
+     * Get operation
      *
-     * @return \DateTime
+     * @return \UserBundle\Entity\Operation
      */
-    public function getCreateAt()
+    public function getOperation()
     {
-        return $this->createAt;
+        return $this->operation;
     }
 }

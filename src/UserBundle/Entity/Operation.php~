@@ -163,3 +163,4 @@ class Operation
         return $this->type;
     }
 }
+

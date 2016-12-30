@@ -4,6 +4,7 @@ namespace BuvetteBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use UserBundle\Entity\Produit;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Produit_panier
@@ -41,6 +42,14 @@ class Produit_panier
      * @ORM\Column(name="quantite", type="integer")
      */
     private $quantite;
+
+    /**
+     * @var \DateTime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="updateAt", type="datetime")
+     */
+    private $updateAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Panier", inversedBy="produitCommandes")
@@ -173,5 +182,29 @@ class Produit_panier
     public function getState()
     {
         return $this->state;
+    }
+
+    /**
+     * Set updateAt
+     *
+     * @param \DateTime $updateAt
+     *
+     * @return Produit_panier
+     */
+    public function setUpdateAt($updateAt)
+    {
+        $this->updateAt = $updateAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updateAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdateAt()
+    {
+        return $this->updateAt;
     }
 }

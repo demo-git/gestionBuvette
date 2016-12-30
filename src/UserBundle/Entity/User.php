@@ -5,6 +5,7 @@ namespace UserBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * User
@@ -51,6 +52,13 @@ class User implements UserInterface
      */
     private $roles;
 
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="createAt", type="datetime")
+     */
+    protected $createAt;
 
     /**
      * Get id
@@ -159,4 +167,28 @@ class User implements UserInterface
     }
 
     public function eraseCredentials(){}
+
+    /**
+     * Set createAt
+     *
+     * @param \DateTime $createAt
+     *
+     * @return User
+     */
+    public function setCreateAt($createAt)
+    {
+        $this->createAt = $createAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createAt
+     *
+     * @return \DateTime
+     */
+    public function getCreateAt()
+    {
+        return $this->createAt;
+    }
 }

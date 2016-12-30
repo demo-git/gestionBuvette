@@ -30,14 +30,6 @@ class Facture
     private $quantite;
 
     /**
-     * @var \DateTime
-     *
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="createAt", type="datetime")
-     */
-    protected $createAt;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Produit", inversedBy="factures")
      * @ORM\JoinColumn(name="produit_id", referencedColumnName="id")
      */
@@ -105,30 +97,6 @@ class Facture
     public function getProduit()
     {
         return $this->produit;
-    }
-
-    /**
-     * Set createAt
-     *
-     * @param \DateTime $createAt
-     *
-     * @return Facture
-     */
-    public function setCreateAt($createAt)
-    {
-        $this->createAt = $createAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createAt
-     *
-     * @return \DateTime
-     */
-    public function getCreateAt()
-    {
-        return $this->createAt;
     }
 
     /**
