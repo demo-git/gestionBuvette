@@ -38,7 +38,7 @@ class ProduitRepository extends EntityRepository
         return $this->createQueryBuilder('p')
             ->where('p.actif = 1')
             ->andWhere('p.warnThreshold >= p.quantiteActuelle')
-            ->orderBy('p.quantiteActuelle', 'DESC')
+            ->orderBy('p.quantiteActuelle', 'ASC')
             ->getQuery()
             ->getResult();
     }

@@ -31,6 +31,7 @@ class Produit_panierRepository extends EntityRepository
             ->join('pp.panier', 'p')
             ->where('pp.state != ' . Produit_panier::STATE_NOWAITING)
             ->andWhere('pp.state != ' . Produit_panier::STATE_RETIRER)
+            ->orderBy('pp.state', 'DESC')
             ->getQuery()
             ->getResult();
     }
