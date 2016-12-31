@@ -2,6 +2,7 @@ $(document).ready(function () {
     asyncRefresh();
     setTimeout(asyncRefreshCommande, 7500);
     $('#table-pizza').on('click', '.btn-commande-upgrade', function () {
+        $(this).html('<img style="height: 20px;" src="/bundles/buvette/images/loading-ajax.gif" />');
         $.ajax({
             url: $('#ajax-upgrade-commande').attr('data-ajax'),
             method: "POST",

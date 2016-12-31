@@ -2,6 +2,7 @@ $(document).ready(function () {
     refreshCommande();
     setTimeout(asyncRefreshCommande, 15000);
     $('#listeCommandes').on('click', '.btn-commande-upgrade', function () {
+        $(this).html('<img style="height: 20px;" src="/bundles/buvette/images/loading-ajax.gif" />');
         $.ajax({
             url: $('#ajax-upgrade-commande').attr('data-ajax'),
             method: "POST",

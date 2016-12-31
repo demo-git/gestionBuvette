@@ -47,20 +47,18 @@ class AlerteController extends Controller
         $now = new \DateTime();
         $attente = 0;
         $cuissonMax = 0;
-
-        $nbProduit = count($produitsPanier);
-        $nbFourne = $nbProduit / $settings->getHovenCapacity();
-        if (!is_int($nbFourne)) {
-            $nbFourne = round($nbFourne - 0.5) + 1;
-        }
+        $nbProduit = 0;
 
         foreach ($produitsPanier as $produitPanier) {
             $produit = $produitPanier->getProduit();
             $diff = $now->diff($produitPanier->getPanier()->getCreateAt());
-            if ($produit->getCuisson() > $cuissonMax) {
-                $cuissonMax = $produit->getCuisson();
+            if ($produitPanier->getState() != Produit_panier::STATE_PRET) {
+                $nbProduit++;
+                $attente += $produit->getCuisson();
+                if ($produit->getCuisson() > $cuissonMax) {
+                    $cuissonMax = $produit->getCuisson();
+                }
             }
-            $attente += $produit->getCuisson();
             $jsonResponse[1][] = array(
                 $produitPanier->getId(),
                 $produit->getNom(),
@@ -70,7 +68,11 @@ class AlerteController extends Controller
             );
         }
 
-        if (count($produitsPanier) > $settings->getHovenCapacity()) {
+        $nbFourne = $nbProduit / $settings->getHovenCapacity();
+        if (!is_int($nbFourne)) {
+            $nbFourne = round($nbFourne - 0.5) + 1;
+        }
+        if ($nbProduit > $settings->getHovenCapacity()) {
             $jsonResponse[0][2] = ($attente / $nbProduit) * $nbFourne;
         } else {
             $jsonResponse[0][2] = $cuissonMax;
