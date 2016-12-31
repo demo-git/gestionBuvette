@@ -1,16 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jérémy
- * Date: 30/05/2016
- * Time: 20:27
- */
 
 namespace UserBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use UserBundle\Entity\Setting;
 use UserBundle\Form\SettingType;
 
@@ -19,7 +14,7 @@ class UserController extends Controller
     /**
      * @Route("/login", name="login")
      */
-    public function loginAction(Request $request)
+    public function loginAction()
     {
         $checker = $this->get('security.authorization_checker');
         if ($checker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
@@ -47,6 +42,8 @@ class UserController extends Controller
 
     /**
      * @Route("/admin/setting", name="admin_setting")
+     * @param Request $request
+     * @return Response
      */
     public function settingAction(Request $request)
     {

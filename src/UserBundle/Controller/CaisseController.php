@@ -8,12 +8,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use UserBundle\Entity\Operation;
 use UserBundle\Form\OperationType;
 
 class CaisseController extends Controller
 {
     /**
+     * @param Request $request
+     * @return Response
      * @Route("/admin/gestioncaisse", name="admin_gestioncaisse")
      */
     public function indexAction(Request $request)
@@ -99,6 +102,9 @@ class CaisseController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param Operation $operation
+     * @return Response
      * @Route("/admin/operation/{id}", name="admin_modifieroperation")
      * @ParamConverter("operation", class="UserBundle:Operation")
      */

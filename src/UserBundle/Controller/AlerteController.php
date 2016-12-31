@@ -33,6 +33,7 @@ class AlerteController extends Controller
 
     /**
      * @Route("/refresh/alerte/commandes/{type}", name="alerte_commandes")
+     * @param int $type
      * @return Response
      */
     public function alerteCommandesAction($type) {

@@ -36,6 +36,9 @@ class ProduitController extends Controller
 
     /**
      * @Route("/admin/produit/image/{id}", name="admin_addimage", requirements={"id" = "\d+"})
+     * @param Request $request
+     * @param int $id
+     * @return Response
      */
     public function imageAction(Request $request, $id)
     {
@@ -55,7 +58,7 @@ class ProduitController extends Controller
             if($form->isValid()){
                 $file = $image->getPath();
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                $file->move($this->container->getParameter('kernel.root_dir').'/../web/uploads/', $fileName);
+                $file->move($this->getParameter('kernel.root_dir').'/../web/uploads/', $fileName);
                 $image->setPath($fileName);
 
                 $produit->setImage($image);
@@ -72,6 +75,9 @@ class ProduitController extends Controller
 
     /**
      * @Route("/admin/produit/{id}", name="admin_modifierproduit", requirements={"id" = "\d+"}, defaults={"id" = -1})
+     * @param Request $request
+     * @param int $id
+     * @return Response
      */
     public function modifierAction(Request $request, $id)
     {
@@ -109,6 +115,8 @@ class ProduitController extends Controller
 
     /**
      * @Route("/admin/ajax/produit/actif", name="admin_ajax_produit")
+     * @param Request $request
+     * @return Response
      */
     public function ajaxActifAction(Request $request){
         $data = '';
@@ -126,6 +134,9 @@ class ProduitController extends Controller
 
     /**
      * @Route("/admin/produit/delete/{id}", name="admin_deleteproduit", requirements={"id" = "\d+"})
+     * @param Request $request
+     * @param int $id
+     * @return Response
      */
     public function deleteAction(Request $request, $id){
         if($id != null && $id >=0){

@@ -82,7 +82,7 @@ class Facture
      *
      * @return Facture
      */
-    public function setProduit(\UserBundle\Entity\Produit $produit = null)
+    public function setProduit(Produit $produit = null)
     {
         $this->produit = $produit;
 
@@ -106,7 +106,7 @@ class Facture
      *
      * @return Facture
      */
-    public function setOperation(\UserBundle\Entity\Operation $operation = null)
+    public function setOperation(Operation $operation = null)
     {
         $this->operation = $operation;
 

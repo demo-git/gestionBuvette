@@ -82,7 +82,7 @@ class Composant
      *
      * @return Composant
      */
-    public function setProduitComposant(\UserBundle\Entity\Produit $produitComposant = null)
+    public function setProduitComposant(Produit $produitComposant = null)
     {
         $this->produitComposant = $produitComposant;
 
@@ -106,7 +106,7 @@ class Composant
      *
      * @return Composant
      */
-    public function setProduitCompose(\UserBundle\Entity\Produit $produitCompose = null)
+    public function setProduitCompose(Produit $produitCompose = null)
     {
         $this->produitCompose = $produitCompose;
 

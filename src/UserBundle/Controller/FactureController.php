@@ -1,13 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jérémy
- * Date: 24/05/2016
- * Time: 15:11
- */
 
 namespace UserBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Response;
 use UserBundle\Entity\Facture;
 use UserBundle\Entity\Operation;
 use UserBundle\Entity\Produit;
@@ -20,6 +15,9 @@ class FactureController extends Controller
 {
     /**
      * @Route("/admin/facture/{id}", name="admin_addfacture", requirements={"id" = "\d+"}, defaults={"id" = -1})
+     * @param Request $request
+     * @param int $id
+     * @return Response
      */
     public function ajoutAction(Request $request, $id)
     {

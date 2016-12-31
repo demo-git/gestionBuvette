@@ -31,6 +31,9 @@ class CuisineController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param Produit $produit
+     * @return Response
      * @Route("/cuisine/addQuantity/{id}", name="cuisine_addquantity")
      * @ParamConverter("produit", class="UserBundle:Produit")
      */
@@ -103,6 +106,7 @@ class CuisineController extends Controller
 
     /**
      * @Route("/cuisine/upgrade/commande", name="cuisine_upgrade_commande")
+     * @param Request $request
      * @return Response
      */
     public function upgradeCommandeAction(Request $request) {
