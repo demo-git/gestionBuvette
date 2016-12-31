@@ -4,6 +4,7 @@ namespace UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Produit
@@ -14,8 +15,10 @@ use Doctrine\ORM\Mapping as ORM;
 class Produit
 {
     const TYPE_DRINK = 0;
+    const TYPE_SANDWITCH = 1;
     const TYPE_SNACK = 2;
-    const TYPE_FOOD = 1;
+    const TYPE_PIZZA = 3;
+    const TYPE_COMPOSANT = 4;
 
     /**
      * @var int
@@ -34,6 +37,14 @@ class Produit
     private $type;
 
     /**
+     * différencie les produits dont les stocks se font par facture
+     * @var int
+     *
+     * @ORM\Column(name="isBillable", type="boolean")
+     */
+    private $isBillable;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
@@ -41,18 +52,35 @@ class Produit
     private $nom;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="pathImage", type="string", length=255, nullable=true)
-     */
-    private $pathImage;
-
-    /**
      * @var int
      *
      * @ORM\Column(name="quantiteActuelle", type="integer", options={"default" = 0})
      */
     private $quantiteActuelle = 0;
+
+    /**
+     * temps de cuisson en minute
+     * @var int
+     *
+     * @ORM\Column(name="cuisson", type="integer", options={"default" = 0})
+     */
+    private $cuisson = 0;
+
+    /**
+     * nombre de produit déclenchant une alerte warning
+     * @var int
+     *
+     * @ORM\Column(name="warnThreshold", type="integer", options={"default" = -1})
+     */
+    private $warnThreshold = -1;
+
+    /**
+     * nombre de produit déclenchant une alerte danger
+     * @var int
+     *
+     * @ORM\Column(name="dangerThreshold", type="integer", options={"default" = -1})
+     */
+    private $dangerThreshold = -1;
 
     /**
      * @var float
@@ -77,6 +105,27 @@ class Produit
      * @ORM\OneToMany(targetEntity="Facture", mappedBy="produit", cascade={"persist"})
      */
     private $factures;
+
+    /**
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Image", cascade={"all"}, orphanRemoval=true)
+     */
+    private $image;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="createAt", type="datetime")
+     */
+    protected $createAt;
+
+    /**
+     * @var \DateTime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="updateAt", type="datetime")
+     */
+    private $updateAt;
 
     public function __construct()
     {
@@ -143,37 +192,13 @@ class Produit
     }
 
     /**
-     * Set pathImage
-     *
-     * @param string $pathImage
-     *
-     * @return Produit
-     */
-    public function setPathImage($pathImage)
-    {
-        $this->pathImage = $pathImage;
-
-        return $this;
-    }
-
-    /**
-     * Get pathImage
-     *
-     * @return string
-     */
-    public function getPathImage()
-    {
-        return $this->pathImage;
-    }
-
-    /**
      * Add composant
      *
-     * @param \CuisineBundle\Entity\Composant $composant
+     * @param \UserBundle\Entity\Composant $composant
      *
      * @return Produit
      */
-    public function addComposant(\CuisineBundle\Entity\Composant $composant)
+    public function addComposant(Composant $composant)
     {
         $this->composants[] = $composant;
 
@@ -183,9 +208,9 @@ class Produit
     /**
      * Remove composant
      *
-     * @param \CuisineBundle\Entity\Composant $composant
+     * @param \UserBundle\Entity\Composant $composant
      */
-    public function removeComposant(\CuisineBundle\Entity\Composant $composant)
+    public function removeComposant(Composant $composant)
     {
         $this->composants->removeElement($composant);
     }
@@ -278,11 +303,11 @@ class Produit
     /**
      * Add facture
      *
-     * @param \CuisineBundle\Entity\Facture $facture
+     * @param \UserBundle\Entity\Facture $facture
      *
      * @return Produit
      */
-    public function addFacture(\CuisineBundle\Entity\Facture $facture)
+    public function addFacture(Facture $facture)
     {
         $this->factures[] = $facture;
 
@@ -292,9 +317,9 @@ class Produit
     /**
      * Remove facture
      *
-     * @param \CuisineBundle\Entity\Facture $facture
+     * @param \UserBundle\Entity\Facture $facture
      */
-    public function removeFacture(\CuisineBundle\Entity\Facture $facture)
+    public function removeFacture(Facture $facture)
     {
         $this->factures->removeElement($facture);
     }
@@ -307,5 +332,125 @@ class Produit
     public function getFactures()
     {
         return $this->factures;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \UserBundle\Entity\Image $image
+     *
+     * @return Produit
+     */
+    public function setImage(Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \UserBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set cuisson
+     *
+     * @param integer $cuisson
+     *
+     * @return Produit
+     */
+    public function setCuisson($cuisson)
+    {
+        $this->cuisson = $cuisson;
+
+        return $this;
+    }
+
+    /**
+     * Get cuisson
+     *
+     * @return integer
+     */
+    public function getCuisson()
+    {
+        return $this->cuisson;
+    }
+
+    /**
+     * Set isBillable
+     *
+     * @param boolean $isBillable
+     *
+     * @return Produit
+     */
+    public function setIsBillable($isBillable)
+    {
+        $this->isBillable = $isBillable;
+
+        return $this;
+    }
+
+    /**
+     * Get isBillable
+     *
+     * @return boolean
+     */
+    public function getIsBillable()
+    {
+        return $this->isBillable;
+    }
+
+    /**
+     * Set warnThreshold
+     *
+     * @param integer $warnThreshold
+     *
+     * @return Produit
+     */
+    public function setWarnThreshold($warnThreshold)
+    {
+        $this->warnThreshold = $warnThreshold;
+
+        return $this;
+    }
+
+    /**
+     * Get warnThreshold
+     *
+     * @return integer
+     */
+    public function getWarnThreshold()
+    {
+        return $this->warnThreshold;
+    }
+
+    /**
+     * Set dangerThreshold
+     *
+     * @param integer $dangerThreshold
+     *
+     * @return Produit
+     */
+    public function setDangerThreshold($dangerThreshold)
+    {
+        $this->dangerThreshold = $dangerThreshold;
+
+        return $this;
+    }
+
+    /**
+     * Get dangerThreshold
+     *
+     * @return integer
+     */
+    public function getDangerThreshold()
+    {
+        return $this->dangerThreshold;
     }
 }

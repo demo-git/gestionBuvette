@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ajouter Quantité{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h1>Ajouter Quantité</h1>
+        </div>
+        <div class="row">
+            <div class="content col-xs-12">
+                {{ form_start(form) }}
+                    <div class="row">
+                        <div class="col-xs-3 col-xs-offset-1 col-center">{{ form_label(form.quantity) }}</div>
+                        <div class="col-xs-6">{{ form_widget(form.quantity) }}</div>
+                        <div class="col-center col-xs-12">{{ form_widget(form.Enregistrer) }}</div>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

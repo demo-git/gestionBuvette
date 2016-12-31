@@ -1,0 +1,75 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Cuisine{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="col-xs-12 col-sm-8 col-md-9">
+            <div class="row btn-margin">
+                <h1>Cuisine</h1>
+            </div>
+            <div id="ajax-refresh-produits" data-ajax="{{ path('cuisine_refresh_produits') }}"></div>
+            <div id="ajax-upgrade-commande" data-ajax="{{ path('cuisine_upgrade_commande') }}"></div>
+            <div id="ajax-refresh-commande" data-ajax="{{ path('alerte_commandes', {'type' : 1}) }}"></div>
+            <div class="row">
+                <div class="content col-xs-12">
+                    <ul class="nav nav-tabs margin-bottom-20">
+                        <li id="tab-pizza" role="presentation" class="content-tab active"><a href="#">Commande Pizza</a></li>
+                        <li id="tab-produits" role="presentation" class="content-tab"><a href="#">Gestion produits</a></li>
+                    </ul>
+                    <div id="table-pizza" class="content-table">
+                        {% for commande in commandes %}
+                            {% set difference = date("now").diff(date(commande.panier.createAt)) %}
+                            {% set difference = (difference.d * 24 + difference.h) * 60 + difference.i %}
+                            <div id="commande-{{ commande.id }}" class="col-xs-12 border-alerte {% if difference > settings.dangerWait %}danger{% elseif difference > settings.warningWait %}warning{% else %}success{% endif %} padding-bottom-15 padding-top-15">
+                                <div class="margin-top-20 col-xs-6 col-sm-4">
+                                    <span id="time-{{ commande.id }}">{{ difference }}</span>m depuis commande
+                                </div>
+                                <div class="margin-top-20 col-xs-6 col-sm-4">
+                                    <span id="commande-nom-{{ commande.id }}">{{ commande.produit.nom }}</span> / Ref : <span id="commande-ref-{{ commande.id }}">{{ commande.panier.id }}</span>
+                                </div>
+                                <div class="col-xs-12 col-sm-4">
+                                    <div class="row">
+                                        {% if commande.state == 1 %}
+                                            <button id="btn-commande-{{ commande.id }}" class="margin-top-10 col-xs-8 col-xs-offset-2 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 btn btn-warning btn-commande-upgrade">En préparation</button>
+                                        {% else %}
+                                            <button id="btn-commande-{{ commande.id }}" class="margin-top-10 col-xs-8 col-xs-offset-2 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 btn btn-success btn-commande-upgrade">Prêt</button>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <table id="table-produits" class="table table-striped content-table not-display">
+                        <thead>
+                        <tr>
+                            <th class="col-xs-4">Nom</th>
+                            <th class="col-xs-2">Quantité</th>
+                            <th class="col-xs-6">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody id="listeStock">
+                            {% for produit in produits %}
+                                <tr id="stock-{{ produit.id }}">
+                                    <td id="pl-{{ produit.id }}-nom" class="col-md-3">{{ produit.nom }}</td>
+                                    <td id="pl-{{ produit.id }}-qte" class="col-md-2">{{ produit.quantiteActuelle }}</td>
+                                    <td class="col-md-5">
+                                        <a href="{{ path('cuisine_addquantity', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajout stock</button></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3">
+            {% include '@User/Alerte/alerte_stock.html.twig' %}
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/user/js/table_content.js') }}"></script>
+    <script src="{{ asset('bundles/cuisine/js/cuisine.js') }}" defer async></script>
+    <script src="{{ asset('bundles/user/js/alerte_stocks.js') }}" defer async></script>
+{% endblock %}

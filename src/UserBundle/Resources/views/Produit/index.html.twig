@@ -1,60 +1,215 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Cuisine{% endblock %}
+{% block title %}Produits{% endblock %}
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <h1>Cuisine</h1>
-        </div>
-        <div class="row">
-            {% for flashMessage in app.session.flashbag.get('error') %}
-                <div class="alert alert-danger alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    {{ flashMessage }}
-                </div>
-            {% endfor %}
-            {% for flashMessage in app.session.flashbag.get('success') %}
-                <div class="alert alert-success alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    {{ flashMessage }}
-                </div>
-            {% endfor %}
-        </div>
-        <div class="row btn-margin">
-            <a href="{{ path('admin_modifierproduit') }}"><button class="btn btn-primary">Ajouter un produit</button></a>
-        </div>
-        <div class="row">
-            <div class="content col-md-12">
-                <table class="table table-striped">
-                    <thead>
+    <div class="container-fluid">
+        <div class="col-xs-12 col-sm-8 col-md-9">
+            <div class="row margin-top-10">
+                <h1>Produits</h1>
+            </div>
+            <div class="row">
+                {% for flashMessage in app.session.flashbag.get('error') %}
+                    <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    <div class="alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row btn-margin">
+                <a href="{{ path('admin_modifierproduit') }}"><button class="btn btn-primary">Ajouter un produit</button></a>
+            </div>
+            <div class="row">
+                <div class="content col-md-12">
+                    <ul class="nav nav-tabs">
+                        <li id="tab-boisson" role="presentation" class="content-tab active"><a href="#">Boisson</a></li>
+                        <li id="tab-sandwitch" role="presentation" class="content-tab"><a href="#">Sandwitch</a></li>
+                        <li id="tab-pizza" role="presentation" class="content-tab"><a href="#">Pizza</a></li>
+                        <li id="tab-snack" role="presentation" class="content-tab"><a href="#">Snack</a></li>
+                        <li id="tab-composant" role="presentation" class="content-tab"><a href="#">Composant</a></li>
+                    </ul>
+                    <table id="table-boisson" class="table table-striped content-table">
+                        <thead>
+                            <tr>
+                                <th class="col-md-3">Nom</th>
+                                <th class="col-md-2">Quantité</th>
+                                <th class="col-md-2">Prix</th>
+                                <th class="col-md-5">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for produit in produitsBoisson %}
+                                <tr>
+                                    <td class="col-md-3">{{ produit.nom }}</td>
+                                    <td class="col-md-2">{{ produit.quantiteActuelle }}</td>
+                                    {% if produit.prixVente is not null %}
+                                        <td class="col-md-2">{{ produit.prixVente }} €</td>
+                                    {% else %}
+                                        <td class="col-md-2">non vendu</td>
+                                    {% endif %}
+                                    <td class="col-md-5">
+                                        {% if produit.isBillable == true %}
+                                            <a href="{{ path('admin_addfacture', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Nouvelle facture</button></a>
+                                        {% else %}
+                                            <a href="{{ path('cuisine_addquantity', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajout stock</button></a>
+                                        {% endif %}
+                                        <a href="{{ path('admin_addimage', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajouter image</button></a>
+                                        <a href="{{ path('admin_modifierproduit', {'id' : produit.id}) }}"><button class="btn btn-success btn-table-left">Modifier</button></a>
+                                        <a href="{{ path('admin_deleteproduit', {'id' : produit.id}) }}"><button class="btn btn-danger btn-table">X</button></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <table id="table-sandwitch" class="not-display table table-striped content-table">
+                        <thead>
                         <tr>
-                            <th class="col-md-4">Nom</th>
+                            <th class="col-md-3">Nom</th>
                             <th class="col-md-2">Quantité</th>
                             <th class="col-md-2">Prix</th>
-                            <th class="col-md-4">Actions</th>
+                            <th class="col-md-5">Actions</th>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {% for produit in produits %}
+                        </thead>
+                        <tbody>
+                        {% for produit in produitsSandwitch %}
                             <tr>
-                                <td class="col-md-4">{{ produit.nom }}</td>
+                                <td class="col-md-3">{{ produit.nom }}</td>
                                 <td class="col-md-2">{{ produit.quantiteActuelle }}</td>
                                 {% if produit.prixVente is not null %}
                                     <td class="col-md-2">{{ produit.prixVente }} €</td>
                                 {% else %}
                                     <td class="col-md-2">non vendu</td>
                                 {% endif %}
-                                <td class="col-md-4">
-                                    <a href="{{ path('admin_addfacture', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Nouvelle facture</button></a>
-                                    <a href="{{ path('admin_modifierproduit', {'id' : produit.id}) }}"><button class="btn btn-success">Modifier</button></a>
+                                <td class="col-md-5">
+                                    {% if produit.isBillable == true %}
+                                        <a href="{{ path('admin_addfacture', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Nouvelle facture</button></a>
+                                    {% else %}
+                                        <a href="{{ path('cuisine_addquantity', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajout stock</button></a>
+                                    {% endif %}
+                                    <a href="{{ path('admin_addimage', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajouter image</button></a>
+                                    <a href="{{ path('admin_modifierproduit', {'id' : produit.id}) }}"><button class="btn btn-success btn-table-left">Modifier</button></a>
                                     <a href="{{ path('admin_deleteproduit', {'id' : produit.id}) }}"><button class="btn btn-danger btn-table">X</button></a>
                                 </td>
                             </tr>
                         {% endfor %}
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                    <table id="table-pizza" class="not-display table table-striped content-table">
+                        <thead>
+                        <tr>
+                            <th class="col-md-3">Nom</th>
+                            <th class="col-md-2">Quantité</th>
+                            <th class="col-md-2">Prix</th>
+                            <th class="col-md-5">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for produit in produitsPizza %}
+                            <tr>
+                                <td class="col-md-3">{{ produit.nom }}</td>
+                                <td class="col-md-2">{{ produit.quantiteActuelle }}</td>
+                                {% if produit.prixVente is not null %}
+                                    <td class="col-md-2">{{ produit.prixVente }} €</td>
+                                {% else %}
+                                    <td class="col-md-2">non vendu</td>
+                                {% endif %}
+                                <td class="col-md-5">
+                                    {% if produit.isBillable == true %}
+                                        <a href="{{ path('admin_addfacture', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Nouvelle facture</button></a>
+                                    {% else %}
+                                        <a href="{{ path('cuisine_addquantity', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajout stock</button></a>
+                                    {% endif %}
+                                    <a href="{{ path('admin_addimage', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajouter image</button></a>
+                                    <a href="{{ path('admin_modifierproduit', {'id' : produit.id}) }}"><button class="btn btn-success btn-table-left">Modifier</button></a>
+                                    <a href="{{ path('admin_deleteproduit', {'id' : produit.id}) }}"><button class="btn btn-danger btn-table">X</button></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <table id="table-snack" class="not-display table table-striped content-table">
+                        <thead>
+                        <tr>
+                            <th class="col-md-3">Nom</th>
+                            <th class="col-md-2">Quantité</th>
+                            <th class="col-md-2">Prix</th>
+                            <th class="col-md-5">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for produit in produitsSnack %}
+                            <tr>
+                                <td class="col-md-3">{{ produit.nom }}</td>
+                                <td class="col-md-2">{{ produit.quantiteActuelle }}</td>
+                                {% if produit.prixVente is not null %}
+                                    <td class="col-md-2">{{ produit.prixVente }} €</td>
+                                {% else %}
+                                    <td class="col-md-2">non vendu</td>
+                                {% endif %}
+                                <td class="col-md-5">
+                                    {% if produit.isBillable == true %}
+                                        <a href="{{ path('admin_addfacture', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Nouvelle facture</button></a>
+                                    {% else %}
+                                        <a href="{{ path('cuisine_addquantity', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajout stock</button></a>
+                                    {% endif %}
+                                    <a href="{{ path('admin_addimage', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajouter image</button></a>
+                                    <a href="{{ path('admin_modifierproduit', {'id' : produit.id}) }}"><button class="btn btn-success btn-table-left">Modifier</button></a>
+                                    <a href="{{ path('admin_deleteproduit', {'id' : produit.id}) }}"><button class="btn btn-danger btn-table">X</button></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <table id="table-composant" class="not-display table table-striped content-table">
+                        <thead>
+                        <tr>
+                            <th class="col-md-3">Nom</th>
+                            <th class="col-md-2">Quantité</th>
+                            <th class="col-md-2">Prix</th>
+                            <th class="col-md-5">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for produit in produitsComposant %}
+                            <tr>
+                                <td class="col-md-3">{{ produit.nom }}</td>
+                                <td class="col-md-2">{{ produit.quantiteActuelle }}</td>
+                                {% if produit.prixVente is not null %}
+                                    <td class="col-md-2">{{ produit.prixVente }} €</td>
+                                {% else %}
+                                    <td class="col-md-2">non vendu</td>
+                                {% endif %}
+                                <td class="col-md-5">
+                                    {% if produit.isBillable == true %}
+                                        <a href="{{ path('admin_addfacture', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Nouvelle facture</button></a>
+                                    {% else %}
+                                        <a href="{{ path('cuisine_addquantity', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajout stock</button></a>
+                                    {% endif %}
+                                    <a href="{{ path('admin_addimage', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajouter image</button></a>
+                                    <a href="{{ path('admin_modifierproduit', {'id' : produit.id}) }}"><button class="btn btn-success btn-table-left">Modifier</button></a>
+                                    <a href="{{ path('admin_deleteproduit', {'id' : produit.id}) }}"><button class="btn btn-danger btn-table">X</button></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+        <div class="col-xs-12 col-sm-4 col-md-3">
+            {% include '@User/Alerte/alerte_stock.html.twig' %}
+            {%  include '@User/Alerte/alerte_commande.html.twig' %}
+        </div>
     </div>
-
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/user/js/table_content.js') }}"></script>
+    <script src="{{ asset('bundles/user/js/alerte_stocks.js') }}" defer async></script>
+    <script src="{{ asset('bundles/user/js/alerte_commandes.js') }}" defer async></script>
 {% endblock %}

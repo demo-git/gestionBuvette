@@ -2,7 +2,9 @@
 
 namespace UserBundle\Controller;
 
+use UserBundle\Entity\Image;
 use UserBundle\Entity\Produit;
+use UserBundle\Form\ImageType;
 use UserBundle\Form\ProduitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -16,13 +18,66 @@ class ProduitController extends Controller
      */
     public function indexAction()
     {
-        $produits = $this->getDoctrine()->getRepository('UserBundle:Produit')->findBy(array('actif' => true));
+        $repo = $this->getDoctrine()->getRepository(Produit::class);
+        $produitsBoisson = $repo->findBy(array('actif' => true, 'type' => Produit::TYPE_DRINK));
+        $produitsSandwitch = $repo->findBy(array('actif' => true, 'type' => Produit::TYPE_SANDWITCH));
+        $produitsSnack = $repo->findBy(array('actif' => true, 'type' => Produit::TYPE_SNACK));
+        $produitsPizza = $repo->findBy(array('actif' => true, 'type' => Produit::TYPE_PIZZA));
+        $produitsComposant = $repo->findBy(array('actif' => true, 'type' => Produit::TYPE_COMPOSANT));
 
-        return $this->render('UserBundle:Produit:index.html.twig', array('produits' => $produits));
+        return $this->render('UserBundle:Produit:index.html.twig', array(
+            'produitsBoisson' => $produitsBoisson,
+            'produitsSandwitch' => $produitsSandwitch,
+            'produitsSnack' => $produitsSnack,
+            'produitsPizza' => $produitsPizza,
+            'produitsComposant' => $produitsComposant
+        ));
+    }
+
+    /**
+     * @Route("/admin/produit/image/{id}", name="admin_addimage", requirements={"id" = "\d+"})
+     * @param Request $request
+     * @param int $id
+     * @return Response
+     */
+    public function imageAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $produit = $em->getRepository(Produit::class)->find($id);
+        if(!$produit){
+            $request->getSession()->getFlashBag()->add('error', 'Le produit n\'existe pas');
+            return $this->redirect($this->generateUrl('admin_gestionproduit'));
+        }
+
+        $image = new Image();
+        $form = $this->createForm(ImageType::class, $image);
+
+        if($request->isMethod('POST')){
+            $form->handleRequest($request);
+
+            if($form->isValid()){
+                $file = $image->getPath();
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move($this->getParameter('kernel.root_dir').'/../web/uploads/', $fileName);
+                $image->setPath($fileName);
+
+                $produit->setImage($image);
+
+                $em->persist($produit);
+                $em->flush();
+                $request->getSession()->getFlashBag()->add('success', 'L\'image a bien été enregistré');
+                return $this->redirect($this->generateUrl('admin_gestionproduit'));
+            }
+        }
+
+        return $this->render('UserBundle:Image:index.html.twig', array('form' => $form->createView()));
     }
 
     /**
      * @Route("/admin/produit/{id}", name="admin_modifierproduit", requirements={"id" = "\d+"}, defaults={"id" = -1})
+     * @param Request $request
+     * @param int $id
+     * @return Response
      */
     public function modifierAction(Request $request, $id)
     {
@@ -30,7 +85,7 @@ class ProduitController extends Controller
         $produit = new Produit();
 
         if($id != -1){
-            $produit = $em->getRepository('UserBundle:Produit')->find($id);
+            $produit = $em->getRepository(Produit::class)->find($id);
             if(!$produit){
                 $request->getSession()->getFlashBag()->add('error', 'Le produit n\'existe pas');
                 return $this->redirect($this->generateUrl('admin_gestionproduit'));
@@ -44,13 +99,6 @@ class ProduitController extends Controller
             $form->handleRequest($request);
 
             if($form->isValid()){
-                if($produit->getPathImage()){
-                    $file = $produit->getPathImage();
-                    $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                    $file->move($this->container->getParameter('kernel.root_dir').'/../web/uploads/', $fileName);
-                    $produit->setPathImage($fileName);
-                }
-
                 foreach ($produit->getComposants() as $composant){
                     $composant->setProduitCompose($produit);
                 }
@@ -67,12 +115,14 @@ class ProduitController extends Controller
 
     /**
      * @Route("/admin/ajax/produit/actif", name="admin_ajax_produit")
+     * @param Request $request
+     * @return Response
      */
     public function ajaxActifAction(Request $request){
         $data = '';
 
         if($request->isMethod('POST')){
-            $produits = $this->getDoctrine()->getRepository('UserBundle:Produit')->findBy(array('actif' => true));
+            $produits = $this->getDoctrine()->getRepository(Produit::class)->findBy(array('actif' => true));
             foreach ($produits as $produit){
                 $data .= $produit->getId() . '/' . $produit->getNom() . ';';
             }
@@ -84,11 +134,14 @@ class ProduitController extends Controller
 
     /**
      * @Route("/admin/produit/delete/{id}", name="admin_deleteproduit", requirements={"id" = "\d+"})
+     * @param Request $request
+     * @param int $id
+     * @return Response
      */
     public function deleteAction(Request $request, $id){
         if($id != null && $id >=0){
             $em = $this->getDoctrine()->getManager();
-            $produit = $em->getRepository('UserBundle:Produit')->find($id);
+            $produit = $em->getRepository(Produit::class)->find($id);
             $produit->setActif(false);
             foreach ($produit->getComposants() as $composant){
                 $em->remove($composant);

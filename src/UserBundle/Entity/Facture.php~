@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Facture
  *
  * @ORM\Table(name="facture")
- * @ORM\Entity(repositoryClass="UserBundle\Repository\FactureRepository")
+ * @ORM\Entity()
  */
 class Facture
 {
@@ -23,13 +23,6 @@ class Facture
     private $id;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="prix", type="float")
-     */
-    private $prix;
-
-    /**
      * @var int
      *
      * @ORM\Column(name="quantite", type="integer")
@@ -37,18 +30,15 @@ class Facture
     private $quantite;
 
     /**
-     * @var \DateTime
-     *
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="createAt", type="datetime")
-     */
-    protected $createAt;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Produit", inversedBy="factures")
      * @ORM\JoinColumn(name="produit_id", referencedColumnName="id")
      */
     private $produit;
+
+    /**
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Operation", cascade={"all"}, orphanRemoval=true)
+     */
+    private $operation;
 
 
     /**
@@ -59,30 +49,6 @@ class Facture
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set prix
-     *
-     * @param float $prix
-     *
-     * @return Facture
-     */
-    public function setPrix($prix)
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
-
-    /**
-     * Get prix
-     *
-     * @return float
-     */
-    public function getPrix()
-    {
-        return $this->prix;
     }
 
     /**
@@ -112,11 +78,11 @@ class Facture
     /**
      * Set produit
      *
-     * @param \CuisineBundle\Entity\Produit $produit
+     * @param \UserBundle\Entity\Produit $produit
      *
      * @return Facture
      */
-    public function setProduit(\CuisineBundle\Entity\Produit $produit = null)
+    public function setProduit(\UserBundle\Entity\Produit $produit = null)
     {
         $this->produit = $produit;
 
@@ -126,7 +92,7 @@ class Facture
     /**
      * Get produit
      *
-     * @return \CuisineBundle\Entity\Produit
+     * @return \UserBundle\Entity\Produit
      */
     public function getProduit()
     {
@@ -134,26 +100,26 @@ class Facture
     }
 
     /**
-     * Set createAt
+     * Set operation
      *
-     * @param \DateTime $createAt
+     * @param \UserBundle\Entity\Operation $operation
      *
      * @return Facture
      */
-    public function setCreateAt($createAt)
+    public function setOperation(\UserBundle\Entity\Operation $operation = null)
     {
-        $this->createAt = $createAt;
+        $this->operation = $operation;
 
         return $this;
     }
 
     /**
-     * Get createAt
+     * Get operation
      *
-     * @return \DateTime
+     * @return \UserBundle\Entity\Operation
      */
-    public function getCreateAt()
+    public function getOperation()
     {
-        return $this->createAt;
+        return $this->operation;
     }
 }

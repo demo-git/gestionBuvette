@@ -2,8 +2,14 @@
 
 namespace BuvetteBundle\Controller;
 
+use BuvetteBundle\Entity\Panier;
+use BuvetteBundle\Entity\Produit_panier;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use UserBundle\Entity\Operation;
+use UserBundle\Entity\Produit;
 
 class BuvetteController extends Controller
 {
@@ -12,14 +18,60 @@ class BuvetteController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('BuvetteBundle:Main:index.html.twig');
+        $produitRepo = $this->getDoctrine()->getRepository(Produit::class);
+        $produitsD = $produitRepo->getBuvetteListe(Produit::TYPE_DRINK);
+        $produitsS = $produitRepo->getBuvetteListe(Produit::TYPE_SNACK);
+        $produitsP = $produitRepo->getBuvetteListe(Produit::TYPE_PIZZA);
+        $produitsSA = $produitRepo->getBuvetteListe(Produit::TYPE_SANDWITCH);
+        return $this->render('BuvetteBundle:buvette:index.html.twig', array(
+            'produitsD' => $produitsD,
+            'produitsS' => $produitsS,
+            'produitsSA' => $produitsSA,
+            'produitsP' => $produitsP
+        ));
     }
 
     /**
-     * @Route("/", name="buvette_tarif")
+     * @param Request $request
+     * @return Response
+     * @Route("/buvette/commande/validation", name="buvette_validation")
      */
-    public function tarifAction()
+    public function validationAction(Request $request)
     {
-        return $this->render('BuvetteBundle:Main:tarif.html.twig');
+        $produits = $request->get('produits');
+        $prix = $request->get('prix');
+        $payement = $request->get('payement');
+        if ($request->isMethod('POST') && $produits != null && $prix != null && $payement != null) {
+            $em = $this->getDoctrine()->getManager();
+            $produitRepo = $em->getRepository(Produit::class);
+            $panier = new Panier();
+            $panier->setTypePayement($payement);
+            $operation = new Operation();
+            $operation->setMontant($prix);
+            $operation->setType(Operation::TYPE_VENTE);
+            $produits = json_decode($produits);
+
+            foreach ($produits as $produit) {
+                $prd = $produitRepo->find($produit[0]);
+                if ($prd->getCuisson() == 0) {
+                    $panier->addProduitCommande(new Produit_panier($produit[1], $panier, $prd));
+                } else {
+                    $x = 0;
+                    while ($x < $produit[1]) {
+                        $panier->addProduitCommande(new Produit_panier(1, $panier, $prd, Produit_panier::STATE_ATTENTE));
+                        $x++;
+                    }
+                }
+                $operation->setJustification($operation->getJustification() . $prd->getNom() . '/');
+            }
+
+            $panier->setOperation($operation);
+            $em->persist($panier);
+            $em->flush();
+
+            return new Response($panier->getId());
+        }
+
+        return new Response('0');
     }
 }

@@ -9,5 +9,5 @@ function actualiser() {
 
 function horloge() {
     actualiser();
-    setInterval(actualiser,60000);
+    setInterval(actualiser,30000);
 }

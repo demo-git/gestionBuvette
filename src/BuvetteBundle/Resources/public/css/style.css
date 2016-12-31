@@ -1,5 +1,5 @@
 @media (max-width:767px) {
-    .vignette > div {
+    .vignette {
         background-repeat: no-repeat;
         background-size: 100% 100%;
         display: block;
@@ -10,7 +10,7 @@
 }
 
 @media (min-width:768px) and (max-width:991px) {
-    .vignette > div {
+    .vignette {
         background-repeat: no-repeat;
         background-size: 100% 100%;
         display: block;
@@ -21,7 +21,7 @@
 }
 
 @media (min-width:992px) and (max-width:1199px) {
-    .vignette > div {
+    .vignette {
         background-repeat: no-repeat;
         background-size: 100% 100%;
         display: block;
@@ -32,7 +32,7 @@
 }
 
 @media (min-width:1200px) {
-    .vignette > div {
+    .vignette {
         background-repeat: no-repeat;
         background-size: 100% 100%;
         display: block;
@@ -66,7 +66,7 @@
 
 #lien-buvette > a:hover, #lien-cuisine > a:hover, #lien-tarif > a:hover, #lien-gestionproduit > a:hover, #lien-logout > a:hover, #lien-login > a:hover, #lien-gestioncaisse > a:hover, #lien-setting > a:hover {
     color: white;
-    font-size: 24px;
+    text-decoration: underline;
 }
 
 #lien-login, #lien-logout {
@@ -81,7 +81,7 @@
     padding: 10px 10px 10px 10px;
     background-image: none;
     background-color: white;
-    box-shadow: 0px 0px 10px #B1B1B1;
+    box-shadow: 0 0 10px #B1B1B1;
     margin-bottom: 20px;
 }
 
@@ -172,7 +172,15 @@
 }
 
 .padding-top-7 {
-    padding: 7px 0px 0px 0px;
+    padding: 7px 0 0 0;
+}
+
+.padding-top-15 {
+    padding-top: 15px;
+}
+
+.padding-bottom-15 {
+    padding-bottom: 15px;
 }
 
 .margin-top-10 {
@@ -181,4 +189,22 @@
 
 .margin-top-20 {
     margin-top: 20px;
+}
+
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+.margin-left-20 {
+    margin-left: 20px;
+}
+
+.not-display {
+    display: none;
+}
+
+.bordure-produit-buvette {
+    border: 1px solid grey;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

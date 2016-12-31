@@ -1,14 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jérémy
- * Date: 24/05/2016
- * Time: 15:11
- */
 
 namespace UserBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Response;
 use UserBundle\Entity\Facture;
+use UserBundle\Entity\Operation;
+use UserBundle\Entity\Produit;
 use UserBundle\Form\FactureType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,11 +15,14 @@ class FactureController extends Controller
 {
     /**
      * @Route("/admin/facture/{id}", name="admin_addfacture", requirements={"id" = "\d+"}, defaults={"id" = -1})
+     * @param Request $request
+     * @param int $id
+     * @return Response
      */
     public function ajoutAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $produit = $em->getRepository('UserBundle:Produit')->find($id);
+        $produit = $em->getRepository(Produit::class)->find($id);
 
         if($produit){
             $facture = new Facture();
@@ -32,10 +32,13 @@ class FactureController extends Controller
             if($request->isMethod('POST')){
                 $form->handleRequest($request);
                 if($form->isValid()){
+                    $operation = new Operation();
+                    $operation->setJustification('achat produit ' . $produit->getNom());
+                    $operation->setType(Operation::TYPE_FACTURE);
+                    $operation->setMontant($form->get('prix')->getData());
+                    $facture->setOperation($operation);
                     $em->persist($facture);
-                    if($facture->getQuantite()){
-                        $produit->setQuantiteActuelle($produit->getQuantiteActuelle() + $facture->getQuantite());
-                    }
+                    $produit->setQuantiteActuelle($produit->getQuantiteActuelle() + $facture->getQuantite());
                     $em->flush();
                     $request->getSession()->getFlashBag()->add('success', 'La facture a bien été créée');
                     return $this->redirect($this->generateUrl('admin_gestionproduit'));

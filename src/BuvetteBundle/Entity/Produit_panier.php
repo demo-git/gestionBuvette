@@ -1,0 +1,210 @@
+<?php
+
+namespace BuvetteBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use UserBundle\Entity\Produit;
+use Gedmo\Mapping\Annotation as Gedmo;
+
+/**
+ * Produit_panier
+ *
+ * @ORM\Table(name="produit_panier")
+ * @ORM\Entity(repositoryClass="BuvetteBundle\Repository\Produit_panierRepository")
+ */
+class Produit_panier
+{
+    const STATE_ATTENTE = 1;
+    const STATE_PREPA = 2;
+    const STATE_PRET = 3;
+    const STATE_RETIRER = 4;
+    const STATE_NOWAITING = 0;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="state", type="integer")
+     */
+    private $state;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="quantite", type="integer")
+     */
+    private $quantite;
+
+    /**
+     * @var \DateTime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="updateAt", type="datetime")
+     */
+    private $updateAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Panier", inversedBy="produitCommandes")
+     * @ORM\JoinColumn(name="panier_id", referencedColumnName="id")
+     */
+    private $panier;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\Produit")
+     * @ORM\JoinColumn(name="produit_id", referencedColumnName="id")
+     */
+    private $produit;
+
+    /**
+     * Produit_panier constructor.
+     * @param int $quantite
+     * @param Panier $panier
+     * @param Produit $produit
+     * @param int $state
+     */
+    public function __construct($quantite = null, $panier = null, $produit = null, $state = self::STATE_NOWAITING)
+    {
+        $this->quantite = $quantite;
+        $this->setPanier($panier);
+        $this->setProduit($produit);
+        $this->state = $state;
+    }
+    
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set quantite
+     *
+     * @param integer $quantite
+     *
+     * @return Produit_panier
+     */
+    public function setQuantite($quantite)
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    /**
+     * Get quantite
+     *
+     * @return int
+     */
+    public function getQuantite()
+    {
+        return $this->quantite;
+    }
+
+    /**
+     * Set panier
+     *
+     * @param \BuvetteBundle\Entity\Panier $panier
+     *
+     * @return Produit_panier
+     */
+    public function setPanier(Panier $panier = null)
+    {
+        $this->panier = $panier;
+
+        return $this;
+    }
+
+    /**
+     * Get panier
+     *
+     * @return \BuvetteBundle\Entity\Panier
+     */
+    public function getPanier()
+    {
+        return $this->panier;
+    }
+
+    /**
+     * Set produit
+     *
+     * @param \UserBundle\Entity\Produit $produit
+     *
+     * @return Produit_panier
+     */
+    public function setProduit(Produit $produit = null)
+    {
+        $this->produit = $produit;
+
+        return $this;
+    }
+
+    /**
+     * Get produit
+     *
+     * @return \UserBundle\Entity\Produit
+     */
+    public function getProduit()
+    {
+        return $this->produit;
+    }
+
+    /**
+     * Set state
+     *
+     * @param integer $state
+     *
+     * @return Produit_panier
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return integer
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * Set updateAt
+     *
+     * @param \DateTime $updateAt
+     *
+     * @return Produit_panier
+     */
+    public function setUpdateAt($updateAt)
+    {
+        $this->updateAt = $updateAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updateAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdateAt()
+    {
+        return $this->updateAt;
+    }
+}
