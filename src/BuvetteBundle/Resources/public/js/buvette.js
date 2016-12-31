@@ -80,6 +80,7 @@ function validerCommande(payement) {
         id = $(children[i]).attr('id').split('-')[1];
         produits.push([parseInt(id),parseInt($('#plqte-' + id).html())]);
     }
+    $('#modal-commande-footer').html('<div class="row"><div class="col-xs-12 col-center"><img src="/bundles/buvette/images/loading-panier.gif" /></div></div>');
     $.ajax({
         url: $('#ajax-validation').attr('data-ajax'),
         method: "POST",
