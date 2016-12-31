@@ -14,12 +14,19 @@ $(document).ready(function () {
     });
     $('#listing-commande').on('click', '.btnp', function () {
         var id = $(this).attr('id').split('-')[1];
+        var produit = $('#' + id);
+        if (parseInt(produit.attr('data-qte')) <= 0) {
+            alert('Attention, ce produit n\'est plus disponible en quantité suffisante pour votre commande !');
+        }
+        produit.attr('data-qte',parseInt(produit.attr('data-qte')) - 1);
         var qte = $('#plqte-' + id);
         qte.html(parseInt(qte.html()) + 1);
         var cost = $('#cout-total-command');
-        cost.html(parseFloat(cost.html()) + parseFloat($('#' + id).attr('data-cost')));
+        cost.html(parseFloat(cost.html()) + parseFloat(produit.attr('data-cost')));
     }).on('click', '.btnm', function () {
         var id = $(this).attr('id').split('-')[1];
+        var produit = $('#' + id);
+        produit.attr('data-qte',parseInt(produit.attr('data-qte')) + 1);
         var qte = $('#plqte-' + id);
         var newQte = parseInt(qte.html()) - 1;
         if (newQte == 0) {
@@ -28,7 +35,7 @@ $(document).ready(function () {
             qte.html(newQte);
         }
         var cost = $('#cout-total-command');
-        cost.html(parseFloat(cost.html()) - parseFloat($('#' + id).attr('data-cost')));
+        cost.html(parseFloat(cost.html()) - parseFloat(produit.attr('data-cost')));
     });
     $('#valider-autre-commande').click(function () {
         validerCommande(3);
@@ -61,6 +68,10 @@ function clickVignette($this) {
     var cost = $('#cout-total-command');
     var id = $($this).attr('id');
     cost.html(parseFloat(cost.html()) + parseFloat($($this).attr('data-cost')));
+    if (parseInt($($this).attr('data-qte')) <= 0) {
+        alert('Attention, ce produit n\'est plus disponible en quantité suffisante pour votre commande !');
+    }
+    $($this).attr('data-qte',parseInt($($this).attr('data-qte')) - 1);
     if ($('#pl-' + id).length == 0) {
         $('#listing-commande').append('<div id="pl-' + id + '" class="row margin-top-10 bordure-produit-buvette"><div class="col-xs-1 col-xs-offset-1 padding-top-7">' +
             '<span id="plqte-' + id + '">1</span></div>' +
@@ -90,6 +101,7 @@ function validerCommande(payement) {
             prix : $('#cout-total-command').html()
         }
     }).success(function (retour) {
+        refresh();
         $('#modalCommande').modal('hide');
         retour = parseInt(retour);
         if (retour !== 0) {
@@ -143,17 +155,18 @@ function refresh() {
         for (var i = 0; i < Object.keys(liste).length; i++) {
             for (var x = 0; x < liste[i].length; x++) {
                 if (document.getElementById(liste[i][x][0])) {
-                    $('#' + liste[i][x][0]).attr('data-name', liste[i][x][1]).attr('data-cuisson', liste[i][x][3]).attr('data-cost', liste[i][x][2]);
+                    $('#' + liste[i][x][0]).attr('data-name', liste[i][x][1]).attr('data-cuisson', liste[i][x][3]).attr('data-cost', liste[i][x][2]).attr('data-qte', liste[i][x][5]);
                     $('#pl-' + liste[i][x][0] + '-nom').html(liste[i][x][1]);
                     $('#pl-' + liste[i][x][0] + '-prix').html(liste[i][x][2]);
+                    $('#pl-' + liste[i][x][0] + '-qteaff').html(liste[i][x][5]);
                 } else {
-                    var html = '<div id="' + liste[i][x][0] + '" data-name="' + liste[i][x][1] + '" data-cuisson="' + liste[i][x][3] + '" data-cost="' + liste[i][x][2] + '" style="background-image: url(\'';
+                    var html = '<div id="' + liste[i][x][0] + '" data-qte="' + liste[i][x][5] + '" data-name="' + liste[i][x][1] + '" data-cuisson="' + liste[i][x][3] + '" data-cost="' + liste[i][x][2] + '" style="background-image: url(\'';
                     if (liste[i][x][4] != null) {
                         html += '/uploads/' + liste[i][x][4];
                     } else {
                         html += '/bundles/buvette/images/noimagefound.jpg';
                     }
-                    html += '\');" class="col-xs-6 col-sm-6 col-md-3 vignette"><span id="pl-' + liste[i][x][0] + '-nom">' + liste[i][x][1] + '</span><br/><span id="pl-' + liste[i][x][0] + '-prix">' + liste[i][x][2] + '</span>€</div>';
+                    html += '\');" class="col-xs-6 col-sm-6 col-md-3 vignette"><span id="pl-' + liste[i][x][0] + '-nom">' + liste[i][x][1] + '</span><br/><span id="pl-' + liste[i][x][0] + '-prix">' + liste[i][x][2] + '</span>€<br/><br/>Stock : <span id="pl-' + liste[i][x][0] + '-qteaff">' + liste[i][x][5] + '</span></div>';
                     listeProduits[i].append(html);
                 }
                 listeIds.push(liste[i][x][0]);
