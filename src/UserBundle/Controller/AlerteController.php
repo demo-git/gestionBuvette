@@ -45,16 +45,35 @@ class AlerteController extends Controller
         $settings = $this->getDoctrine()->getRepository(Setting::class)->find(1);
         $jsonResponse = array(0 => array($settings->getWarningWait(), $settings->getDangerWait()), 1 => array());
         $now = new \DateTime();
+        $attente = 0;
+        $cuissonMax = 0;
+
+        $nbProduit = count($produitsPanier);
+        $nbFourne = $nbProduit / $settings->getHovenCapacity();
+        if (!is_int($nbFourne)) {
+            $nbFourne = round($nbFourne - 0.5) + 1;
+        }
 
         foreach ($produitsPanier as $produitPanier) {
+            $produit = $produitPanier->getProduit();
             $diff = $now->diff($produitPanier->getPanier()->getCreateAt());
+            if ($produit->getCuisson() > $cuissonMax) {
+                $cuissonMax = $produit->getCuisson();
+            }
+            $attente += $produit->getCuisson();
             $jsonResponse[1][] = array(
                 $produitPanier->getId(),
-                $produitPanier->getProduit()->getNom(),
+                $produit->getNom(),
                 $produitPanier->getPanier()->getId(),
                 $produitPanier->getState(),
                 ($diff->d * 24 + $diff->h) * 60 + $diff->i
             );
+        }
+
+        if (count($produitsPanier) > $settings->getHovenCapacity()) {
+            $jsonResponse[0][2] = ($attente / $nbProduit) * $nbFourne;
+        } else {
+            $jsonResponse[0][2] = $cuissonMax;
         }
 
         return new Response(json_encode($jsonResponse));

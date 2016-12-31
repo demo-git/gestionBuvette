@@ -25,6 +25,7 @@ function refreshCommande() {
         var liste = JSON.parse(json);
         var listeCommandes = $('#listeCommandes');
         var listeIds = [];
+        $('#alerte-commande-attente').html(liste[0][2]);
         for (var i = 0; i < liste[1].length; i++) {
             if (document.getElementById('commande-' + liste[1][i][0])) {
                 var row = $('commande-' + liste[1][i][0]);
