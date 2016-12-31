@@ -77,6 +77,7 @@ function refreshCommande() {
                     }
                 }
                 $('#time-' + liste[1][i][0]).html(liste[1][i][4]);
+                $('#commande-nom-' + liste[1][i][0]).html(liste[1][i][1]);
             } else {
                 var html = '<div id="commande-' + liste[1][i][0] + '" class="col-xs-12 border-alerte ';
                 if (liste[1][i][4] > liste[0][1]) {

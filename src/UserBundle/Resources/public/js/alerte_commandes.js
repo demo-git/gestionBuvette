@@ -44,6 +44,7 @@ function refreshCommande() {
                         row.addClass('success').removeClass('warning').removeClass('danger');
                     }
                 }
+                $('#commande-nom-' + liste[1][i][0]).html(liste[1][i][1]);
             } else {
                 var html = '<div id="commande-' + liste[1][i][0] + '" class="col-xs-12 border-alerte ';
                 var btnAdd = false;
@@ -55,7 +56,7 @@ function refreshCommande() {
                     html += 'success';
                     btnAdd = true;
                 }
-                html += '"><div class="row"><div id="commande-nom-' + liste[1][i][0] + '" class="col-xs-6"><p>' + liste[1][i][1] + '</p></div><div id="commande-ref-' + liste[1][i][0] + '" class="col-xs-6"><p>Ref : ' + liste[1][i][2] + '</p></div></div>';
+                html += '"><div class="row"><div id="commande-nom-' + liste[1][i][0] + '" class="col-xs-6">' + liste[1][i][1] + '</div><div id="commande-ref-' + liste[1][i][0] + '" class="col-xs-6">Ref : ' + liste[1][i][2] + '</div></div>';
 
                 if (btnAdd) {
                     html += '<div class="row"><div class="col-xs-12"><button id="btn-commande-' + liste[1][i][0] + '" class="col-xs-6 col-xs-offset-3 btn btn-success btn-commande-upgrade">Retrait</button></div></div>';

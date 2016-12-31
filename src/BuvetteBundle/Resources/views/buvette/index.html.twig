@@ -22,13 +22,13 @@
                     <div id="table-boisson" class="content-table col-xs-12 col-sm-6 col-md-8">
                         {% for produit in produitsD %}
                             {% if produit.image is not null %}
-                                <div id="{{ produit.id }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('/uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
+                                <div id="{{ produit.id }}" data-qte="{{ produit.quantiteActuelle }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('/uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
                                     <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
                                     <br/>
                                     <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
                                 </div>
                             {% else %}
-                                <div id="{{ produit.id }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
+                                <div id="{{ produit.id }}" data-qte="{{ produit.quantiteActuelle }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
                                     <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
                                     <br/>
                                     <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
@@ -39,13 +39,13 @@
                     <div id="table-pizza" class="not-display content-table col-xs-12 col-sm-6 col-md-8">
                         {% for produit in produitsP %}
                             {% if produit.image is not null %}
-                                <div id="{{ produit.id }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('/uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
+                                <div id="{{ produit.id }}" data-qte="{{ produit.quantiteActuelle }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('/uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
                                     <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
                                     <br/>
                                     <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
                                 </div>
                             {% else %}
-                                <div id="{{ produit.id }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
+                                <div id="{{ produit.id }}" data-qte="{{ produit.quantiteActuelle }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
                                     <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
                                     <br/>
                                     <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
@@ -56,13 +56,13 @@
                     <div id="table-sandwitch" class="not-display content-table col-xs-12 col-sm-6 col-md-8">
                         {% for produit in produitsSA %}
                             {% if produit.image is not null %}
-                                <div id="{{ produit.id }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('/uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
+                                <div id="{{ produit.id }}" data-qte="{{ produit.quantiteActuelle }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('/uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
                                     <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
                                     <br/>
                                     <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
                                 </div>
                             {% else %}
-                                <div id="{{ produit.id }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
+                                <div id="{{ produit.id }}" data-qte="{{ produit.quantiteActuelle }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
                                     <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
                                     <br/>
                                     <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
@@ -73,13 +73,13 @@
                     <div id="table-snack" class="not-display content-table col-xs-12 col-sm-6 col-md-8">
                         {% for produit in produitsS %}
                             {% if produit.image is not null %}
-                                <div id="{{ produit.id }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('/uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
+                                <div id="{{ produit.id }}" data-qte="{{ produit.quantiteActuelle }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('/uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
                                     <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
                                     <br/>
                                     <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
                                 </div>
                             {% else %}
-                                <div id="{{ produit.id }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
+                                <div id="{{ produit.id }}" data-qte="{{ produit.quantiteActuelle }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
                                     <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
                                     <br/>
                                     <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€

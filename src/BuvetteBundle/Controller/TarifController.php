@@ -33,7 +33,7 @@ class TarifController extends Controller
             if ($produit->getImage()) {
                 $image = $produit->getImage()->getPath();
             }
-            $jsonResponse[$produit->getType()][] = array($produit->getId(), $produit->getNom(), $produit->getPrixVente(), $produit->getCuisson(), $image);
+            $jsonResponse[$produit->getType()][] = array($produit->getId(), $produit->getNom(), $produit->getPrixVente(), $produit->getCuisson(), $image, $produit->getQuantiteActuelle());
         }
 
         return new Response(json_encode($jsonResponse));
