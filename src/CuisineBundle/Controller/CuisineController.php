@@ -105,7 +105,7 @@ class CuisineController extends Controller
     }
 
     /**
-     * @Route("/cuisine/upgrade/commande", name="cuisine_upgrade_commande")
+     * @Route("/upgrade/commande", name="cuisine_upgrade_commande")
      * @param Request $request
      * @return Response
      */

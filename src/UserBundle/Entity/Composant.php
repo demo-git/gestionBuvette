@@ -24,7 +24,7 @@ class Composant
     /**
      * @var int
      *
-     * @ORM\Column(name="quantite", type="integer", nullable=true)
+     * @ORM\Column(name="quantite", type="float", nullable=true)
      */
     private $quantite;
 
