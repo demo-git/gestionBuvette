@@ -98,7 +98,7 @@ class ProduitController extends Controller
         if($request->isMethod('POST')){
             $form->handleRequest($request);
 
-            if($form->isValid()){
+            if($form->isValid() && $produit->getType() !== null && $produit->getIsBillable() !== null){
                 foreach ($produit->getComposants() as $composant){
                     $composant->setProduitCompose($produit);
                 }
@@ -107,6 +107,8 @@ class ProduitController extends Controller
                 $em->flush();
                 $request->getSession()->getFlashBag()->add('success', 'Le produit a bien été enregistré');
                 return $this->redirect($this->generateUrl('admin_gestionproduit'));
+            } else {
+                $request->getSession()->getFlashBag()->add('error', 'Il faut définir un type de produit et d\'ajout');
             }
         }
 

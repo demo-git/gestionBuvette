@@ -54,7 +54,7 @@ class Produit
     /**
      * @var int
      *
-     * @ORM\Column(name="quantiteActuelle", type="integer", options={"default" = 0})
+     * @ORM\Column(name="quantiteActuelle", type="float", options={"default" = 0})
      */
     private $quantiteActuelle = 0;
 

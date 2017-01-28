@@ -5,7 +5,7 @@ namespace UserBundle\Form;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use UserBundle\Entity\Composant;
@@ -25,9 +25,10 @@ class ComposantType extends AbstractType
                     return $er->createQueryBuilder('c')->where('c.actif = true');
                 }
             ))
-            ->add('quantite', IntegerType::class, array(
+            ->add('quantite', NumberType::class, array(
                 'label' => 'Quantité :',
-                'attr' => array('min' => 1, 'class' => 'form-control'),
+                'scale' => 2,
+                'attr' => array('class' => 'form-control'),
                 'required' => false
             ))
         ;
