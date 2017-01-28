@@ -22,12 +22,14 @@ class ProduitType extends AbstractType
                 'choices'  => array('Boisson' => Produit::TYPE_DRINK, 'Sandwitch' => Produit::TYPE_SANDWITCH, 'Snack' => Produit::TYPE_SNACK, 'Pizza' => Produit::TYPE_PIZZA, 'Composant' => Produit::TYPE_COMPOSANT),
                 'expanded' => false,
                 'multiple' => false,
+                'required' => true,
                 'attr' => array('class' => 'selectpicker', 'title' => 'Type de produit')
             ))
             ->add('isBillable', ChoiceType::class,array(
                 'choices'  => array('Facturable' => true, 'Non facturable' => false),
                 'expanded' => false,
                 'multiple' => false,
+                'required' => true,
                 'attr' => array('class' => 'selectpicker', 'title' => 'Type d\'ajout')
             ))
             ->add('nom', TextType::class, array(
