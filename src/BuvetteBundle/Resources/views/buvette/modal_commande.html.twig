@@ -19,43 +19,52 @@
                 </div>
             </div>
             <div id="modal-commande-footer" class="modal-footer">
-                <div class="row">
-                    <div class="col-xs-6 margin-top-20">
-                        <div class="row">
-                            <div class="col-xs-8 col-xs-offset-2">
-                                <div class="row">
-                                    <button type="button" id="valider-espece-commande" class="btn btn-success col-xs-12">Payer en espèce</button>
+                <div id="modal-commande-footer-1" class="">
+                    <div class="row">
+                        <div class="col-xs-6 margin-top-20">
+                            <div class="row">
+                                <div class="col-xs-8 col-xs-offset-2">
+                                    <div class="row">
+                                        <button type="button" id="valider-espece-commande" class="btn btn-success col-xs-12">Payer en espèce</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 margin-top-20">
+                            <div class="row">
+                                <div class="col-xs-8 col-xs-offset-2">
+                                    <div class="row">
+                                        <button type="button" id="valider-cb-commande" class="btn btn-success col-xs-12">Payer par CB</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-6 margin-top-20">
-                        <div class="row">
-                            <div class="col-xs-8 col-xs-offset-2">
-                                <div class="row">
-                                    <button type="button" id="valider-cb-commande" class="btn btn-success col-xs-12">Payer par CB</button>
+                    <div class="row col-center">
+                        <div class="col-xs-6 margin-top-20">
+                            <div class="row">
+                                <div class="col-xs-8 col-xs-offset-2">
+                                    <div class="row">
+                                        <button type="button" id="valider-autre-commande" class="btn btn-success col-xs-12">Payer autrement</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 margin-top-20">
+                            <div class="row">
+                                <div class="col-xs-8 col-xs-offset-2">
+                                    <div class="row">
+                                        <button type="button" class="btn btn-danger col-xs-12" data-dismiss="modal">Retour à la commande</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row col-center">
-                    <div class="col-xs-6 margin-top-20">
-                        <div class="row">
-                            <div class="col-xs-8 col-xs-offset-2">
-                                <div class="row">
-                                    <button type="button" id="valider-autre-commande" class="btn btn-success col-xs-12">Payer autrement</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 margin-top-20">
-                        <div class="row">
-                            <div class="col-xs-8 col-xs-offset-2">
-                                <div class="row">
-                                    <button type="button" class="btn btn-danger col-xs-12" data-dismiss="modal">Retour à la commande</button>
-                                </div>
-                            </div>
+                <div id="modal-commande-footer-2" class="footer-visible-none">
+                    <div class="row">
+                        <div class="col-xs-12 col-center">
+                            <img src="{{ asset('bundles/buvette/images/loading-panier.gif') }}" />
                         </div>
                     </div>
                 </div>

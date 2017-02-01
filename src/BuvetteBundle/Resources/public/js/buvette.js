@@ -91,7 +91,8 @@ function validerCommande(payement) {
         id = $(children[i]).attr('id').split('-')[1];
         produits.push([parseInt(id),parseInt($('#plqte-' + id).html())]);
     }
-    $('#modal-commande-footer').html('<div class="row"><div class="col-xs-12 col-center"><img src="/bundles/buvette/images/loading-panier.gif" /></div></div>');
+    $('#modal-commande-footer-1').addClass('footer-visible-none');
+    $('#modal-commande-footer-2').removeClass('footer-visible-none');
     $.ajax({
         url: $('#ajax-validation').attr('data-ajax'),
         method: "POST",
@@ -102,6 +103,8 @@ function validerCommande(payement) {
         }
     }).success(function (retour) {
         refresh();
+        $('#modal-commande-footer-2').addClass('footer-visible-none');
+        $('#modal-commande-footer-1').removeClass('footer-visible-none');
         $('#modalCommande').modal('hide');
         retour = parseInt(retour);
         if (retour !== 0) {
@@ -111,6 +114,8 @@ function validerCommande(payement) {
             openModalValidation(0);
         }
     }).error(function () {
+        $('#modal-commande-footer-2').addClass('footer-visible-none');
+        $('#modal-commande-footer-1').removeClass('footer-visible-none');
         $('#modalCommande').modal('hide');
         openModalValidation(0);
     });
