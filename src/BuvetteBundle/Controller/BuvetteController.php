@@ -62,6 +62,7 @@ class BuvetteController extends Controller
                         $x++;
                     }
                 }
+                $prd->setQuantiteActuelle($prd->getQuantiteActuelle() - $produit[1]);
                 $operation->setJustification($operation->getJustification() . $prd->getNom() . '/');
             }
 

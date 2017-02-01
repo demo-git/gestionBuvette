@@ -29,13 +29,14 @@ security:
                 path: logout
                 target: /login
     role_hierarchy:
-        ROLE_ADMIN: [ROLE_USER,ROLE_BUVETTE,ROLE_CUISINE]
+        ROLE_ADMIN: [ROLE_BUVETTE,ROLE_CUISINE]
         ROLE_BUVETTE: ROLE_USER
         ROLE_CUISINE: ROLE_USER
     access_control:
         - { path: ^/logout, roles: ROLE_USER }
         - { path: ^/login_check, roles: ROLE_USER }
         - { path: ^/refresh, roles: ROLE_USER }
+        - { path: ^/upgrade, roles: ROLE_USER }
         - { path: ^/buvette, roles: ROLE_BUVETTE }
         - { path: ^/cuisine, roles: ROLE_CUISINE }
         - { path: ^/admin, roles: ROLE_ADMIN }
