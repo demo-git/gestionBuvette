@@ -17,6 +17,8 @@ class Operation
     const TYPE_AJOUT = 1;
     const TYPE_FACTURE = 2;
     const TYPE_VENTE = 3;
+    const TYPE_VENTE_CB = 4;
+    const CB_COEF = 0.0175;
 
     /**
      * @var int
