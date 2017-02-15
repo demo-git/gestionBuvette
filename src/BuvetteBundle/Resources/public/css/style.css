@@ -212,3 +212,8 @@
 .footer-visible-none {
     display: none;
 }
+
+.lien-pagination, .lien-pagination:hover, .lien-pagination:focus {
+    color: #3380ff;
+    text-decoration: none;
+}

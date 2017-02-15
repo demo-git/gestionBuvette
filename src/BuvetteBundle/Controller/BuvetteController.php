@@ -48,7 +48,11 @@ class BuvetteController extends Controller
             $panier->setTypePayement($payement);
             $operation = new Operation();
             $operation->setMontant($prix);
-            $operation->setType(Operation::TYPE_VENTE);
+            if ($payement == Panier::PAYEMENT_CB) {
+                $operation->setType(Operation::TYPE_VENTE_CB);
+            } else {
+                $operation->setType(Operation::TYPE_VENTE);
+            }
             $produits = json_decode($produits);
 
             foreach ($produits as $produit) {

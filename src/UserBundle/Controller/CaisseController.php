@@ -67,10 +67,12 @@ class CaisseController extends Controller
             $request->query->getInt('page', 1),
             30
         );
+        $pagination->setTemplate('BuvetteBundle:common:pagination.html.twig');
         $operations = $em->getRepository(Operation::class)->findAll();
         $ca = 0;
         $total = 0;
         $benef = 0;
+        $cbMontantCoef = 0;
         foreach ($operations as $ope){
             switch($ope->getType()){
                 case Operation::TYPE_AJOUT:
@@ -88,6 +90,12 @@ class CaisseController extends Controller
                     $benef += $ope->getMontant();
                     $ca += $ope->getMontant();
                     break;
+                case Operation::TYPE_VENTE_CB:
+                    $total += $ope->getMontant();
+                    $benef += $ope->getMontant() - ($ope->getMontant() * Operation::CB_COEF);
+                    $ca += $ope->getMontant();
+                    $cbMontantCoef += $ope->getMontant() * Operation::CB_COEF;
+                    break;
             }
         }
 
@@ -97,6 +105,7 @@ class CaisseController extends Controller
             'benef' => $benef,
             'ca' => $ca,
             'total' => $total,
+            'montantCb' => $cbMontantCoef,
             'formSearch' => $formSearch->createView()
         ));
     }
