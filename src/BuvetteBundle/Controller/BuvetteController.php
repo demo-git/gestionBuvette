@@ -47,6 +47,9 @@ class BuvetteController extends Controller
             $panier = new Panier();
             $panier->setTypePayement($payement);
             $operation = new Operation();
+            if ($payement == Panier::PAYEMENT_STAFF) {
+                $prix = 0;
+            }
             $operation->setMontant($prix);
             if ($payement == Panier::PAYEMENT_CB) {
                 $operation->setType(Operation::TYPE_VENTE_CB);
