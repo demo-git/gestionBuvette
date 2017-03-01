@@ -18,6 +18,7 @@ class Panier
     const PAYEMENT_CB = 1;
     const PAYEMENT_LIQUIDE = 2;
     const PAYEMENT_AUTRE = 3;
+    const PAYEMENT_STAFF = 4;
 
     /**
      * @var int

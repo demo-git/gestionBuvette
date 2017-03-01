@@ -46,6 +46,9 @@ $(document).ready(function () {
     $('#valider-espece-commande').click(function () {
         validerCommande(2);
     });
+    $('#valider-staff-commande').click(function () {
+        validerCommande(4);
+    });
     $('#annuler-commande').click(function () {
         clearCommande();
     });
