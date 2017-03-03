@@ -42,8 +42,8 @@ class ProduitType extends AbstractType
                 'attr' => array('min' => 0, 'class' => 'form-control', 'placeholder' => '€'),
                 'required' => false
             ))
-            ->add('cuisson (minutes)', IntegerType::class, array(
-                'label' => 'Temps de cuisson :',
+            ->add('cuisson', IntegerType::class, array(
+                'label' => 'Temps de cuisson (minutes) :',
                 'attr' => array('min' => 0, 'class' => 'form-control'),
                 'required' => false
             ))
