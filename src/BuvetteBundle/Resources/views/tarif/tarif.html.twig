@@ -17,7 +17,7 @@
                 <div id="listeProduits" class="row">
                     {% for produit in produits %}
                         {% if produit.image is not null %}
-                            <div id="{{ produit.id }}" style="background-image: url('{{ asset('/uploads/' ~ produit.image.path) }}');margin: 0 0 20px 0;font-size:20px;" class="col-xs-6 col-sm-4 col-md-3 col-lg-2 vignette">
+                            <div id="{{ produit.id }}" style="background-image: url('{{ asset('/uploads/' ~ produit.image.path) }}');margin: 0 0 20px 0;font-size:24px;" class="col-xs-6 col-sm-4 col-md-3 col-lg-2 vignette">
                                 <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
                                 <br/>
                                 <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
