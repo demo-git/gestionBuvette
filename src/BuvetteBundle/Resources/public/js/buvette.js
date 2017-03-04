@@ -54,7 +54,7 @@ $(document).ready(function () {
     });
     $('#modalCommande').on('shown.bs.modal', function () {
         var prix = $('#cout-total-command').html();
-        if (parseInt(prix) > 0) {
+        if (parseFloat(prix) > 0) {
             $('#valider-autre-commande').removeAttr('disabled');
             $('#valider-cb-commande').removeAttr('disabled');
             $('#valider-espece-commande').removeAttr('disabled');
