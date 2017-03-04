@@ -28,7 +28,8 @@ class ProduitRepository extends EntityRepository
         } else {
             $qb->andWhere('p.type != ' . Produit::TYPE_COMPOSANT);
         }
-        return $qb->getQuery()
+        return $qb->orderBy('p.type', 'ASC')
+            ->getQuery()
             ->getResult();
     }
 
