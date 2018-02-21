@@ -31,7 +31,6 @@
                         <li id="tab-sandwitch" role="presentation" class="content-tab"><a href="#">Sandwitch</a></li>
                         <li id="tab-pizza" role="presentation" class="content-tab"><a href="#">Pizza</a></li>
                         <li id="tab-snack" role="presentation" class="content-tab"><a href="#">Snack</a></li>
-                        <li id="tab-composant" role="presentation" class="content-tab"><a href="#">Composant</a></li>
                     </ul>
                     <table id="table-boisson" class="table table-striped content-table">
                         <thead>
@@ -143,39 +142,6 @@
                         </thead>
                         <tbody>
                         {% for produit in produitsSnack %}
-                            <tr>
-                                <td class="col-md-3">{{ produit.nom }}</td>
-                                <td class="col-md-2">{{ produit.quantiteActuelle }}</td>
-                                {% if produit.prixVente is not null %}
-                                    <td class="col-md-2">{{ produit.prixVente }} €</td>
-                                {% else %}
-                                    <td class="col-md-2">non vendu</td>
-                                {% endif %}
-                                <td class="col-md-5">
-                                    {% if produit.isBillable == true %}
-                                        <a href="{{ path('admin_addfacture', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Nouvelle facture</button></a>
-                                    {% else %}
-                                        <a href="{{ path('cuisine_addquantity', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajout stock</button></a>
-                                    {% endif %}
-                                    <a href="{{ path('admin_addimage', {'id' : produit.id}) }}"><button class="btn btn-primary btn-table-left">Ajouter image</button></a>
-                                    <a href="{{ path('admin_modifierproduit', {'id' : produit.id}) }}"><button class="btn btn-success btn-table-left">Modifier</button></a>
-                                    <a href="{{ path('admin_deleteproduit', {'id' : produit.id}) }}"><button class="btn btn-danger btn-table">X</button></a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                    <table id="table-composant" class="not-display table table-striped content-table">
-                        <thead>
-                        <tr>
-                            <th class="col-md-3">Nom</th>
-                            <th class="col-md-2">Quantité actuelle</th>
-                            <th class="col-md-2">Prix</th>
-                            <th class="col-md-5">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for produit in produitsComposant %}
                             <tr>
                                 <td class="col-md-3">{{ produit.nom }}</td>
                                 <td class="col-md-2">{{ produit.quantiteActuelle }}</td>

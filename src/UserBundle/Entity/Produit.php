@@ -18,7 +18,6 @@ class Produit
     const TYPE_SANDWITCH = 1;
     const TYPE_SNACK = 2;
     const TYPE_PIZZA = 3;
-    const TYPE_COMPOSANT = 4;
 
     /**
      * @var int
@@ -97,11 +96,6 @@ class Produit
     private $actif = true;
 
     /**
-     * @ORM\OneToMany(targetEntity="Composant", mappedBy="produitCompose", cascade={"persist", "remove"})
-     */
-    private $composants;
-
-    /**
      * @ORM\OneToMany(targetEntity="Facture", mappedBy="produit", cascade={"persist"})
      */
     private $factures;
@@ -129,7 +123,6 @@ class Produit
 
     public function __construct()
     {
-        $this->composants = new ArrayCollection();
         $this->factures = new ArrayCollection();
     }
 
@@ -189,40 +182,6 @@ class Produit
     public function getNom()
     {
         return $this->nom;
-    }
-
-    /**
-     * Add composant
-     *
-     * @param \UserBundle\Entity\Composant $composant
-     *
-     * @return Produit
-     */
-    public function addComposant(Composant $composant)
-    {
-        $this->composants[] = $composant;
-
-        return $this;
-    }
-
-    /**
-     * Remove composant
-     *
-     * @param \UserBundle\Entity\Composant $composant
-     */
-    public function removeComposant(Composant $composant)
-    {
-        $this->composants->removeElement($composant);
-    }
-
-    /**
-     * Get composants
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getComposants()
-    {
-        return $this->composants;
     }
 
     /**

@@ -6,7 +6,6 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use UserBundle\Entity\Produit;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -19,7 +18,7 @@ class ProduitType extends AbstractType
     {
         $builder
             ->add('type', ChoiceType::class,array(
-                'choices'  => array('Boisson' => Produit::TYPE_DRINK, 'Sandwitch' => Produit::TYPE_SANDWITCH, 'Snack' => Produit::TYPE_SNACK, 'Pizza' => Produit::TYPE_PIZZA, 'Composant' => Produit::TYPE_COMPOSANT),
+                'choices'  => array('Boisson' => Produit::TYPE_DRINK, 'Sandwitch' => Produit::TYPE_SANDWITCH, 'Snack' => Produit::TYPE_SNACK, 'Pizza' => Produit::TYPE_PIZZA),
                 'expanded' => false,
                 'multiple' => false,
                 'required' => true,
@@ -56,11 +55,6 @@ class ProduitType extends AbstractType
                 'label' => 'Seuil d\'alerte danger :',
                 'attr' => array('min' => -1, 'class' => 'form-control'),
                 'required' => true
-            ))
-            ->add('composants', CollectionType::class, array(
-                'allow_delete' => true,
-                'allow_add' => true,
-                'entry_type' => ComposantType::class
             ))
             ->add('Enregistrer', SubmitType::class, array(
                 'attr' => array('class' => 'btn btn-success btn-margin')
