@@ -103,10 +103,6 @@
     margin-top: 10px;
 }
 
-.composant {
-    margin-top: 20px;
-}
-
 .delete {
     float: right;
     margin-top: 7px;
@@ -189,6 +185,10 @@
 
 .margin-top-20 {
     margin-top: 20px;
+}
+
+.margin-top-40 {
+    margin-top: 40px;
 }
 
 .margin-bottom-20 {

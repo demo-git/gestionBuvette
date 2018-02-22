@@ -18,7 +18,6 @@ class Produit
     const TYPE_SANDWITCH = 1;
     const TYPE_SNACK = 2;
     const TYPE_PIZZA = 3;
-    const TYPE_COMPOSANT = 4;
 
     /**
      * @var int
@@ -54,7 +53,7 @@ class Produit
     /**
      * @var int
      *
-     * @ORM\Column(name="quantiteActuelle", type="integer", options={"default" = 0})
+     * @ORM\Column(name="quantiteActuelle", type="float", options={"default" = 0})
      */
     private $quantiteActuelle = 0;
 
@@ -97,9 +96,11 @@ class Produit
     private $actif = true;
 
     /**
-     * @ORM\OneToMany(targetEntity="Composant", mappedBy="produitCompose", cascade={"persist", "remove"})
+     * @var bool
+     *
+     * @ORM\Column(name="needSauce", type="boolean", options={"default" = false})
      */
-    private $composants;
+    private $needSauce = false;
 
     /**
      * @ORM\OneToMany(targetEntity="Facture", mappedBy="produit", cascade={"persist"})
@@ -129,7 +130,6 @@ class Produit
 
     public function __construct()
     {
-        $this->composants = new ArrayCollection();
         $this->factures = new ArrayCollection();
     }
 
@@ -189,40 +189,6 @@ class Produit
     public function getNom()
     {
         return $this->nom;
-    }
-
-    /**
-     * Add composant
-     *
-     * @param \UserBundle\Entity\Composant $composant
-     *
-     * @return Produit
-     */
-    public function addComposant(Composant $composant)
-    {
-        $this->composants[] = $composant;
-
-        return $this;
-    }
-
-    /**
-     * Remove composant
-     *
-     * @param \UserBundle\Entity\Composant $composant
-     */
-    public function removeComposant(Composant $composant)
-    {
-        $this->composants->removeElement($composant);
-    }
-
-    /**
-     * Get composants
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getComposants()
-    {
-        return $this->composants;
     }
 
     /**
@@ -452,5 +418,53 @@ class Produit
     public function getDangerThreshold()
     {
         return $this->dangerThreshold;
+    }
+
+    /**
+     * Set createAt
+     *
+     * @param \DateTime $createAt
+     *
+     * @return Produit
+     */
+    public function setCreateAt($createAt)
+    {
+        $this->createAt = $createAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createAt
+     *
+     * @return \DateTime
+     */
+    public function getCreateAt()
+    {
+        return $this->createAt;
+    }
+
+    /**
+     * Set updateAt
+     *
+     * @param \DateTime $updateAt
+     *
+     * @return Produit
+     */
+    public function setUpdateAt($updateAt)
+    {
+        $this->updateAt = $updateAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updateAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdateAt()
+    {
+        return $this->updateAt;
     }
 }

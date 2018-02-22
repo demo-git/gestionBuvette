@@ -1,5 +1,4 @@
 {% extends "base.html.twig" %}
-
 {% block title %}Fiche produit{% endblock %}
 {% block body %}
     <div class="container">
@@ -35,38 +34,12 @@
                         <div class="col-md-6 margin-top-20">{{ form_label(form.warnThreshold) }} {{ form_widget(form.warnThreshold) }}</div>
                         <div class="col-md-6 margin-top-20">{{ form_label(form.dangerThreshold) }} {{ form_widget(form.dangerThreshold) }}</div>
                         <div class="col-md-6 margin-top-20">{{ form_label(form.prixVente) }} {{ form_widget(form.prixVente) }}</div>
+                        <div class="col-md-6 margin-top-40">{{ form_label(form.needSauce) }} {{ form_widget(form.needSauce) }}</div>
                         {{ form_widget(form._token) }}
-                    </div>
-                    <div class="col-md-12">
-                        <h2>Composants</h2>
-                        <button class="btn btn-primary" id="add-composant">Ajouter un composant</button>
-                        <div id="composants" class="input-margin">
-                            {% set nbComposant = 0 %}
-                            {% for composant in form.composants %}
-                                <div id="produit_modifier_composants_{{ nbComposant }}" class="composant col-md-6">
-                                    <div class="col-md-12">
-                                        <label class="required btn-margin">Nouveau composant</label><div id="delete-produit_modifier_composants_{{ nbComposant }}" class="btn btn-danger delete">X</div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label for="produit_modifier_composants_{{ nbComposant }}_produitComposant" class="required">Produit :</label>
-                                        {{ form_widget(composant.produitComposant) }}
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label for="produit_modifier_composants_{{ nbComposant }}_quantite" class="required">Quantité :</label>
-                                        {{ form_widget(composant.quantite) }}
-                                    </div>
-                                </div>
-                                {% set nbComposant = nbComposant + 1 %}
-                            {% endfor %}
-                        </div>
                     </div>
                     <div class="col-md-12 col-center">{{ form_widget(form.Enregistrer) }}</div>
                 {{ form_end(form, {'render_rest': false}) }}
             </div>
         </div>
     </div>
-{% endblock %}
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('bundles/user/js/produit.js') }}"></script>
 {% endblock %}

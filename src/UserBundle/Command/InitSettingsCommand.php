@@ -18,6 +18,7 @@ class InitSettingsCommand extends ContainerAwareCommand
             ->addArgument('hoven', InputArgument::REQUIRED)
             ->addArgument('warning', InputArgument::REQUIRED)
             ->addArgument('danger', InputArgument::REQUIRED)
+            ->addArgument('sauce', InputArgument::OPTIONAL)
         ;
     }
 
@@ -35,6 +36,9 @@ class InitSettingsCommand extends ContainerAwareCommand
             $settings->setDangerWait($danger);
             $settings->setHovenCapacity($hoven);
             $settings->setWarningWait($warning);
+            if ($input->getArgument('sauce')) {
+                $settings->setSauce($input->getArgument('sauce'));
+            }
 
             $em->persist($settings);
             $em->flush();
