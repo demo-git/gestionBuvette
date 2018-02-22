@@ -31,6 +31,14 @@ class ProduitType extends AbstractType
                 'required' => true,
                 'attr' => array('class' => 'selectpicker', 'title' => 'Type d\'ajout')
             ))
+            ->add('needSauce', ChoiceType::class,array(
+                'choices'  => array('Oui' => true, 'Non' => false),
+                'label' => 'Besoin de sauce : ',
+                'expanded' => false,
+                'multiple' => false,
+                'required' => true,
+                'attr' => array('class' => 'selectpicker', 'title' => 'Nécessite une sauce')
+            ))
             ->add('nom', TextType::class, array(
                 'label' => 'Nom :',
                 'attr' => array('class' => 'form-control')

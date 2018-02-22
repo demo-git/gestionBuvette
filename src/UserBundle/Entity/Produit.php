@@ -96,6 +96,13 @@ class Produit
     private $actif = true;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="needSauce", type="boolean", options={"default" = false})
+     */
+    private $needSauce = false;
+
+    /**
      * @ORM\OneToMany(targetEntity="Facture", mappedBy="produit", cascade={"persist"})
      */
     private $factures;
@@ -459,5 +466,29 @@ class Produit
     public function getUpdateAt()
     {
         return $this->updateAt;
+    }
+
+    /**
+     * Set needSauce
+     *
+     * @param boolean $needSauce
+     *
+     * @return Produit
+     */
+    public function setNeedSauce($needSauce)
+    {
+        $this->needSauce = $needSauce;
+
+        return $this;
+    }
+
+    /**
+     * Get needSauce
+     *
+     * @return boolean
+     */
+    public function getNeedSauce()
+    {
+        return $this->needSauce;
     }
 }
