@@ -44,6 +44,13 @@ class Setting
     private $hovenCapacity;
 
     /**
+     * @var string
+     * sauce séparé par des ;
+     * @ORM\Column(name="sauce", type="string")
+     */
+    private $sauce;
+
+    /**
      * @var \DateTime $updated
      *
      * @Gedmo\Timestampable(on="update")
@@ -156,5 +163,29 @@ class Setting
     public function getUpdateAt()
     {
         return $this->updateAt;
+    }
+
+    /**
+     * Set sauce
+     *
+     * @param string $sauce
+     *
+     * @return Setting
+     */
+    public function setSauce($sauce)
+    {
+        $this->sauce = $sauce;
+
+        return $this;
+    }
+
+    /**
+     * Get sauce
+     *
+     * @return string
+     */
+    public function getSauce()
+    {
+        return $this->sauce;
     }
 }
