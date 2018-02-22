@@ -55,15 +55,6 @@ class CuisineController extends Controller
                     $qte = $form->get('quantity')->getData();
                     $produit->setQuantiteActuelle($produit->getQuantiteActuelle() + $qte);
                     $em = $this->getDoctrine()->getManager();
-
-                    foreach ($produit->getComposants() as $composant) {
-                        if ($composant->getQuantite()) {
-                            $prdComposant = $composant->getProduitComposant();
-                            $prdComposant->setQuantiteActuelle($prdComposant->getQuantiteActuelle() - ($qte * $composant->getQuantite()));
-                            $em->persist($prdComposant);
-                        }
-                    }
-
                     $em->persist($produit);
                     $em->flush();
                     $request->getSession()->getFlashBag()->add('success', 'La quantité a bien été modifiée');

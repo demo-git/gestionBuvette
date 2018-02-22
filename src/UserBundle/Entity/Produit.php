@@ -18,7 +18,6 @@ class Produit
     const TYPE_SANDWITCH = 1;
     const TYPE_SNACK = 2;
     const TYPE_PIZZA = 3;
-    const TYPE_COMPOSANT = 4;
 
     /**
      * @var int
@@ -97,9 +96,11 @@ class Produit
     private $actif = true;
 
     /**
-     * @ORM\OneToMany(targetEntity="Composant", mappedBy="produitCompose", cascade={"persist", "remove"})
+     * @var bool
+     *
+     * @ORM\Column(name="needSauce", type="boolean", options={"default" = false})
      */
-    private $composants;
+    private $needSauce = false;
 
     /**
      * @ORM\OneToMany(targetEntity="Facture", mappedBy="produit", cascade={"persist"})
@@ -129,7 +130,6 @@ class Produit
 
     public function __construct()
     {
-        $this->composants = new ArrayCollection();
         $this->factures = new ArrayCollection();
     }
 
@@ -189,40 +189,6 @@ class Produit
     public function getNom()
     {
         return $this->nom;
-    }
-
-    /**
-     * Add composant
-     *
-     * @param \UserBundle\Entity\Composant $composant
-     *
-     * @return Produit
-     */
-    public function addComposant(Composant $composant)
-    {
-        $this->composants[] = $composant;
-
-        return $this;
-    }
-
-    /**
-     * Remove composant
-     *
-     * @param \UserBundle\Entity\Composant $composant
-     */
-    public function removeComposant(Composant $composant)
-    {
-        $this->composants->removeElement($composant);
-    }
-
-    /**
-     * Get composants
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getComposants()
-    {
-        return $this->composants;
     }
 
     /**
@@ -500,5 +466,29 @@ class Produit
     public function getUpdateAt()
     {
         return $this->updateAt;
+    }
+
+    /**
+     * Set needSauce
+     *
+     * @param boolean $needSauce
+     *
+     * @return Produit
+     */
+    public function setNeedSauce($needSauce)
+    {
+        $this->needSauce = $needSauce;
+
+        return $this;
+    }
+
+    /**
+     * Get needSauce
+     *
+     * @return boolean
+     */
+    public function getNeedSauce()
+    {
+        return $this->needSauce;
     }
 }

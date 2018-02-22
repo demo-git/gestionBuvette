@@ -3,7 +3,6 @@
 namespace UserBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use UserBundle\Entity\Produit;
 
 /**
  * ProduitRepository
@@ -25,8 +24,6 @@ class ProduitRepository extends EntityRepository
         if ($type !== null) {
             $qb->andWhere('p.type = :type')
                 ->setParameter('type', $type);
-        } else {
-            $qb->andWhere('p.type != ' . Produit::TYPE_COMPOSANT);
         }
         return $qb->orderBy('p.type', 'ASC')
             ->getQuery()

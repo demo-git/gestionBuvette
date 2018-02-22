@@ -23,14 +23,12 @@ class ProduitController extends Controller
         $produitsSandwitch = $repo->findBy(array('actif' => true, 'type' => Produit::TYPE_SANDWITCH));
         $produitsSnack = $repo->findBy(array('actif' => true, 'type' => Produit::TYPE_SNACK));
         $produitsPizza = $repo->findBy(array('actif' => true, 'type' => Produit::TYPE_PIZZA));
-        $produitsComposant = $repo->findBy(array('actif' => true, 'type' => Produit::TYPE_COMPOSANT));
 
         return $this->render('UserBundle:Produit:index.html.twig', array(
             'produitsBoisson' => $produitsBoisson,
             'produitsSandwitch' => $produitsSandwitch,
             'produitsSnack' => $produitsSnack,
             'produitsPizza' => $produitsPizza,
-            'produitsComposant' => $produitsComposant
         ));
     }
 
@@ -99,10 +97,6 @@ class ProduitController extends Controller
             $form->handleRequest($request);
 
             if($form->isValid() && $produit->getType() !== null && $produit->getIsBillable() !== null){
-                foreach ($produit->getComposants() as $composant){
-                    $composant->setProduitCompose($produit);
-                }
-
                 $em->persist($produit);
                 $em->flush();
                 $request->getSession()->getFlashBag()->add('success', 'Le produit a bien été enregistré');
@@ -145,9 +139,6 @@ class ProduitController extends Controller
             $em = $this->getDoctrine()->getManager();
             $produit = $em->getRepository(Produit::class)->find($id);
             $produit->setActif(false);
-            foreach ($produit->getComposants() as $composant){
-                $em->remove($composant);
-            }
             $em->flush();
             $request->getSession()->getFlashBag()->add('success', 'Le produit a bien été supprimé');
         }
