@@ -18,7 +18,7 @@ class ProduitType extends AbstractType
     {
         $builder
             ->add('type', ChoiceType::class,array(
-                'choices'  => array('Boisson' => Produit::TYPE_DRINK, 'Sandwitch' => Produit::TYPE_SANDWITCH, 'Snack' => Produit::TYPE_SNACK, 'Pizza' => Produit::TYPE_PIZZA),
+                'choices'  => array('Boisson' => Produit::TYPE_DRINK, 'Sandwich' => Produit::TYPE_SANDWITCH, 'Snack' => Produit::TYPE_SNACK, 'Pizza' => Produit::TYPE_PIZZA),
                 'expanded' => false,
                 'multiple' => false,
                 'required' => true,
