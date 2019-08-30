@@ -42,6 +42,9 @@ class LoadUserCommand extends ContainerAwareCommand
             case 'buvette' :
                 $user->setRoles(array('ROLE_BUVETTE'));
                 break;
+            case 'accueil' :
+                $user->setRoles(array('ROLE_ACCUEIL'));
+                break;
             default :
                 $user->setRoles(array('ROLE_USER'));
                 break;

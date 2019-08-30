@@ -20,14 +20,13 @@ class UserController extends Controller
         if ($checker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             if($checker->isGranted('ROLE_ADMIN')){
                 return $this->redirectToRoute('admin_gestionproduit');
-            }
-            elseif ($checker->isGranted('ROLE_CUISINE')){
+            } elseif ($checker->isGranted('ROLE_CUISINE')){
                 return $this->redirectToRoute('cuisine_commande');
-            }
-            elseif ($checker->isGranted('ROLE_BUVETTE')){
+            } elseif ($checker->isGranted('ROLE_BUVETTE')){
                 return $this->redirectToRoute('buvette_commande');
-            }
-            else {
+            } elseif ($checker->isGranted('ROLE_ACCUEIL')){
+                return $this->redirectToRoute('accueil_billetterie');
+            } else {
                 return $this->redirectToRoute('buvette_tarif');
             }
         }

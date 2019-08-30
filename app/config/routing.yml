@@ -1,3 +1,7 @@
+accueil:
+    resource: "@AccueilBundle/Controller"
+    type:     annotation
+
 user:
     resource: "@UserBundle/Controller"
     type:     annotation

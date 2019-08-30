@@ -32,6 +32,7 @@ security:
         ROLE_ADMIN: [ROLE_BUVETTE,ROLE_CUISINE]
         ROLE_BUVETTE: ROLE_USER
         ROLE_CUISINE: ROLE_USER
+        ROLE_ACCUEIL: ROLE_BUVETTE
     access_control:
         - { path: ^/logout, roles: ROLE_USER }
         - { path: ^/login_check, roles: ROLE_USER }
@@ -39,4 +40,5 @@ security:
         - { path: ^/upgrade, roles: ROLE_USER }
         - { path: ^/buvette, roles: ROLE_BUVETTE }
         - { path: ^/cuisine, roles: ROLE_CUISINE }
+        - { path: ^/accueil, roles: ROLE_ACCUEIL }
         - { path: ^/admin, roles: ROLE_ADMIN }

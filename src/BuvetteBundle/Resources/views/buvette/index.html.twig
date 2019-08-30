@@ -1,5 +1,4 @@
 {% extends "base.html.twig" %}
-
 {% block title %}Buvette{% endblock %}
 {% block body %}
     <div class="container-fluid">
@@ -15,9 +14,11 @@
                 <div class="content col-xs-12">
                     <ul class="nav nav-tabs margin-bottom-20">
                         <li id="tab-boisson" role="presentation" class="content-tab active"><a href="#">Boisson</a></li>
-                        <li id="tab-pizza" role="presentation" class="content-tab"><a href="#">Pizza</a></li>
-                        <li id="tab-sandwitch" role="presentation" class="content-tab"><a href="#">Sandwich</a></li>
-                        <li id="tab-snack" role="presentation" class="content-tab"><a href="#">Snack</a></li>
+                        {% if app.user.hasRole('ROLE_BUVETTE') %}
+                            <li id="tab-pizza" role="presentation" class="content-tab"><a href="#">Pizza</a></li>
+                            <li id="tab-sandwitch" role="presentation" class="content-tab"><a href="#">Sandwich</a></li>
+                            <li id="tab-snack" role="presentation" class="content-tab"><a href="#">Snack</a></li>
+                        {% endif %}
                     </ul>
                     <div id="table-boisson" class="content-table col-xs-12 col-sm-6 col-md-8">
                         {% for produit in produitsD %}
@@ -42,75 +43,77 @@
                             {% endif %}
                         {% endfor %}
                     </div>
-                    <div id="table-pizza" class="not-display content-table col-xs-12 col-sm-6 col-md-8">
-                        {% for produit in produitsP %}
-                            {% if produit.image is not null %}
-                                <div id="{{ produit.id }}" data-qte="{{ produit.quantiteActuelle }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('/uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
-                                    <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
-                                    <br/>
-                                    <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
-                                    <br/>
-                                    <br/>
-                                    Stock : <span id="pl-{{ produit.id }}-qteaff">{{ produit.quantiteActuelle }}</span>
-                                </div>
-                            {% else %}
-                                <div id="{{ produit.id }}" data-qte="{{ produit.quantiteActuelle }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
-                                    <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
-                                    <br/>
-                                    <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
-                                    <br/>
-                                    <br/>
-                                    Stock : <span id="pl-{{ produit.id }}-qteaff">{{ produit.quantiteActuelle }}</span>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                    <div id="table-sandwitch" class="not-display content-table col-xs-12 col-sm-6 col-md-8">
-                        {% for produit in produitsSA %}
-                            {% if produit.image is not null %}
-                                <div id="{{ produit.id }}" data-qte="{{ produit.quantiteActuelle }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('/uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
-                                    <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
-                                    <br/>
-                                    <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
-                                    <br/>
-                                    <br/>
-                                    Stock : <span id="pl-{{ produit.id }}-qteaff">{{ produit.quantiteActuelle }}</span>
-                                </div>
-                            {% else %}
-                                <div id="{{ produit.id }}" data-qte="{{ produit.quantiteActuelle }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
-                                    <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
-                                    <br/>
-                                    <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
-                                    <br/>
-                                    <br/>
-                                    Stock : <span id="pl-{{ produit.id }}-qteaff">{{ produit.quantiteActuelle }}</span>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                    <div id="table-snack" class="not-display content-table col-xs-12 col-sm-6 col-md-8">
-                        {% for produit in produitsS %}
-                            {% if produit.image is not null %}
-                                <div id="{{ produit.id }}" data-qte="{{ produit.quantiteActuelle }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('/uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
-                                    <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
-                                    <br/>
-                                    <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
-                                    <br/>
-                                    <br/>
-                                    Stock : <span id="pl-{{ produit.id }}-qteaff">{{ produit.quantiteActuelle }}</span>
-                                </div>
-                            {% else %}
-                                <div id="{{ produit.id }}" data-qte="{{ produit.quantiteActuelle }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
-                                    <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
-                                    <br/>
-                                    <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
-                                    <br/>
-                                    <br/>
-                                    Stock : <span id="pl-{{ produit.id }}-qteaff">{{ produit.quantiteActuelle }}</span>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
+                    {% if app.user.hasRole('ROLE_BUVETTE') %}
+                        <div id="table-pizza" class="not-display content-table col-xs-12 col-sm-6 col-md-8">
+                            {% for produit in produitsP %}
+                                {% if produit.image is not null %}
+                                    <div id="{{ produit.id }}" data-qte="{{ produit.quantiteActuelle }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('/uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
+                                        <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
+                                        <br/>
+                                        <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
+                                        <br/>
+                                        <br/>
+                                        Stock : <span id="pl-{{ produit.id }}-qteaff">{{ produit.quantiteActuelle }}</span>
+                                    </div>
+                                {% else %}
+                                    <div id="{{ produit.id }}" data-qte="{{ produit.quantiteActuelle }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
+                                        <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
+                                        <br/>
+                                        <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
+                                        <br/>
+                                        <br/>
+                                        Stock : <span id="pl-{{ produit.id }}-qteaff">{{ produit.quantiteActuelle }}</span>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div id="table-sandwitch" class="not-display content-table col-xs-12 col-sm-6 col-md-8">
+                            {% for produit in produitsSA %}
+                                {% if produit.image is not null %}
+                                    <div id="{{ produit.id }}" data-qte="{{ produit.quantiteActuelle }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('/uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
+                                        <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
+                                        <br/>
+                                        <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
+                                        <br/>
+                                        <br/>
+                                        Stock : <span id="pl-{{ produit.id }}-qteaff">{{ produit.quantiteActuelle }}</span>
+                                    </div>
+                                {% else %}
+                                    <div id="{{ produit.id }}" data-qte="{{ produit.quantiteActuelle }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
+                                        <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
+                                        <br/>
+                                        <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
+                                        <br/>
+                                        <br/>
+                                        Stock : <span id="pl-{{ produit.id }}-qteaff">{{ produit.quantiteActuelle }}</span>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div id="table-snack" class="not-display content-table col-xs-12 col-sm-6 col-md-8">
+                            {% for produit in produitsS %}
+                                {% if produit.image is not null %}
+                                    <div id="{{ produit.id }}" data-qte="{{ produit.quantiteActuelle }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('/uploads/' ~ produit.image.path) }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
+                                        <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
+                                        <br/>
+                                        <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
+                                        <br/>
+                                        <br/>
+                                        Stock : <span id="pl-{{ produit.id }}-qteaff">{{ produit.quantiteActuelle }}</span>
+                                    </div>
+                                {% else %}
+                                    <div id="{{ produit.id }}" data-qte="{{ produit.quantiteActuelle }}" data-name="{{ produit.nom }}" data-cuisson="{{ produit.cuisson }}" data-cost="{{ produit.prixVente }}" style="background-image: url('{{ asset('bundles/buvette/images/noimagefound.jpg') }}');" class="col-xs-6 col-sm-6 col-md-3 vignette">
+                                        <span id="pl-{{ produit.id }}-nom">{{ produit.nom }}</span>
+                                        <br/>
+                                        <span id="pl-{{ produit.id }}-prix">{{ produit.prixVente }}</span>€
+                                        <br/>
+                                        <br/>
+                                        Stock : <span id="pl-{{ produit.id }}-qteaff">{{ produit.quantiteActuelle }}</span>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                     <div class="col-xs-12 col-sm-6 col-md-4">
                         <div class="row">
                             <div class="col-xs-12 col-center">

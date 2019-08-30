@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new CuisineBundle\CuisineBundle(),
             new UserBundle\UserBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new AccueilBundle\AccueilBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

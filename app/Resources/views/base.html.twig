@@ -21,7 +21,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="{% if is_granted('ROLE_BUVETTE') %}{{ path('buvette_commande') }}{% elseif is_granted('ROLE_CUISINE') %}{{ path('cuisine_commande') }}{% else %}{{ path('buvette_tarif') }}{% endif %}">
+                    <a href="{% if is_granted('ROLE_ACCUEIL') %}{{ path('accueil_billetterie') }}{% elseif is_granted('ROLE_CUISINE') %}{{ path('cuisine_commande') }}{% elseif is_granted('ROLE_BUVETTE') %}{{ path('buvette_commande') }}{% else %}{{ path('buvette_tarif') }}{% endif %}">
                         <img class="img-logo" src="{{ asset('bundles/buvette/images/epsilan_logo.png') }}" alt="logo epsilan" />
                     </a>
                 </div>
@@ -31,6 +31,7 @@
                         <ul class="nav navbar-nav">
                             <li id="lien-buvette"><a href="{{ path('buvette_commande') }}">Buvette</a></li>
                             <li id="lien-cuisine"><a href="{{ path('cuisine_commande') }}">Cuisine</a></li>
+                            <li id="lien-setting"><a href="{{ path('admin_setting') }}">Billeterie</a></li>
                             <li id="lien-gestionproduit"><a href="{{ path('admin_gestionproduit') }}">Gestion produits</a></li>
                             <li id="lien-gestioncaisse"><a href="{{ path('admin_gestioncaisse') }}">Gestion financière</a></li>
                             <li id="lien-setting"><a href="{{ path('admin_setting') }}">Paramètres</a></li>
@@ -40,7 +41,13 @@
                             <li id="lien-logout"><a href="{{ path('logout') }}">Déconnexion</a></li>
                         </ul>
                     {% else %}
-                        <ul class="nav navbar-nav" style="float:right;width:52%;">
+                        {% if is_granted('ROLE_ACCUEIL') %}
+                            <ul class="nav navbar-nav">
+                                <li id="lien-cuisine"><a href="{{ path('accueil_billetterie') }}">Billetterie</a></li>
+                                <li id="lien-buvette"><a href="{{ path('buvette_commande') }}">Buvette</a></li>
+                            </ul>
+                        {% endif %}
+                        <ul class="nav navbar-nav" style="float:right;">
                             <li><a href="" id="heure">heure</a></li>
                             {% if is_granted('ROLE_USER') %}
                                 <li id="lien-logout"><a href="{{ path('logout') }}">Déconnexion</a></li>

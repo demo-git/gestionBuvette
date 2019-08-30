@@ -35,7 +35,6 @@ class TarifController extends Controller
             }
             $jsonResponse[$produit->getType()][] = array($produit->getId(), $produit->getNom(), $produit->getPrixVente(), $produit->getCuisson(), $image, $produit->getQuantiteActuelle());
         }
-
         return new Response(json_encode($jsonResponse));
     }
 

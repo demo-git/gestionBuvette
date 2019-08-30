@@ -191,4 +191,15 @@ class User implements UserInterface
     {
         return $this->createAt;
     }
+
+    /**
+     * @param $role
+     * @return bool
+     */
+    public function hasRole($role) {
+        if (in_array($role, $this->roles)) {
+            return true;
+        }
+        return false;
+    }
 }

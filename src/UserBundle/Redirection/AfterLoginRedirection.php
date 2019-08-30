@@ -43,6 +43,9 @@ class AfterLoginRedirection implements AuthenticationSuccessHandlerInterface
         elseif (in_array('ROLE_BUVETTE', $rolesTab, true)){
             $redirection = new RedirectResponse($this->router->generate('buvette_commande'));
         }
+        elseif (in_array('ROLE_ACCUEIL', $rolesTab, true)){
+            $redirection = new RedirectResponse($this->router->generate('accueil_billetterie'));
+        }
         else{
             $redirection = new RedirectResponse($this->router->generate('buvette_tarif'));
         }

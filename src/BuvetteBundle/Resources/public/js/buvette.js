@@ -158,26 +158,34 @@ function refresh() {
         async: true
     }).success(function (json) {
         var liste = JSON.parse(json);
-        var listeProduits = [$('#table-boisson'), $('#table-sandwitch'), $('#table-snack'), $('#table-pizza')];
+        var listeProduits;
+        if (document.getElementById('table-sandwitch')) {
+            listeProduits = [$('#table-boisson'), $('#table-sandwitch'), $('#table-snack'), $('#table-pizza')];
+        } else {
+            listeProduits = [$('#table-boisson')];
+        }
         var listeIds = [];
-        for (var i = 0; i < Object.keys(liste).length; i++) {
-            for (var x = 0; x < liste[i].length; x++) {
-                if (document.getElementById(liste[i][x][0])) {
-                    $('#' + liste[i][x][0]).attr('data-name', liste[i][x][1]).attr('data-cuisson', liste[i][x][3]).attr('data-cost', liste[i][x][2]).attr('data-qte', liste[i][x][5]);
-                    $('#pl-' + liste[i][x][0] + '-nom').html(liste[i][x][1]);
-                    $('#pl-' + liste[i][x][0] + '-prix').html(liste[i][x][2]);
-                    $('#pl-' + liste[i][x][0] + '-qteaff').html(liste[i][x][5]);
+        var keys = Object.keys(liste);
+        for (var i = 0; i < keys.length; i++) {
+            for (var x = 0; x < liste[keys[i]].length; x++) {
+                if (document.getElementById(liste[keys[i]][x][0])) {
+                    $('#' + liste[keys[i]][x][0]).attr('data-name', liste[keys[i]][x][1]).attr('data-cuisson', liste[keys[i]][x][3]).attr('data-cost', liste[keys[i]][x][2]).attr('data-qte', liste[keys[i]][x][5]);
+                    $('#pl-' + liste[keys[i]][x][0] + '-nom').html(liste[keys[i]][x][1]);
+                    $('#pl-' + liste[keys[i]][x][0] + '-prix').html(liste[keys[i]][x][2]);
+                    $('#pl-' + liste[keys[i]][x][0] + '-qteaff').html(liste[keys[i]][x][5]);
                 } else {
-                    var html = '<div id="' + liste[i][x][0] + '" data-qte="' + liste[i][x][5] + '" data-name="' + liste[i][x][1] + '" data-cuisson="' + liste[i][x][3] + '" data-cost="' + liste[i][x][2] + '" style="background-image: url(\'';
-                    if (liste[i][x][4] != null) {
-                        html += '/uploads/' + liste[i][x][4];
-                    } else {
-                        html += '/bundles/buvette/images/noimagefound.jpg';
+                    if (i in listeProduits) {
+                        var html = '<div id="' + liste[keys[i]][x][0] + '" data-qte="' + liste[keys[i]][x][5] + '" data-name="' + liste[keys[i]][x][1] + '" data-cuisson="' + liste[keys[i]][x][3] + '" data-cost="' + liste[keys[i]][x][2] + '" style="background-image: url(\'';
+                        if (liste[keys[i]][x][4] != null) {
+                            html += '/uploads/' + liste[keys[i]][x][4];
+                        } else {
+                            html += '/bundles/buvette/images/noimagefound.jpg';
+                        }
+                        html += '\');" class="col-xs-6 col-sm-6 col-md-3 vignette"><span id="pl-' + liste[keys[i]][x][0] + '-nom">' + liste[keys[i]][x][1] + '</span><br/><span id="pl-' + liste[keys[i]][x][0] + '-prix">' + liste[keys[i]][x][2] + '</span>€<br/><br/>Stock : <span id="pl-' + liste[keys[i]][x][0] + '-qteaff">' + liste[keys[i]][x][5] + '</span></div>';
+                        listeProduits[keys[i]].append(html);
                     }
-                    html += '\');" class="col-xs-6 col-sm-6 col-md-3 vignette"><span id="pl-' + liste[i][x][0] + '-nom">' + liste[i][x][1] + '</span><br/><span id="pl-' + liste[i][x][0] + '-prix">' + liste[i][x][2] + '</span>€<br/><br/>Stock : <span id="pl-' + liste[i][x][0] + '-qteaff">' + liste[i][x][5] + '</span></div>';
-                    listeProduits[i].append(html);
                 }
-                listeIds.push(liste[i][x][0]);
+                listeIds.push(liste[keys[i]][x][0]);
             }
         }
 
