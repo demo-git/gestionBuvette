@@ -111,16 +111,16 @@ function validerCommande(payement) {
         $('#modalCommande').modal('hide');
         retour = parseInt(retour);
         if (retour !== 0) {
-            openModalValidation(retour);
+            openValidation(retour);
             clearCommande();
         } else {
-            openModalValidation(0);
+            openValidation(0);
         }
     }).error(function () {
         $('#modal-commande-footer-2').addClass('footer-visible-none');
         $('#modal-commande-footer-1').removeClass('footer-visible-none');
         $('#modalCommande').modal('hide');
-        openModalValidation(0);
+        openValidation(0);
     });
 }
 
@@ -129,8 +129,8 @@ function clearCommande() {
     $('#cout-total-command').html('0');
 }
 
-function openModalValidation(retour) {
-    var res = $('#modal_validation_body');
+function openValidation(retour) {
+    var res = $('#resultat_validation');
     if (retour != 0) {
         if (!res.hasClass('alert-success')) {
             res.addClass('alert-success');
@@ -138,7 +138,7 @@ function openModalValidation(retour) {
         if (res.hasClass('alert-danger')) {
             res.removeClass('alert-danger');
         }
-        $('#modal_resultat_validation').html('La commande a bien été enregistrée !<br/>Numéro de commande : ' + retour);
+        res.html('La commande a bien été enregistrée !<br/>Numéro de commande : ' + retour);
     } else {
         if (!res.hasClass('alert-danger')) {
             res.addClass('alert-danger');
@@ -146,9 +146,9 @@ function openModalValidation(retour) {
         if (res.hasClass('alert-success')) {
             res.removeClass('alert-success');
         }
-        $('#modal_resultat_validation').html('Un problème est survenue, la commande n\'a pas été enregistrée !');
+        res.html('Un problème est survenue, la commande n\'a pas été enregistrée !');
     }
-    $('#modalValidation').modal('show');
+    res.removeClass('not-display');
 }
 
 function refresh() {

@@ -5,12 +5,12 @@ namespace AccueilBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Joueur
+ * Participant
  *
- * @ORM\Table(name="joueur")
+ * @ORM\Table(name="Participant")
  * @ORM\Entity()
  */
-class Joueur
+class Participant
 {
     /**
      * @var int

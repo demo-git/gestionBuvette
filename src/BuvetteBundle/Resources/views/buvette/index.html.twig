@@ -6,11 +6,10 @@
             <div class="row btn-margin">
                 <h1>Buvette</h1>
             </div>
-            {% include '@Buvette/buvette/modal_commande.html.twig' %}
-            {% include '@Buvette/buvette/modal_validation.html.twig' %}
             <div id="ajax-validation" data-ajax="{{ path('buvette_validation') }}"></div>
             <div id="ajax-refresh-produits" data-ajax="{{ path('refresh_produits') }}"></div>
             <div class="row">
+                <div id="resultat_validation" class="col-xs-12 alert not-display text-center"></div>
                 <div class="content col-xs-12">
                     <ul class="nav nav-tabs margin-bottom-20">
                         <li id="tab-boisson" role="presentation" class="content-tab active"><a href="#">Boisson</a></li>
@@ -133,6 +132,7 @@
             {% include '@User/Alerte/alerte_commande.html.twig' %}
             {% include '@User/Alerte/alerte_stock.html.twig' %}
         </div>
+        {% include '@Buvette/buvette/modal_commande.html.twig' %}
     </div>
 {% endblock %}
 {% block javascripts %}
